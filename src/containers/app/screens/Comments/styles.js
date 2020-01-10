@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     height: height - 110,
   },
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   backIcon: {
     width: 21.5,
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     width,
   },
   input: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     fontSize: 14,
     color: '#000',
     width: 250,
@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
   sendText: {
     fontWeight: '600',
     color: '#33638e',
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     paddingTop: 5,
   },
   footer: {

@@ -10,15 +10,15 @@ import { addGoal } from '../../redux/actions';
 import { styles } from './styles';
 
 
-class PublishStory extends React.PureComponent {
+class AddGoal extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: null,
-    headerLeft: (
+    headerLeft: () => (
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text style={styles.cancelText}>Cancel</Text>
       </TouchableOpacity>
     ),
-    headerRight: (
+    headerRight: () => (
       <TouchableOpacity
         style={styles.actionTextContainer}
         onPress={navigation.getParam('submitGoal')}
@@ -30,7 +30,7 @@ class PublishStory extends React.PureComponent {
 
   state = {
     title: '',
-    body: '',
+    description: '',
   }
 
   componentDidMount() {
@@ -38,49 +38,53 @@ class PublishStory extends React.PureComponent {
   }
 
   handleSubmit = () => {
-    const { title, body } = this.state;
+    const { title, description } = this.state;
     const { user } = this.props;
 
     this.props.addGoal({
       title,
-      body,
+      description,
       datetime: new Date(),
       author: user.id,
     });
   }
 
-  handleTitleChange = (title) => {
+  handleInputChange = (key, value) => {
     this.setState({
-      title,
-    });
-  }
-
-  handleStoryChange = (body) => {
-    this.setState({
-      body,
+      [key]: value,
     });
   }
 
   render() {
-    const { title, body } = this.state;
+    const { title, description } = this.state;
 
     return (
       <Layout style={styles.screen}>
         <TextInput
-          style={[styles.titleInput, !title ? styles.placeholder : {}]}
+          style={styles.input}
           value={title}
-          onChangeText={this.handleTitleChange}
+          onChangeText={(val) => this.handleInputChange('title', val)}
           placeholder="Goal title"
           placeholderTextColor="#6F6F6F"
         />
+
         <TextInput
           multiline
           style={styles.input}
-          value={body}
+          value={description}
+          onChangeText={(val) => this.handleInputChange('description', val)}
+          placeholder="Why is this goal important?"
+          placeholderTextColor="#6F6F6F"
+        />
+
+        {/* <TextInput
+          multiline
+          value={description}
+          style={styles.textarea}
           onChangeText={this.handleStoryChange}
           placeholder="Write goal"
           placeholderTextColor="#6F6F6F"
-        />
+        /> */}
       </Layout>
     );
   }
@@ -97,4 +101,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PublishStory);
+)(AddGoal);

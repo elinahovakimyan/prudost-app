@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   screen: {
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   cancelText: {
     fontSize: 14,
@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   actionTextContainer: {
     marginHorizontal: 15,
     paddingVertical: 6,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     backgroundColor: '#33638e',
     borderRadius: 20,
   },
@@ -21,21 +21,22 @@ export const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
   },
-  titleInput: {
-    marginTop: 30,
+  input: {
+    marginTop: 32,
     color: '#000',
     fontSize: 16,
-    marginBottom: 0,
-    paddingBottom: 10,
-    fontWeight: '600',
+    marginBottom: 8,
+    paddingBottom: 16,
+    paddingHorizontal: 8,
+    borderBottomWidth: 0.5,
+    borderColor: '#626262',
   },
-  placeholder: {
-    fontWeight: 'normal',
-  },
-  input: {
+  textarea: {
     marginVertical: 22,
     color: '#000',
     fontSize: 16,
     paddingBottom: 350,
+    borderBottomWidth: 0.5,
+    borderColor: '#626262',
   },
 });

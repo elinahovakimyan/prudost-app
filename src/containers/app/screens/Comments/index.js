@@ -16,12 +16,12 @@ class Comments extends React.PureComponent {
     headerTitle: 'Comments',
     headerTitleStyle: styles.headerTitle,
     headerLayoutPreset: 'center',
-    headerLeft: (
+    headerLeft: () => (
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image style={styles.backIcon} source={require('../../../../assets/icons/backIcon.png')} />
       </TouchableOpacity>
     ),
-    headerRight: <View />,
+    headerRight: () => <View />,
   });
 
   state = {
@@ -30,10 +30,10 @@ class Comments extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { navigation } = this.props;
-    const { goalId } = navigation.state.params;
+    // const { navigation } = this.props;
+    // const { goalId } = navigation.state.params;
 
-    this.props.getComments(goalId);
+    // this.props.getComments(goalId);
 
     this.keyboardDidShowListener = Keyboard.addListener(
       'keyboardDidShow',
@@ -76,24 +76,24 @@ class Comments extends React.PureComponent {
   }
 
   handleSubmit = () => {
-    const { comment } = this.state;
-    const { navigation, user } = this.props;
-    const { goalId } = navigation.state.params;
+    // const { comment } = this.state;
+    // const { navigation, user } = this.props;
+    // const { goalId } = navigation.state.params;
 
-    this.setState({ comment: '' });
-    this.props.addComment({
-      goal: goalId,
-      body: comment,
-      datetime: new Date(),
-      person: user.id,
-    });
+    // this.setState({ comment: '' });
+    // this.props.addComment({
+    //   goal: goalId,
+    //   body: comment,
+    //   datetime: new Date(),
+    //   person: user.id,
+    // });
   }
 
   render() {
-    const { navigation, allComments } = this.props;
-    const { goalId } = navigation.state.params;
+    const { allComments } = this.props;
+    // const { goalId } = navigation.state.params;
     const { comment, isKeyboardOpen } = this.state;
-    const comments = allComments[goalId] || [];
+    const comments = allComments[0] || [];
     console.log('isKeyboardOpen :', isKeyboardOpen);
 
     return (

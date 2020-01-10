@@ -2,16 +2,23 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomColor: '#D8D8D8',
-    borderBottomWidth: 1,
-    paddingVertical: 20,
+    borderRadius: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    marginVertical: 8,
+    backgroundColor: '#fff',
+    shadowColor: '#727982',
+    shadowOpacity: 0.5,
+    shadowRadius: 6,
+    shadowOffset: { height: 1, width: 1 },
+    elevation: 6,
   },
   title: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: '500',
     letterSpacing: 0.5,
-    marginBottom: 4,
-    color: '#000',
+    marginBottom: 8,
+    color: '#33638e',
     lineHeight: 25,
   },
   descriptionContainer: {
@@ -32,17 +39,18 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   status: {
-    fontSize: 16,
-    color: '#000',
+    fontSize: 14,
+    color: '#3b3b3b',
     letterSpacing: 0.78,
+    textTransform: 'capitalize',
   },
-  date: {
-    fontSize: 16,
-    color: '#5F5F5F',
+  task: {
+    fontSize: 14,
+    color: '#3b3b3b',
     letterSpacing: 0.78,
   },
   circle: {
-    backgroundColor: '#464646',
+    backgroundColor: '#3b3b3b',
     width: 4,
     height: 4,
     borderRadius: 2,
@@ -50,23 +58,9 @@ const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  footerText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  footerIcons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  footerIcon: {
-    width: 22,
-    resizeMode: 'contain',
-    marginLeft: 11,
+    marginTop: 16,
+    marginBottom: 8,
   },
 });
 

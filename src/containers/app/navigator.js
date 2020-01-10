@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Goals from './screens/Goals';
 import Menu from './screens/Menu';
 import Comments from './screens/Comments';
-import PublishStory from './screens/PublishStory';
+import AddGoal from './screens/AddGoal';
 import { getTabIcon } from '../../utils/navigation';
 
 
@@ -13,7 +13,7 @@ const GoalsStack = createStackNavigator(
     Goals: { screen: Goals },
     Menu: { screen: Menu },
     Comments: { screen: Comments },
-    PublishStory: { screen: PublishStory },
+    AddGoal: { screen: AddGoal },
   },
   {
     initialRouteName: 'Goals',
@@ -23,12 +23,24 @@ const GoalsStack = createStackNavigator(
   },
 );
 
+const HabitsStack = createStackNavigator(
+  {
+    Comments: { screen: Comments },
+  },
+  {
+    initialRouteName: 'Comments',
+    defaultNavigationOptions: {
+      headerLayoutPreset: 'center',
+    },
+  },
+);
+
 const AppNavigator = createBottomTabNavigator(
   {
     Goals: GoalsStack,
-    Habits: GoalsStack,
-    Rewards: GoalsStack,
-    Profile: GoalsStack,
+    Habits: HabitsStack,
+    Rewards: HabitsStack,
+    Profile: HabitsStack,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({
@@ -38,10 +50,10 @@ const AppNavigator = createBottomTabNavigator(
       activeTintColor: '#ffd96d',
       inactiveTintColor: '#33638e',
       labelStyle: {
-        fontSize: 12,
+        fontSize: 14,
       },
       style: {
-        height: 60,
+        height: 65,
       },
     },
   },

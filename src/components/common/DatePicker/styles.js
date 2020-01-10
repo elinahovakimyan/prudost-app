@@ -11,7 +11,7 @@ const styles = {
   dateInput: {
     backgroundColor: 'white',
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
     borderWidth: 0,
     borderRadius: 16,
     fontSize: 16,

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   screen: {
     backgroundColor: '#fff',
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   backIcon: {
     width: 21.5,

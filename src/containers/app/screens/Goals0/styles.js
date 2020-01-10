@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     position: 'relative',
   },
   container: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   headerIcon: {
     width: 28,

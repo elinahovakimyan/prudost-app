@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
-import {
-  View, Text, TouchableOpacity,
-} from 'react-native';
-import moment from 'moment';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import styles from './styles';
 
+
 function GoalCard({
-  title, description, status, date,
+  title, description, status, tasks,
 }) {
   const [isFullDescriptionShown, toggleDescription] = useState(false);
   const getShortenedDescription = () => `${description.substring(0, 185)}...`;
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       {description.length > 185
         ? (
@@ -44,17 +42,15 @@ function GoalCard({
           <Text style={styles.description}>{description}</Text>
         )}
       <View style={styles.footer}>
-        <View style={styles.footerText}>
-          <Text style={styles.status}>{status || 'Unknown'}</Text>
-          <View style={styles.circle} />
-          <Text style={styles.date}>{moment(date).format('DD MMM YYYY')}</Text>
-        </View>
-
-        <TouchableOpacity>
-          <Text>Tasks</Text>
-        </TouchableOpacity>
+        <Text style={styles.status}>{status || 'Unknown'}</Text>
+        <View style={styles.circle} />
+        <Text style={styles.task}>
+            Tasks
+          {`(${tasks ? tasks.length : 0})`}
+        </Text>
       </View>
-    </View>
+
+    </TouchableOpacity>
   );
 }
 

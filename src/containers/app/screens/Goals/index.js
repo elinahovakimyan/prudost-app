@@ -25,7 +25,7 @@ class Goals extends React.PureComponent {
   renderItem = (item) => (
     <GoalCard
       title={item.title}
-      date={item.date}
+      tasks={item.tasks}
       description={item.description}
       status={item.status}
     />
@@ -38,22 +38,23 @@ class Goals extends React.PureComponent {
       <Layout style={styles.screen}>
         <FlatList
           data={goals}
+          refreshing={isLoading}
           style={styles.container}
           renderItem={({ item }) => this.renderItem(item)}
           keyExtractor={(item) => String(item.id)}
           ListEmptyComponent={!isLoading && <Text style={styles.emptyText}>No goals found.</Text>}
           ListFooterComponent={<View style={styles.footer} />}
-          refreshing={isLoading}
+          ListHeaderComponent={<View style={styles.header} />}
           refreshControl={<RefreshControl refreshing={isLoading} />}
         />
 
         <TouchableOpacity
-          onPress={() => navigation.push('PublishStory')}
+          onPress={() => navigation.push('AddGoal')}
           style={styles.feedbackContainer}
         >
           <Image
             style={styles.feedbackIcon}
-            source={require('../../../../assets/icons/feedbackIcon.png')}
+            source={require('../../../../assets/icons/plus.png')}
           />
         </TouchableOpacity>
       </Layout>
