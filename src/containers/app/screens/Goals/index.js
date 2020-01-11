@@ -12,24 +12,36 @@ import { styles } from './styles';
 
 
 class Goals extends React.PureComponent {
-  static navigationOptions = () => ({
-    headerTitle: 'My Goals',
-    headerTitleStyle: styles.headerTitle,
-    headerLayoutPreset: 'center',
-  });
+  static navigationOptions = ({ navigation }) => {
+    const { category } = navigation.state.params;
+
+    return ({
+      headerTitle: 'Goals',
+      headerTintColor: '#fff',
+      headerTitleStyle: styles.headerTitle,
+      headerStyle: {
+        backgroundColor: category ? category.color : '#33638e',
+      },
+    });
+  }
 
   componentDidMount() {
     this.props.getGoals();
   }
 
-  renderItem = (item) => (
-    <GoalCard
-      title={item.title}
-      tasks={item.tasks}
-      description={item.description}
-      status={item.status}
-    />
-  )
+  renderItem = (item) => {
+    const { navigation } = this.props;
+
+    return (
+      <GoalCard
+        title={item.title}
+        tasks={item.tasks}
+        description={item.description}
+        category={item.category}
+        onPress={() => navigation.push('GoalDetails', { goal: item })}
+      />
+    );
+  }
 
   render() {
     const { navigation, goals, isLoading } = this.props;

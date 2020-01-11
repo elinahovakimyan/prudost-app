@@ -17,5 +17,5 @@ export const getTabIcon = (navigation, focused) => {
     tabIconSrc = focused ? require('../assets/icons/profile_yellow.png') : require('../assets/icons/profile_blue.png');
   }
 
-  return <Image resizeMode="contain" style={{ width: 25 }} source={tabIconSrc} />;
+  return <Image resizeMode="contain" style={{ width: 25, height: 30 }} source={tabIconSrc} />;
 };

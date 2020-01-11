@@ -80,13 +80,11 @@ function* handleGetGoals() {
       isLoading: true,
     });
 
-    console.log('here');
     // const { status, data } = yield call(getGoals);
     // const { status } = yield call(getGoals);
 
     // if (status === 200) {
     if (true) {
-      console.log('goals :', goals);
       yield put({
         type: MAIN_GET_GOALS_SUCCESS,
         goals,

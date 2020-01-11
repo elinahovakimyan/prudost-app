@@ -5,20 +5,17 @@ const styles = StyleSheet.create({
   radioButton: {
     height: 18,
     width: 18,
-    borderWidth: 1,
-    borderColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#33638e',
     borderRadius: 9,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   innerCircle: {
-    height: 8,
-    width: 8,
-    borderWidth: 0.5,
-    borderColor: '#fff',
+    height: 18,
+    width: 18,
     borderRadius: 4,
-    backgroundColor: '#fff',
   },
 });
 

@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
+import OptionPicker from '../../../../components/common/OptionPicker';
 import { addGoal } from '../../redux/actions';
 
 import { styles } from './styles';
@@ -12,7 +13,9 @@ import { styles } from './styles';
 
 class AddGoal extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: null,
+    headerTitle: 'New Goal',
+    headerTintColor: '#fff',
+    headerStyle: styles.headerStyle,
     headerLeft: () => (
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Text style={styles.cancelText}>Cancel</Text>
@@ -23,7 +26,7 @@ class AddGoal extends React.PureComponent {
         style={styles.actionTextContainer}
         onPress={navigation.getParam('submitGoal')}
       >
-        <Text style={styles.actionText}>Publish</Text>
+        <Text style={styles.actionText}>Add</Text>
       </TouchableOpacity>
     ),
   });
@@ -77,14 +80,24 @@ class AddGoal extends React.PureComponent {
           placeholderTextColor="#6F6F6F"
         />
 
-        {/* <TextInput
-          multiline
-          value={description}
-          style={styles.textarea}
-          onChangeText={this.handleStoryChange}
-          placeholder="Write goal"
+        <OptionPicker
+          headerStyle={styles.input}
+          placeholder="Goal category"
+          options={[{ value: 'val', label: 'option' }]}
+        />
+
+        <Text style={styles.sectionTitle}>TASKS</Text>
+
+        <TextInput
+          style={styles.input}
+          value={title}
+          onChangeText={(val) => this.handleInputChange('title', val)}
+          placeholder="Add a task"
           placeholderTextColor="#6F6F6F"
-        /> */}
+        />
+
+        <Text style={styles.newTask}>+ Add a new task</Text>
+
       </Layout>
     );
   }

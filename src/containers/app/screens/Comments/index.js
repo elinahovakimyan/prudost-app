@@ -15,7 +15,6 @@ class Comments extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
     headerTitle: 'Comments',
     headerTitleStyle: styles.headerTitle,
-    headerLayoutPreset: 'center',
     headerLeft: () => (
       <TouchableOpacity onPress={() => navigation.goBack()}>
         <Image style={styles.backIcon} source={require('../../../../assets/icons/backIcon.png')} />

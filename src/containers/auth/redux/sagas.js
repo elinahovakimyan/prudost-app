@@ -4,7 +4,6 @@ import {
 
 import * as NavigationService from '../../../navigator/NavigationService';
 import { request, addTokenToHttp } from '../../../utils/http';
-import { getFormattedDateFromString, getFormattedDateFromDate } from '../helpers';
 import StorageUtils from '../helpers/storage';
 import {
   AUTH_LOGIN_REQUEST,
@@ -16,9 +15,6 @@ import {
   AUTH_SIGNUP_SUCCESS,
   AUTH_PASSWORD_RECOVER_SUCCESS,
   AUTH_PASSWORD_RECOVER_ERROR,
-  AUTH_UPDATE_USER_REQUEST,
-  AUTH_UPDATE_USER_ERROR,
-  AUTH_UPDATE_USER_SUCCESS,
 } from './constants';
 
 
@@ -43,9 +39,6 @@ function sendPasswordRecovery(email) {
   });
 }
 
-function updateUser({ id, user }) {
-  return request.patch(`/api/v1/user/${id}/`, user);
-}
 
 function* handleLogin(action) {
   const {
@@ -154,45 +147,8 @@ function* handlePasswordRecovery(action) {
   }
 }
 
-function* handleUpdateUser(action) {
-  const { id, user } = action;
-  console.log('user.assault_date :', user.assault_date);
-  const finalUser = user.birth
-    ? {
-      ...user,
-      birth: getFormattedDateFromString(user.birth),
-    } : user.assault_date ? {
-      ...user,
-      assault_date: getFormattedDateFromDate(user.assault_date),
-    } : user;
-
-  try {
-    const { status, data } = yield call(updateUser, { id, user: finalUser });
-
-    if (status === 200) {
-      yield put({
-        type: AUTH_UPDATE_USER_SUCCESS,
-        user: data,
-      });
-
-      StorageUtils.setUser(data);
-    } else {
-      yield put({
-        type: AUTH_UPDATE_USER_ERROR,
-        error: 'Unknown Error',
-      });
-    }
-  } catch (error) {
-    yield put({
-      type: AUTH_UPDATE_USER_ERROR,
-      error: "Can't get profile date.",
-    });
-  }
-}
-
 export default all([
   takeLatest(AUTH_LOGIN_REQUEST, handleLogin),
   takeLatest(AUTH_SIGNUP_REQUEST, handleSignUp),
   takeLatest(AUTH_PASSWORD_RECOVER_REQUEST, handlePasswordRecovery),
-  takeLatest(AUTH_UPDATE_USER_REQUEST, handleUpdateUser),
 ]);

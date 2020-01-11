@@ -8,17 +8,23 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     backgroundColor: '#fff',
     shadowColor: '#727982',
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
     shadowOffset: { height: 1, width: 1 },
-    elevation: 6,
+    elevation: 5,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
   },
   title: {
     fontSize: 16,
     fontWeight: '500',
     letterSpacing: 0.5,
-    marginBottom: 8,
     color: '#33638e',
+    maxWidth: '75%',
     lineHeight: 25,
   },
   descriptionContainer: {
@@ -38,11 +44,16 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontWeight: '600',
   },
-  status: {
-    fontSize: 14,
-    color: '#3b3b3b',
+  category: {
+    fontSize: 12,
+    color: '#FBC635',
+    borderColor: '#FBC635',
     letterSpacing: 0.78,
     textTransform: 'capitalize',
+    borderWidth: 1,
+    borderRadius: 14,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
   task: {
     fontSize: 14,
@@ -59,7 +70,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 16,
+    marginTop: 8,
     marginBottom: 8,
   },
 });

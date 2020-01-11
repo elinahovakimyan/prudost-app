@@ -24,9 +24,3 @@ export const resetPassword = (email) => ({
   type: actions.AUTH_PASSWORD_RECOVER_REQUEST,
   email,
 });
-
-export const updateUser = (id, user) => ({
-  type: actions.AUTH_UPDATE_USER_REQUEST,
-  id,
-  user,
-});

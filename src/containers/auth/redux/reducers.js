@@ -22,10 +22,6 @@ export const AuthReducer = (state = initialState, action) => {
       return { ...state, errors: { SignUp: action.error } };
     case actions.AUTH_USER:
       return { ...state, user: action.user, accessToken: action.token };
-    case actions.MAIN_UPDATE_USER_SUCCESS:
-      return { ...state, user: action.user };
-    case actions.MAIN_UPDATE_USER_ERROR:
-      return { ...state, errors: { User: action.error } };
     case actions.AUTH_LOGOUT:
       return initialState;
     default:

@@ -2,24 +2,27 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F3F3F3',
     paddingHorizontal: 16,
   },
   cancelText: {
     fontSize: 14,
-    color: '#33638e',
+    color: '#ffd96d',
     marginHorizontal: 16,
   },
   actionTextContainer: {
     marginHorizontal: 15,
     paddingVertical: 6,
     paddingHorizontal: 16,
-    backgroundColor: '#33638e',
+    backgroundColor: '#ffd96d',
     borderRadius: 20,
   },
   actionText: {
-    color: '#fff',
+    color: '#33638e',
     fontSize: 14,
+  },
+  headerStyle: {
+    backgroundColor: '#33638e',
   },
   input: {
     marginTop: 32,
@@ -38,5 +41,21 @@ export const styles = StyleSheet.create({
     paddingBottom: 350,
     borderBottomWidth: 0.5,
     borderColor: '#626262',
+  },
+  sectionTitle: {
+    paddingHorizontal: 8,
+    paddingBottom: 8,
+    fontWeight: '600',
+    color: '#3b3b3b',
+    marginTop: 56,
+    fontSize: 15,
+  },
+  newTask: {
+    paddingHorizontal: 8,
+    paddingBottom: 16,
+    fontWeight: '500',
+    color: '#3b3b3b',
+    marginTop: 32,
+    fontSize: 14,
   },
 });

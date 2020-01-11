@@ -2,28 +2,28 @@ import React, { useState } from 'react';
 import {
   Picker, View, Text, Modal, TouchableOpacity, Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
 
 import Button from '../Button';
 
 import styles from './styles';
 
 function OptionPicker({
-  options, value, onChange, placeholder,
+  options, value, onChange, placeholder, headerStyle,
 }) {
   const [isOpen, toggleOpen] = useState(false);
   const selectedOption = options.find((o) => o.value === value);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => toggleOpen(true)} style={styles.header}>
-        <Text style={styles.headerText}>{selectedOption ? selectedOption.label : placeholder}</Text>
-        <Icon name="chevron-thin-down" size={20} />
+      <TouchableOpacity onPress={() => toggleOpen(true)} style={[styles.header, headerStyle]}>
+        <Text style={selectedOption ? styles.headerText : styles.placeholder}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </Text>
       </TouchableOpacity>
 
       <Modal
         transparent
-        animationType="slide"
+        animationType="fade"
         visible={isOpen}
         onRequestClose={() => {
           Alert.alert('Modal has been closed.');
@@ -37,8 +37,8 @@ function OptionPicker({
             >
               <Picker.Item
                 key="placeholder"
-                itemStyle={{ color: 'grey' }}
-                color="grey"
+                itemStyle={{ color: '#6F6F6F' }}
+                color="#6F6F6F"
                 label="Please select..."
                 value={null}
               />

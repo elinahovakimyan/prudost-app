@@ -11,9 +11,7 @@ export const styles = StyleSheet.create({
     marginLeft: 15,
   },
   headerTitle: {
-    flex: 1,
-    fontSize: 18.5,
-    letterSpacing: 0.78,
+    fontSize: 20,
     fontWeight: '500',
     textAlign: 'center',
   },

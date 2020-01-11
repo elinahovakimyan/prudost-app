@@ -30,7 +30,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: '500',
-    color: '#fff',
   },
   title: {
     textTransform: 'uppercase',
@@ -59,7 +58,7 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 20,
     right: 20,
-    bottom: 200,
+    bottom: 155,
   },
   feedbackIcon: {
     width: 28,
@@ -69,7 +68,7 @@ export const styles = StyleSheet.create({
     height: 16,
   },
   footer: {
-    height: 230,
+    height: 500,
   },
   emptyText: {
     textAlign: 'center',
