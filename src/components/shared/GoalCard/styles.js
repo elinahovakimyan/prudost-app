@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
-    paddingVertical: 16,
-    paddingHorizontal: 16,
+    borderRadius: 8,
     marginVertical: 8,
     backgroundColor: '#fff',
     shadowColor: '#727982',
@@ -13,19 +13,28 @@ const styles = StyleSheet.create({
     shadowOffset: { height: 1, width: 1 },
     elevation: 5,
   },
-  header: {
+  contentContainer: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 8,
+  },
+  content: {
+    width: width - 82,
   },
   title: {
     fontSize: 16,
     fontWeight: '500',
     letterSpacing: 0.5,
     color: '#33638e',
-    maxWidth: '75%',
+    maxWidth: '94%',
     lineHeight: 25,
+    paddingRight: 8,
+  },
+  categoryContainer: {
+    flexDirection: 'row',
+    paddingBottom: 8,
   },
   descriptionContainer: {
     flexDirection: 'row',
@@ -50,7 +59,7 @@ const styles = StyleSheet.create({
     borderColor: '#FBC635',
     letterSpacing: 0.78,
     textTransform: 'capitalize',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 14,
     paddingHorizontal: 8,
     paddingVertical: 4,
@@ -67,10 +76,28 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     marginHorizontal: 11,
   },
+  icon: {
+    width: 20,
+    height: 20,
+  },
+  progressBarContainer: {
+    width: '100%',
+    borderRadius: 20,
+    height: 8,
+    backgroundColor: '#ededed',
+    // marginHorizontal: 2,
+    // marginBottom: 0.5,
+  },
+  progressBar: {
+    // paddingHorizontal: 1,
+    height: 8,
+    borderRadius: 20,
+    backgroundColor: '#FBC635',
+  },
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
+    marginTop: 16,
     marginBottom: 8,
   },
 });

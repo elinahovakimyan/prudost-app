@@ -87,7 +87,7 @@ class MainGoals extends React.PureComponent {
         >
           <Image
             style={styles.feedbackIcon}
-            source={require('../../../../assets/icons/plus.png')}
+            source={require('../../../../assets/icons/plus_white.png')}
           />
         </TouchableOpacity>
       </Layout>

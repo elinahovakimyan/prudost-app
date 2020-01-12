@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View, Text, TouchableOpacity, Image,
+} from 'react-native';
 
 import styles from './styles';
 
 
 function GoalCard({
-  title, category, tasks, onPress,
+  title, category, onPress, tasks,
 }) {
-  // const [isFullDescriptionShown, toggleDescription] = useState(false);
+  // const [isExpanded, toggleCard] = useState(false);
   // const getShortenedDescription = () => `${description.substring(0, 30)}... `;
 
   // const getDescription = () => (description.length > 30
@@ -31,29 +33,44 @@ function GoalCard({
   //   ) : (
   //     <Text style={styles.description}>{description}</Text>
   //   ));
+  const completedTasks = tasks.filter((task) => task.isCompleted);
+  const completedPercentage = (completedTasks.length / tasks.length) * 100;
 
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
-      <View style={styles.header}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={[styles.category, { borderColor: category.color, color: category.color }]}>
-          {category.title || 'Unknown'}
-        </Text>
+      <View style={styles.contentContainer}>
+        <View style={styles.content}>
+          <View style={styles.categoryContainer}>
+            <Text style={[styles.category, { borderColor: category.color, color: category.color }]}>
+              {category.title || 'Unknown'}
+            </Text>
+          </View>
+
+          <Text style={styles.title}>{title}</Text>
+        </View>
+        <Image source={require('../../../assets/icons/next.png')} style={styles.icon} />
+      </View>
+
+      <View style={styles.progressBarContainer}>
+        <View style={[styles.progressBar, { width: `${completedPercentage}%` }]} />
       </View>
 
       {/* {getDescription()} */}
 
-      <View style={styles.footer}>
-        <Text style={styles.task}>
-          All Tasks
-          {` (${tasks ? tasks.length : 0})`}
-        </Text>
-        <View style={styles.circle} />
-        <Text style={styles.task}>
-          Completed Tasks
-          {` (${tasks ? tasks.length : 0})`}
-        </Text>
-      </View>
+      {/* {isExpanded
+        ? (
+          <View style={styles.footer}>
+            <Text style={styles.task}>
+              All Tasks
+              {` (${tasks ? tasks.length : 0})`}
+            </Text>
+            <View style={styles.circle} />
+            <Text style={styles.task}>
+              Completed Tasks
+              {` (${tasks ? tasks.length : 0})`}
+            </Text>
+          </View>
+        ) : null} */}
 
     </TouchableOpacity>
   );

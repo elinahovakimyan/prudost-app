@@ -48,7 +48,7 @@ export const goals = [
     status: 'active',
     tasks: [
       {
-        title: 'Develop frontend part of the app',
+        title: 'Develop frontend and and and a a part of the app',
         isCompleted: true,
       },
       {
@@ -67,7 +67,7 @@ export const goals = [
   },
   {
     id: 3,
-    title: 'Earn 1 million USD with Prudost and this is long goal',
+    title: 'Earn 1 million USD with Prudost an a an a a a a d this is long goal',
     description: 'This is very important to prove myself and the world that I am not just a dreamer!',
     category: {
       id: 2,
@@ -80,10 +80,22 @@ export const goals = [
     tasks: [
       {
         title: 'Develop frontend part of the app',
+        isCompleted: true,
+      },
+      {
+        title: 'Develop backnd part of the app',
         isCompleted: false,
       },
       {
-        title: 'Develop backend part of the app',
+        title: 'Develop bacnd part of the app',
+        isCompleted: false,
+      },
+      {
+        title: 'Develop bacend part of the app',
+        isCompleted: false,
+      },
+      {
+        title: 'Develop bkend part of the app',
         isCompleted: false,
       },
       {

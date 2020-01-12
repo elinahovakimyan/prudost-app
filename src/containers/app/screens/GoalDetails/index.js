@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, RefreshControl,
+  FlatList, View, Text, RefreshControl, Image, TouchableOpacity, Alert,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -33,6 +33,22 @@ class GoalDetails extends React.PureComponent {
     />
   )
 
+  handleDelete = () => {
+    Alert.alert(
+      'Delete the goal?',
+      'Are you sure you want to delete this goal?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        { text: 'Yes', onPress: () => console.log('OK Pressed') },
+      ],
+      { cancelable: false },
+    );
+  }
+
   render() {
     const { navigation, isLoading } = this.props;
     const { goal } = navigation.state.params;
@@ -44,11 +60,26 @@ class GoalDetails extends React.PureComponent {
           <Text style={[styles.category, { borderColor: category.color, color: category.color }]}>
             {category.title || 'Unknown'}
           </Text>
+
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>
+              <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.handleDelete}>
+              <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
+            </TouchableOpacity>
+          </View>
         </View>
+
         <Text style={styles.title}>{goal.title}</Text>
         <Text style={styles.description}>{goal.description}</Text>
 
         <Text style={styles.sectionTitle}>TASKS</Text>
+        <TouchableOpacity style={styles.addTaskContainer}>
+          <Image source={require('../../../../assets/icons/plus_grey.png')} style={styles.addTaskIcon} />
+          <Text style={styles.addTaskTitle}>Add a new task</Text>
+        </TouchableOpacity>
+
         <FlatList
           data={goal.tasks || []}
           refreshing={isLoading}
@@ -60,6 +91,7 @@ class GoalDetails extends React.PureComponent {
           ListFooterComponent={<View style={styles.footer} />}
           refreshControl={<RefreshControl refreshing={isLoading} />}
         />
+
       </Layout>
     );
   }

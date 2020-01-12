@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  Image, TouchableOpacity, FlatList, View, Text, TextInput, KeyboardAvoidingView, Keyboard,
+  FlatList, View, Text, TextInput, KeyboardAvoidingView, Keyboard,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -12,14 +12,9 @@ import { styles } from './styles';
 
 
 class Comments extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => ({
+  static navigationOptions = () => ({
     headerTitle: 'Comments',
     headerTitleStyle: styles.headerTitle,
-    headerLeft: () => (
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Image style={styles.backIcon} source={require('../../../../assets/icons/backIcon.png')} />
-      </TouchableOpacity>
-    ),
     headerRight: () => <View />,
   });
 

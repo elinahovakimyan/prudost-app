@@ -11,14 +11,15 @@ import { styles } from './styles';
 
 
 class Splash extends React.PureComponent {
-  timer = null;
   static navigationOptions = () => ({
     headerStyle: {
       height: 50,
       backgroundColor: '#33638e',
     },
     headerTitle: () => null,
-  })
+  });
+
+  timer = null;
 
   async componentDidMount() {
     if (this.props.navigation) {
