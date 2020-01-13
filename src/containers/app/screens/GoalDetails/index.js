@@ -7,6 +7,7 @@ import {
 import Layout from '../../../../components/shared/Layout';
 import TaskCard from '../../../../components/shared/TaskCard';
 import { getGoals } from '../../redux/actions';
+import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
 
@@ -14,10 +15,10 @@ import { styles } from './styles';
 class GoalDetails extends React.PureComponent {
   static navigationOptions = () => ({
     headerTitle: 'Goal Details',
-    headerTintColor: '#fff',
+    headerTintColor: colors.white,
     headerTitleStyle: styles.headerTitle,
     headerStyle: {
-      backgroundColor: '#33638e',
+      backgroundColor: colors.blue,
     },
   });
 

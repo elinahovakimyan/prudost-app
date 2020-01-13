@@ -1,25 +1,27 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../../utils/styles';
+
 export const styles = StyleSheet.create({
   header: {
     marginTop: 50,
   },
   title: {
-    color: '#ffd96d',
+    color: colors.lightYellow,
     fontSize: 18,
     fontWeight: '500',
     letterSpacing: 0.78,
     paddingRight: 10,
   },
   subtitle: {
-    color: '#ffd96d',
+    color: colors.lightYellow,
     fontSize: 14,
     letterSpacing: 0.78,
     marginBottom: 40,
     marginTop: 10,
   },
   rightText: {
-    color: '#ffd96d',
+    color: colors.lightYellow,
     fontSize: 14,
     letterSpacing: 0.78,
     textAlign: 'right',
@@ -36,7 +38,7 @@ export const styles = StyleSheet.create({
     marginVertical: 12,
   },
   text: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 16,
     letterSpacing: 0.78,
     flexWrap: 'wrap',

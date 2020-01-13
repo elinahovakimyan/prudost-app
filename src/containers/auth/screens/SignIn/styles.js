@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+import { colors } from '../../../../utils/styles';
+
 const { height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
@@ -14,14 +16,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: '#ffd96d',
+    color: colors.lightYellow,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: '500',
     letterSpacing: 0.78,
   },
   rightText: {
-    color: '#ffd96d',
+    color: colors.lightYellow,
     fontSize: 18,
     letterSpacing: 0.78,
   },
@@ -30,7 +32,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   forgotPasswordText: {
-    color: '#fff',
+    color: colors.white,
     textAlign: 'center',
     fontSize: 16,
     paddingTop: 10,
@@ -55,13 +57,12 @@ export const styles = StyleSheet.create({
   },
   quoteText: {
     textAlign: 'center',
-    color: '#ffd96d',
+    color: colors.lightYellow,
     fontSize: 18,
     paddingTop: 8,
   },
   quoteAuthor: {
-    color: '#fff',
-    // alignSelf: 'flex-end',
+    color: colors.white,
     paddingTop: 16,
     paddingRight: 16,
   },

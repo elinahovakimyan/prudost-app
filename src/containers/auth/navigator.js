@@ -5,6 +5,7 @@ import RecoverPasswordScreen from './screens/PasswordRecover';
 import SignUpScreen from './screens/SignUp';
 import ConfirmationRequiredScreen from './screens/ConfirmationRequired';
 import AgreementScreen from './screens/Agreement';
+import { colors } from '../../utils/styles';
 
 const AuthNavigator = createStackNavigator(
   {
@@ -18,9 +19,8 @@ const AuthNavigator = createStackNavigator(
     initialRouteName: 'SignIn',
     defaultNavigationOptions: {
       headerStyle: {
-        // height: getStatusBarHeight()+1,
         height: 50,
-        backgroundColor: '#33638e',
+        backgroundColor: colors.blue,
       },
       headerLeft: () => null,
       headerRight: () => null,

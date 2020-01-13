@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../utils/styles';
+
 const styles = StyleSheet.create({
   container: {
     borderRadius: 16,
@@ -17,13 +19,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '500',
-    color: '#fff',
+    color: colors.white,
     paddingRight: 16,
     lineHeight: 32,
   },
   goalsIndicator: {
     fontSize: 14,
-    color: '#F3F3F3',
+    color: colors.lightGrey,
     letterSpacing: 0.78,
     textTransform: 'capitalize',
     paddingTop: 24,

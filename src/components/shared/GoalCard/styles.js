@@ -1,12 +1,14 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+import { colors } from '../../../utils/styles';
+
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
     marginVertical: 8,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     shadowColor: '#727982',
     shadowOpacity: 0.4,
     shadowRadius: 5,
@@ -27,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     letterSpacing: 0.5,
-    color: '#33638e',
+    color: colors.blue,
     maxWidth: '94%',
     lineHeight: 25,
     paddingRight: 8,
@@ -42,21 +44,21 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 14,
     flex: 1,
-    color: '#626262',
+    color: colors.grey,
     letterSpacing: 0.5,
     marginBottom: 5,
   },
   showMoreText: {
     fontSize: 14,
-    color: '#626262',
+    color: colors.grey,
     letterSpacing: 0.5,
     marginBottom: 5,
     fontWeight: '600',
   },
   category: {
     fontSize: 12,
-    color: '#FBC635',
-    borderColor: '#FBC635',
+    color: colors.yellow,
+    borderColor: colors.yellow,
     letterSpacing: 0.78,
     textTransform: 'capitalize',
     borderWidth: 0.5,
@@ -66,11 +68,11 @@ const styles = StyleSheet.create({
   },
   task: {
     fontSize: 14,
-    color: '#3b3b3b',
+    color: colors.darkGrey,
     letterSpacing: 0.78,
   },
   circle: {
-    backgroundColor: '#3b3b3b',
+    backgroundColor: colors.darkGrey,
     width: 4,
     height: 4,
     borderRadius: 2,
@@ -85,14 +87,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 8,
     backgroundColor: '#ededed',
-    // marginHorizontal: 2,
-    // marginBottom: 0.5,
   },
   progressBar: {
-    // paddingHorizontal: 1,
     height: 8,
     borderRadius: 20,
-    backgroundColor: '#FBC635',
+    backgroundColor: colors.yellow,
   },
   footer: {
     flexDirection: 'row',

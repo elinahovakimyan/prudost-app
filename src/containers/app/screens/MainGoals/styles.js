@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../../utils/styles';
+
 export const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#F3F3F3',
+    backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
     position: 'relative',
   },
@@ -16,7 +18,7 @@ export const styles = StyleSheet.create({
   },
   headerLink: {
     marginRight: 15,
-    color: '#33638e',
+    color: colors.blue,
     fontSize: 14,
     fontWeight: '500',
   },
@@ -36,18 +38,18 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 16,
     fontWeight: '600',
-    color: '#3b3b3b',
+    color: colors.darkGrey,
     marginTop: 24,
   },
-  feedbackContainer: {
+  plusContainer: {
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#33638e',
+    backgroundColor: colors.blue,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 2,
       height: 2,
@@ -60,7 +62,7 @@ export const styles = StyleSheet.create({
     right: 20,
     bottom: 155,
   },
-  feedbackIcon: {
+  plusIcon: {
     width: 28,
     height: 28,
   },

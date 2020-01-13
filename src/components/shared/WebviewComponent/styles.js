@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { colors } from '../../../utils/styles';
 
 const styles = StyleSheet.create({
   webView: {
@@ -18,18 +19,18 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   closeButtonWithWrapper: {
-    backgroundColor: '#ffd96d',
+    backgroundColor: colors.lightYellow,
     width: Dimensions.get('screen').width,
     height: 70,
     borderWidth: 1,
-    borderColor: '#ffd96d',
+    borderColor: colors.lightYellow,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 5,
   },
   closeText: {
-    color: '#fff',
+    color: colors.blue,
     fontSize: 16,
   },
 });

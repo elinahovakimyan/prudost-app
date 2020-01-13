@@ -1,12 +1,13 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../utils/styles';
 
 const styles = StyleSheet.create({
   radioButton: {
     height: 18,
     width: 18,
     borderWidth: 2,
-    borderColor: '#33638e',
+    borderColor: colors.blue,
     borderRadius: 9,
     flexDirection: 'row',
     alignItems: 'center',

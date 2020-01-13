@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+import { colors } from '../../../utils/styles';
+
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
@@ -8,7 +10,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 16,
     marginVertical: 8,
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     shadowColor: '#727982',
     shadowOpacity: 0.5,
     shadowRadius: 6,
@@ -25,7 +27,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#626262',
+    color: colors.grey,
     width: width - 128,
     paddingLeft: 8,
   },

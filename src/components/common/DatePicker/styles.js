@@ -6,7 +6,7 @@ const styles = {
     marginTop: 12,
   },
   btnTextConfirm: {
-    color: '#ffd96d',
+    color: '#33638e',
   },
   dateInput: {
     backgroundColor: 'white',

@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../utils/styles';
 
 const styles = StyleSheet.create({
   button: {
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: '500',
     fontSize: 16,
-    color: '#33638e',
+    color: colors.blue,
     textAlign: 'center',
     lineHeight: 20,
   },
@@ -26,18 +27,18 @@ const styles = StyleSheet.create({
   },
   outlined: {
     borderWidth: 0.5,
-    borderColor: '#FF4A2C',
+    borderColor: colors.lightYellow,
     borderRadius: 8,
     paddingVertical: 5,
   },
   block: {
     width: '100%',
   },
-  light: {
-    backgroundColor: '#55D8CF',
-  },
   dark: {
-    backgroundColor: '#ffd96d',
+    backgroundColor: colors.black,
+  },
+  light: {
+    backgroundColor: colors.lightYellow,
   },
 });
 

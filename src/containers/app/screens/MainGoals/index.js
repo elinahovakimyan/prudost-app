@@ -7,6 +7,7 @@ import {
 import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
 import CategoryCard from '../../../../components/shared/CategoryCard';
+import { colors } from '../../../../utils/styles';
 import { getGoals } from '../../redux/actions';
 import { categories } from '../../data';
 
@@ -16,11 +17,11 @@ import { styles } from './styles';
 class MainGoals extends React.PureComponent {
   static navigationOptions = () => ({
     headerTitle: 'All Goals',
-    headerTintColor: '#fff',
+    headerTintColor: colors.white,
     headerShown: false,
     headerTitleStyle: styles.headerTitle,
     headerStyle: {
-      backgroundColor: '#33638e',
+      backgroundColor: colors.blue,
     },
   });
 
@@ -83,10 +84,10 @@ class MainGoals extends React.PureComponent {
 
         <TouchableOpacity
           onPress={() => navigation.push('AddGoal')}
-          style={styles.feedbackContainer}
+          style={styles.plusContainer}
         >
           <Image
-            style={styles.feedbackIcon}
+            style={styles.plusIcon}
             source={require('../../../../assets/icons/plus_white.png')}
           />
         </TouchableOpacity>

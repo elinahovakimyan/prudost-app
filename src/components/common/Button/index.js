@@ -12,7 +12,7 @@ function Button(props) {
     outlined ? styles.outlined : {},
     block ? styles.block : {},
     circled ? styles.circled : {},
-    theme === 'light' ? styles.light : styles.dark,
+    theme === 'dark' ? styles.dark : styles.light,
     buttonStyle,
   ];
 

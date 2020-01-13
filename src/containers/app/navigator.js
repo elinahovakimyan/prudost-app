@@ -4,9 +4,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 import Goals from './screens/Goals';
 import MainGoals from './screens/MainGoals';
 import GoalDetails from './screens/GoalDetails';
-import Comments from './screens/Comments';
 import AddGoal from './screens/AddGoal';
 import { getTabIcon } from '../../utils/navigation';
+import { colors } from '../../utils/styles';
 
 
 const GoalsStack = createStackNavigator(
@@ -14,7 +14,6 @@ const GoalsStack = createStackNavigator(
     MainGoals: { screen: MainGoals },
     Goals: { screen: Goals },
     GoalDetails: { screen: GoalDetails },
-    Comments: { screen: Comments },
     AddGoal: { screen: AddGoal },
   },
   {
@@ -27,10 +26,10 @@ const GoalsStack = createStackNavigator(
 
 const HabitsStack = createStackNavigator(
   {
-    Comments: { screen: Comments },
+    AddGoal: { screen: AddGoal },
   },
   {
-    initialRouteName: 'Comments',
+    initialRouteName: 'AddGoal',
     defaultNavigationOptions: {
       headerLayoutPreset: 'center',
     },
@@ -49,8 +48,8 @@ const AppNavigator = createBottomTabNavigator(
       tabBarIcon: ({ focused }) => getTabIcon(navigation, focused),
     }),
     tabBarOptions: {
-      activeTintColor: '#FBC635',
-      inactiveTintColor: '#33638e',
+      activeTintColor: colors.yellow,
+      inactiveTintColor: colors.blue,
       labelStyle: {
         fontSize: 14,
       },

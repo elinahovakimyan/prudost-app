@@ -1,8 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../../utils/styles';
+
 export const styles = StyleSheet.create({
   screen: {
-    backgroundColor: '#F3F3F3',
+    backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
   },
   container: {
@@ -12,13 +14,13 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     fontWeight: '500',
-    color: '#fff',
+    color: colors.white,
   },
   title: {
     paddingHorizontal: 16,
     paddingBottom: 16,
     fontWeight: '600',
-    color: '#3b3b3b',
+    color: colors.darkGrey,
     marginTop: 16,
     fontSize: 22,
   },
@@ -26,20 +28,20 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 16,
     fontWeight: '600',
-    color: '#3b3b3b',
+    color: colors.darkGrey,
     marginTop: 32,
     fontSize: 14,
   },
   description: {
     paddingHorizontal: 16,
     paddingBottom: 16,
-    color: '#3b3b3b',
+    color: colors.darkGrey,
     fontSize: 16,
   },
   category: {
     fontSize: 14,
-    color: '#FBC635',
-    borderColor: '#FBC635',
+    color: colors.yellow,
+    borderColor: colors.yellow,
     letterSpacing: 0.78,
     textTransform: 'capitalize',
     borderWidth: 0.5,
@@ -75,7 +77,7 @@ export const styles = StyleSheet.create({
   addTaskTitle: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#626262',
+    color: colors.grey,
     maxWidth: '75%',
     lineHeight: 25,
     paddingLeft: 8,

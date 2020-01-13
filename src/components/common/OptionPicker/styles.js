@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../utils/styles';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -17,12 +19,12 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     paddingHorizontal: 8,
     borderBottomWidth: 0.5,
-    borderColor: '#626262',
+    borderColor: colors.grey,
   },
   headerText: {
     fontSize: 16,
     fontWeight: '500',
-    color: '#000',
+    color: colors.black,
   },
   placeholder: {
     color: '#6F6F6F',
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   content: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     marginHorizontal: 20,
     marginVertical: 70,
     borderRadius: 8,

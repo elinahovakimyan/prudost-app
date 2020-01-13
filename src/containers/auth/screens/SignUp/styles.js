@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
+import { colors } from '../../../../utils/styles';
+
 const { height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
@@ -11,14 +13,14 @@ export const styles = StyleSheet.create({
     marginBottom: 40,
   },
   title: {
-    color: '#ffd96d',
+    color: colors.lightYellow,
     fontSize: 20,
     textAlign: 'center',
     fontWeight: '500',
     letterSpacing: 0.78,
   },
   rightText: {
-    color: '#ffd96d',
+    color: colors.lightYellow,
     fontSize: 18,
     letterSpacing: 0.78,
   },
@@ -36,7 +38,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   signInText: {
-    color: '#fff',
+    color: colors.white,
     textAlign: 'center',
     paddingTop: 10,
     fontSize: 16,

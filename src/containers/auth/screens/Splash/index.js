@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Layout from '../../../../components/shared/Layout';
 import StorageUtils from '../../helpers/storage';
 import { addTokenToHttp } from '../../../../utils/http';
+import { colors } from '../../../../utils/styles';
 import { setUser } from '../../redux/actions';
 
 import { styles } from './styles';
@@ -14,7 +15,7 @@ class Splash extends React.PureComponent {
   static navigationOptions = () => ({
     headerStyle: {
       height: 50,
-      backgroundColor: '#33638e',
+      backgroundColor: colors.blue,
     },
     headerTitle: () => null,
   });
