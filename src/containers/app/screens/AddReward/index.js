@@ -5,15 +5,22 @@ import { Text, TouchableOpacity } from 'react-native';
 import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
+import { addReward } from '../../redux/actions';
 import { colors } from '../../../../utils/styles';
-import { addGoal } from '../../redux/actions';
 
 import { styles } from './styles';
 
+const timeOptions = [
+  { value: 10, label: 'Less than 1 hour (10 points)' },
+  { value: 30, label: '1 - 5 hours (30 points)' },
+  { value: 80, label: '1 full day (80 points)' },
+  { value: 120, label: '2 - 7 days (120 points)' },
+  { value: 150, label: 'More than a week (150 points)' },
+];
 
-class AddGoal extends React.PureComponent {
+class AddReward extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'New Goal',
+    headerTitle: 'New Reward',
     headerTintColor: '#fff',
     headerStyle: styles.headerStyle,
     headerLeft: () => (
@@ -24,7 +31,7 @@ class AddGoal extends React.PureComponent {
     headerRight: () => (
       <TouchableOpacity
         style={styles.actionTextContainer}
-        onPress={navigation.getParam('submitGoal')}
+        onPress={navigation.getParam('submit')}
       >
         <Text style={styles.actionText}>Add</Text>
       </TouchableOpacity>
@@ -33,19 +40,19 @@ class AddGoal extends React.PureComponent {
 
   state = {
     title: '',
-    description: '',
+    points: null,
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ submitGoal: this.handleSubmit });
+    this.props.navigation.setParams({ submit: this.handleSubmit });
   }
 
   handleSubmit = () => {
-    const { title, description } = this.state;
+    const { title, points } = this.state;
 
-    this.props.addGoal({
+    this.props.addReward({
       title,
-      description,
+      points,
       datetime: new Date(),
     });
   }
@@ -57,7 +64,7 @@ class AddGoal extends React.PureComponent {
   }
 
   render() {
-    const { title, description } = this.state;
+    const { title, points } = this.state;
 
     return (
       <Layout style={styles.screen}>
@@ -65,36 +72,17 @@ class AddGoal extends React.PureComponent {
           underlined
           value={title}
           onChangeText={(val) => this.handleInputChange('title', val)}
-          placeholder="Goal title"
-          placeholderTextColor={colors.grey}
-        />
-
-        <Input
-          multiline
-          underlined
-          value={description}
-          onChangeText={(val) => this.handleInputChange('description', val)}
-          placeholder="Why is this goal important?"
+          placeholder="Reward title"
           placeholderTextColor={colors.grey}
         />
 
         <OptionPicker
           headerStyle={styles.input}
-          placeholder="Goal category"
-          options={[{ value: 'val', label: 'option' }]}
+          onChange={(val) => this.handleInputChange('points', val)}
+          value={points}
+          placeholder="How much time will it take?"
+          options={timeOptions}
         />
-
-        <Text style={styles.sectionTitle}>TASKS</Text>
-
-        <Input
-          underlined
-          value={title}
-          onChangeText={(val) => this.handleInputChange('title', val)}
-          placeholder="Add a task"
-          placeholderTextColor={colors.grey}
-        />
-
-        <Text style={styles.newTask}>+ Add a new task</Text>
 
       </Layout>
     );
@@ -102,10 +90,10 @@ class AddGoal extends React.PureComponent {
 }
 
 const mapDispatchToProps = {
-  addGoal,
+  addReward,
 };
 
 export default connect(
   null,
   mapDispatchToProps,
-)(AddGoal);
+)(AddReward);

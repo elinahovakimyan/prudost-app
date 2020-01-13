@@ -6,7 +6,6 @@ import {
 
 import Layout from '../../../../components/shared/Layout';
 import TaskCard from '../../../../components/shared/TaskCard';
-import { getGoals } from '../../redux/actions';
 import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
@@ -21,10 +20,6 @@ class GoalDetails extends React.PureComponent {
       backgroundColor: colors.blue,
     },
   });
-
-  componentDidMount() {
-    this.props.getGoals();
-  }
 
   renderItem = (item) => (
     <TaskCard
@@ -101,15 +96,9 @@ class GoalDetails extends React.PureComponent {
 const mapStateToProps = (state) => ({
   goals: state.App.goals,
   isLoading: state.App.isLoading,
-  user: state.Auth.user,
   goalsError: state.App.errors.Goals,
 });
 
-const mapDispatchToProps = {
-  getGoals,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(GoalDetails);

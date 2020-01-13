@@ -1,10 +1,18 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
+/* Goals */
 import Goals from './screens/Goals';
 import MainGoals from './screens/MainGoals';
 import GoalDetails from './screens/GoalDetails';
 import AddGoal from './screens/AddGoal';
+
+/* Habits */
+
+/* Rewards */
+import Rewards from './screens/Rewards';
+import AddReward from './screens/AddReward';
+
 import { getTabIcon } from '../../utils/navigation';
 import { colors } from '../../utils/styles';
 
@@ -17,7 +25,6 @@ const GoalsStack = createStackNavigator(
     AddGoal: { screen: AddGoal },
   },
   {
-    initialRouteName: 'MainGoals',
     defaultNavigationOptions: {
       headerLayoutPreset: 'center',
     },
@@ -29,7 +36,18 @@ const HabitsStack = createStackNavigator(
     AddGoal: { screen: AddGoal },
   },
   {
-    initialRouteName: 'AddGoal',
+    defaultNavigationOptions: {
+      headerLayoutPreset: 'center',
+    },
+  },
+);
+
+const RewardsStack = createStackNavigator(
+  {
+    Rewards: { screen: Rewards },
+    AddReward: { screen: AddReward },
+  },
+  {
     defaultNavigationOptions: {
       headerLayoutPreset: 'center',
     },
@@ -40,7 +58,7 @@ const AppNavigator = createBottomTabNavigator(
   {
     Goals: GoalsStack,
     Habits: HabitsStack,
-    Rewards: HabitsStack,
+    Rewards: RewardsStack,
     Profile: HabitsStack,
   },
   {
