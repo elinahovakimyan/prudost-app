@@ -18,7 +18,7 @@ class Goals extends React.PureComponent {
 
     return ({
       headerTitle: 'Goals',
-      headerTintColor: colors.blue,
+      headerTintColor: colors.white,
       headerTitleStyle: styles.headerTitle,
       headerStyle: {
         backgroundColor: category ? category.color : colors.blue,

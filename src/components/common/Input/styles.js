@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
 
+import { colors } from '../../../utils/styles';
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     paddingVertical: 16,
     paddingHorizontal: 24,
     borderWidth: 0,
     borderRadius: 16,
-    color: '#000',
+    color: colors.black,
     width: '100%',
     marginVertical: 8,
     fontSize: 16,
@@ -29,6 +30,16 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     resizeMode: 'contain',
+  },
+  underlined: {
+    marginTop: 32,
+    color: colors.black,
+    fontSize: 16,
+    marginBottom: 8,
+    paddingBottom: 16,
+    paddingHorizontal: 8,
+    borderBottomWidth: 0.5,
+    borderColor: colors.grey,
   },
 });
 

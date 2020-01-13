@@ -19,8 +19,10 @@ class Input extends React.PureComponent {
   render() {
     const { isPasswordVisible } = this.state;
     const {
-      onChangeText, value, keyboardType, placeholder, isPassword, autoCapitalize, maxLength,
+      onChangeText, value, keyboardType, placeholder, placeholderTextColor,
+      isPassword, autoCapitalize, maxLength, underlined,
     } = this.props;
+    const inputStyle = underlined ? styles.underlined : styles.input;
 
     if (isPassword) {
       return (
@@ -29,8 +31,8 @@ class Input extends React.PureComponent {
             value={value}
             onChangeText={onChangeText}
             placeholder={placeholder}
-            placeholderTextColor="#515151"
-            style={styles.input}
+            placeholderTextColor={placeholderTextColor || '#515151'}
+            style={inputStyle}
             autoCapitalize={autoCapitalize}
             keyboardType={keyboardType}
             secureTextEntry={isPasswordVisible}
@@ -54,10 +56,10 @@ class Input extends React.PureComponent {
         value={value}
         maxLength={maxLength}
         onChangeText={onChangeText}
-        placeholderTextColor="#515151"
+        placeholderTextColor={placeholderTextColor || '#515151'}
         autoCapitalize={autoCapitalize}
         placeholder={placeholder}
-        style={styles.input}
+        style={inputStyle}
         keyboardType={keyboardType}
       />
     );

@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Text, TouchableOpacity, TextInput,
-} from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
+import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
 import { addGoal } from '../../redux/actions';
 
 import { styles } from './styles';
+import { colors } from '../../../../utils/styles';
 
 
 class AddGoal extends React.PureComponent {
@@ -63,21 +63,21 @@ class AddGoal extends React.PureComponent {
 
     return (
       <Layout style={styles.screen}>
-        <TextInput
-          style={styles.input}
+        <Input
+          underlined
           value={title}
           onChangeText={(val) => this.handleInputChange('title', val)}
           placeholder="Goal title"
-          placeholderTextColor="#6F6F6F"
+          placeholderTextColor={colors.grey}
         />
 
-        <TextInput
+        <Input
           multiline
-          style={styles.input}
+          underlined
           value={description}
           onChangeText={(val) => this.handleInputChange('description', val)}
           placeholder="Why is this goal important?"
-          placeholderTextColor="#6F6F6F"
+          placeholderTextColor={colors.grey}
         />
 
         <OptionPicker
@@ -88,12 +88,12 @@ class AddGoal extends React.PureComponent {
 
         <Text style={styles.sectionTitle}>TASKS</Text>
 
-        <TextInput
-          style={styles.input}
+        <Input
+          underlined
           value={title}
           onChangeText={(val) => this.handleInputChange('title', val)}
           placeholder="Add a task"
-          placeholderTextColor="#6F6F6F"
+          placeholderTextColor={colors.grey}
         />
 
         <Text style={styles.newTask}>+ Add a new task</Text>
