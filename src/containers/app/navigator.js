@@ -13,6 +13,9 @@ import AddGoal from './screens/AddGoal';
 import Rewards from './screens/Rewards';
 import AddReward from './screens/AddReward';
 
+/* Profile */
+import Profile from './screens/Profile';
+
 import { getTabIcon } from '../../utils/navigation';
 import { colors } from '../../utils/styles';
 
@@ -54,12 +57,23 @@ const RewardsStack = createStackNavigator(
   },
 );
 
+const ProfileStack = createStackNavigator(
+  {
+    Profile: { screen: Profile },
+  },
+  {
+    defaultNavigationOptions: {
+      headerLayoutPreset: 'center',
+    },
+  },
+);
+
 const AppNavigator = createBottomTabNavigator(
   {
     Goals: GoalsStack,
     Habits: HabitsStack,
     Rewards: RewardsStack,
-    Profile: HabitsStack,
+    Profile: ProfileStack,
   },
   {
     defaultNavigationOptions: ({ navigation }) => ({

@@ -4,12 +4,12 @@ import { View, Text } from 'react-native';
 import styles from './styles';
 
 
-function Score({ score }) {
+function Score({ score, numberStyle, titleStyle }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Current score</Text>
+      <Text style={[styles.title, titleStyle]}>Current score</Text>
       <View style={styles.scoreContainer}>
-        <Text style={styles.score}>{score}</Text>
+        <Text style={[styles.score, numberStyle]}>{score}</Text>
       </View>
     </View>
   );
