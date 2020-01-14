@@ -9,6 +9,7 @@ import { colors } from '../../../../utils/styles';
 import { addGoal } from '../../redux/actions';
 
 import { styles } from './styles';
+import AddTask from '../../../../components/shared/AddTask';
 
 
 class AddGoal extends React.PureComponent {
@@ -94,7 +95,8 @@ class AddGoal extends React.PureComponent {
           placeholderTextColor={colors.grey}
         />
 
-        <Text style={styles.newTask}>+ Add a new task</Text>
+        <AddTask hasPadding={false} />
+        {/* <Text style={styles.newTask}>+ Add a new task</Text> */}
 
       </Layout>
     );

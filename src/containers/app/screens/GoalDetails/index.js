@@ -9,6 +9,7 @@ import TaskCard from '../../../../components/shared/TaskCard';
 import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
+import AddTask from '../../../../components/shared/AddTask';
 
 
 class GoalDetails extends React.PureComponent {
@@ -71,10 +72,8 @@ class GoalDetails extends React.PureComponent {
         <Text style={styles.description}>{goal.description}</Text>
 
         <Text style={styles.sectionTitle}>TASKS</Text>
-        <TouchableOpacity style={styles.addTaskContainer}>
-          <Image source={require('../../../../assets/icons/plus_grey.png')} style={styles.addTaskIcon} />
-          <Text style={styles.addTaskTitle}>Add a new task</Text>
-        </TouchableOpacity>
+
+        <AddTask hasHorizaontalPadding />
 
         <FlatList
           data={goal.tasks || []}

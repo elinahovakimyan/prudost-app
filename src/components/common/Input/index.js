@@ -20,7 +20,7 @@ class Input extends React.PureComponent {
     const { isPasswordVisible } = this.state;
     const {
       onChangeText, value, keyboardType, placeholder, placeholderTextColor,
-      isPassword, autoCapitalize, maxLength, underlined,
+      isPassword, autoCapitalize, maxLength, underlined, onBlur,
     } = this.props;
     const inputStyle = underlined ? styles.underlined : styles.input;
 
@@ -30,6 +30,7 @@ class Input extends React.PureComponent {
           <TextInput
             value={value}
             onChangeText={onChangeText}
+            onBlur={onBlur}
             placeholder={placeholder}
             placeholderTextColor={placeholderTextColor || '#515151'}
             style={inputStyle}
@@ -56,6 +57,7 @@ class Input extends React.PureComponent {
         value={value}
         maxLength={maxLength}
         onChangeText={onChangeText}
+        onBlur={onBlur}
         placeholderTextColor={placeholderTextColor || '#515151'}
         autoCapitalize={autoCapitalize}
         placeholder={placeholder}
