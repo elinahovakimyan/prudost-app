@@ -17,3 +17,12 @@ export const addReward = (reward) => ({
   type: actions.MAIN_ADD_REWARD_REQUEST,
   reward,
 });
+
+export const getHabits = () => ({
+  type: actions.MAIN_GET_HABITS_REQUEST,
+});
+
+export const addHabit = (habit) => ({
+  type: actions.MAIN_ADD_HABIT_REQUEST,
+  habit,
+});

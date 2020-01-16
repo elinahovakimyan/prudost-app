@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  Image, TouchableOpacity, FlatList, View, Text, RefreshControl, ScrollView,
+  FlatList, View, Text, RefreshControl, ScrollView,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
 import CategoryCard from '../../../../components/shared/CategoryCard';
+import AddButton from '../../../../components/common/AddButton';
 import { colors } from '../../../../utils/styles';
 import { getGoals } from '../../redux/actions';
 import { categories } from '../../data';
@@ -82,15 +83,7 @@ class MainGoals extends React.PureComponent {
           />
         </View>
 
-        <TouchableOpacity
-          onPress={() => navigation.push('AddGoal')}
-          style={styles.plusContainer}
-        >
-          <Image
-            style={styles.plusIcon}
-            source={require('../../../../assets/icons/plus_white.png')}
-          />
-        </TouchableOpacity>
+        <AddButton onPress={() => navigation.push('AddGoal')} bottomSpace={155} />
       </Layout>
     );
   }

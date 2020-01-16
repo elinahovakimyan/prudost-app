@@ -6,10 +6,10 @@ import {
 
 import Layout from '../../../../components/shared/Layout';
 import TaskCard from '../../../../components/shared/TaskCard';
+import AddTask from '../../../../components/shared/AddTask';
 import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
-import AddTask from '../../../../components/shared/AddTask';
 
 
 class GoalDetails extends React.PureComponent {

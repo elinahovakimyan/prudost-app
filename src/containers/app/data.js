@@ -215,3 +215,18 @@ export const rewards = [
     pointsRequired: 50,
   },
 ];
+
+export const habits = [
+  {
+    id: 1,
+    title: "Don't watch a movie till 7pm",
+  },
+  {
+    id: 2,
+    title: 'No social media till 12pm',
+  },
+  {
+    id: 4,
+    title: 'Drink a water in the morning',
+  },
+];

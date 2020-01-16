@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
+    position: 'relative',
   },
   container: {
     paddingHorizontal: 16,
@@ -37,32 +38,6 @@ export const styles = StyleSheet.create({
     paddingBottom: 16,
     color: colors.darkGrey,
     fontSize: 16,
-  },
-  category: {
-    fontSize: 14,
-    color: colors.yellow,
-    borderColor: colors.yellow,
-    letterSpacing: 0.78,
-    textTransform: 'capitalize',
-    borderWidth: 0.5,
-    borderRadius: 14,
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-  },
-  categoryContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    marginTop: 24,
-  },
-  iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  icon: {
-    width: 20,
-    height: 20,
-    marginRight: 12,
   },
   footer: {
     height: 230,

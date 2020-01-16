@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, RefreshControl, Image, TouchableOpacity, Alert, ScrollView,
+  FlatList, View, Text, RefreshControl, Alert, ScrollView,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import RewardCard from '../../../../components/shared/RewardCard';
+import AddButton from '../../../../components/common/AddButton';
 import Score from '../../../../components/shared/Score';
 import { getRewards } from '../../redux/actions';
 import { colors } from '../../../../utils/styles';
@@ -132,15 +133,7 @@ class Rewards extends React.PureComponent {
 
         </ScrollView>
 
-        <TouchableOpacity
-          onPress={() => navigation.push('AddReward')}
-          style={styles.plusContainer}
-        >
-          <Image
-            style={styles.plusIcon}
-            source={require('../../../../assets/icons/plus_white.png')}
-          />
-        </TouchableOpacity>
+        <AddButton onPress={() => navigation.push('AddReward')} bottomSpace={155} />
       </Layout>
     );
   }

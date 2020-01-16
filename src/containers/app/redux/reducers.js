@@ -9,6 +9,8 @@ const initialState = {
     AddGoal: null,
     Rewards: null,
     AddReward: null,
+    Habits: null,
+    AddHabit: null,
   },
 };
 
@@ -30,6 +32,14 @@ export const AppReducer = (state = initialState, action) => {
       return { ...state, errors: { AddReward: null } };
     case actions.MAIN_ADD_REWARD_ERROR:
       return { ...state, errors: { AddReward: action.error } };
+    case actions.MAIN_GET_HABITS_SUCCESS:
+      return { ...state, habits: action.habits, errors: { Habits: null } };
+    case actions.MAIN_GET_HABITS_ERROR:
+      return { ...state, errors: { Habits: action.error } };
+    case actions.MAIN_ADD_HABIT_SUCCESS:
+      return { ...state, errors: { AddHabit: null } };
+    case actions.MAIN_ADD_HABIT_ERROR:
+      return { ...state, errors: { AddHabit: action.error } };
     case actions.MAIN_CHANGE_LOADING_STATE:
       return { ...state, isLoading: action.isLoading };
     default:

@@ -8,6 +8,8 @@ import GoalDetails from './screens/GoalDetails';
 import AddGoal from './screens/AddGoal';
 
 /* Habits */
+import Habits from './screens/Habits';
+import AddHabit from './screens/AddHabit';
 
 /* Rewards */
 import Rewards from './screens/Rewards';
@@ -36,7 +38,8 @@ const GoalsStack = createStackNavigator(
 
 const HabitsStack = createStackNavigator(
   {
-    AddGoal: { screen: AddGoal },
+    Habits: { screen: Habits },
+    AddHabit: { screen: AddHabit },
   },
   {
     defaultNavigationOptions: {
