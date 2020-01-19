@@ -60,4 +60,9 @@ export const styles = StyleSheet.create({
     marginTop: 32,
     fontSize: 14,
   },
+  overallPoints: {
+    textAlign: 'right',
+    fontWeight: '500',
+    paddingTop: 48,
+  },
 });

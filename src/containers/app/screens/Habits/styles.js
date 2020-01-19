@@ -31,7 +31,8 @@ export const styles = StyleSheet.create({
     fontWeight: '600',
     color: colors.darkGrey,
     marginTop: 32,
-    fontSize: 14,
+    fontSize: 16,
+    textTransform: 'uppercase',
   },
   description: {
     paddingHorizontal: 16,

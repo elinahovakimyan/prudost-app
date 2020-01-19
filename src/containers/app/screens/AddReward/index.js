@@ -11,11 +11,20 @@ import { colors } from '../../../../utils/styles';
 import { styles } from './styles';
 
 const timeOptions = [
-  { value: 10, label: 'Less than 1 hour (10 points)' },
-  { value: 30, label: '1 - 5 hours (30 points)' },
-  { value: 80, label: '1 full day (80 points)' },
-  { value: 120, label: '2 - 7 days (120 points)' },
-  { value: 150, label: 'More than a week (150 points)' },
+  { value: 5, label: 'Less than 1 hour (5 points)' },
+  { value: 20, label: '1 - 5 hours (20 points)' },
+  { value: 50, label: '1 full day (50 points)' },
+  { value: 80, label: '2 - 7 days (80 points)' },
+  { value: 100, label: 'More than a week (100 points)' },
+];
+
+const moneyOptions = [
+  { value: 0, label: 'No money' },
+  { value: 5, label: 'Less than 5 USD (5 points)' },
+  { value: 20, label: '5 - 10 USD (20 points)' },
+  { value: 50, label: '10 - 30 USD (50 points)' },
+  { value: 80, label: '30 - 80 USD (80 points)' },
+  { value: 100, label: 'More than 100 USD (100 points)' },
 ];
 
 class AddReward extends React.PureComponent {
@@ -40,7 +49,9 @@ class AddReward extends React.PureComponent {
 
   state = {
     title: '',
-    points: null,
+    timePoints: null,
+    moneyPoints: null,
+    // notes: '',
   }
 
   componentDidMount() {
@@ -64,7 +75,9 @@ class AddReward extends React.PureComponent {
   }
 
   render() {
-    const { title, points } = this.state;
+    const {
+      title, timePoints, moneyPoints,
+    } = this.state;
 
     return (
       <Layout style={styles.screen}>
@@ -78,11 +91,30 @@ class AddReward extends React.PureComponent {
 
         <OptionPicker
           headerStyle={styles.input}
-          onChange={(val) => this.handleInputChange('points', val)}
-          value={points}
+          onChange={(val) => this.handleInputChange('timePoints', val)}
+          value={timePoints}
           placeholder="How much time will it take?"
           options={timeOptions}
         />
+
+        <OptionPicker
+          headerStyle={styles.input}
+          onChange={(val) => this.handleInputChange('moneyPoints', val)}
+          value={moneyPoints}
+          placeholder="How much money will it take?"
+          options={moneyOptions}
+        />
+
+        {/* <Input
+          underlined
+          multiline
+          value={notes}
+          onChangeText={(val) => this.handleInputChange('notes', val)}
+          placeholder="Notes"
+          placeholderTextColor={colors.grey}
+        /> */}
+
+        <Text style={styles.overallPoints}>{`Overall points required: ${timePoints + moneyPoints}`}</Text>
 
       </Layout>
     );

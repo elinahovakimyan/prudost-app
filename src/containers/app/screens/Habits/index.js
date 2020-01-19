@@ -6,7 +6,7 @@ import {
 
 import Layout from '../../../../components/shared/Layout';
 import AddButton from '../../../../components/common/AddButton';
-import TaskCard from '../../../../components/shared/TaskCard';
+import HabitCard from '../../../../components/shared/HabitCard';
 import { colors } from '../../../../utils/styles';
 import { getHabits } from '../../redux/actions';
 
@@ -28,7 +28,7 @@ class Habits extends React.PureComponent {
   }
 
   renderItem = (item) => (
-    <TaskCard
+    <HabitCard
       title={item.title}
       isCompleted={item.isCompleted}
       onPress={() => {}}
@@ -40,7 +40,7 @@ class Habits extends React.PureComponent {
 
     return (
       <Layout style={styles.screen}>
-        <Text style={styles.sectionTitle}>Daily Habits</Text>
+        <Text style={styles.sectionTitle}>Today&apos;s Habits</Text>
 
         <FlatList
           data={habits || []}
