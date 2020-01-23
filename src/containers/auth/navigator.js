@@ -1,18 +1,16 @@
 import { createStackNavigator } from 'react-navigation-stack';
 
 import SignInScreen from './screens/SignIn';
-import RecoverPasswordScreen from './screens/PasswordRecover';
+import ResetPasswordScreen from './screens/ResetPassword';
 import SignUpScreen from './screens/SignUp';
-import ConfirmationRequiredScreen from './screens/ConfirmationRequired';
 import AgreementScreen from './screens/Agreement';
 import { colors } from '../../utils/styles';
 
 const AuthNavigator = createStackNavigator(
   {
     SignIn: { screen: SignInScreen },
-    ForgotPassword: { screen: RecoverPasswordScreen },
+    ForgotPassword: { screen: ResetPasswordScreen },
     SignUp: { screen: SignUpScreen },
-    ConfirmationRequired: { screen: ConfirmationRequiredScreen },
     Agreement: { screen: AgreementScreen },
   },
   {

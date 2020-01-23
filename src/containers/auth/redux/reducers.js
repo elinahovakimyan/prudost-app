@@ -4,7 +4,7 @@ const initialState = {
   user: null,
   accessToken: 'null',
   errors: {
-    SignIn: null, SignUp: null, PasswordRecover: null, User: null,
+    SignIn: null, SignUp: null, ResetPassword: null, User: null,
   },
 };
 
@@ -15,7 +15,7 @@ export const AuthReducer = (state = initialState, action) => {
     case actions.AUTH_LOGIN_ERROR:
       return { ...state, errors: { SignIn: action.error } };
     case actions.AUTH_PASSWORD_RECOVER_ERROR:
-      return { ...state, errors: { PasswordRecover: action.error } };
+      return { ...state, errors: { ResetPassword: action.error } };
     case actions.AUTH_SIGNUP_SUCCESS:
       return { ...state, user: action.user };
     case actions.AUTH_SIGNUP_ERROR:

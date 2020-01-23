@@ -11,7 +11,7 @@ import { validateEmail } from '../../helpers/validation';
 
 import { styles } from './styles';
 
-class PasswordRecover extends React.PureComponent {
+class ResetPassword extends React.PureComponent {
   state = {
     email: '',
     validationError: '',
@@ -46,14 +46,14 @@ class PasswordRecover extends React.PureComponent {
   }
 
   renderErrors = () => {
-    const { PasswordRecoverErrors } = this.props;
+    const { ResetPasswordErrors } = this.props;
     const { validationError } = this.state;
 
     if (validationError) {
       return <ErrorBox errorText={validationError} />;
     }
-    if (PasswordRecoverErrors) {
-      return <ErrorBox errorText={PasswordRecoverErrors} />;
+    if (ResetPasswordErrors) {
+      return <ErrorBox errorText={ResetPasswordErrors} />;
     }
     return null;
   }
@@ -116,7 +116,7 @@ class PasswordRecover extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  PasswordRecoverErrors: state.Auth.errors.PasswordRecover,
+  ResetPasswordErrors: state.Auth.errors.ResetPassword,
 });
 
 const mapDispatchToProps = {
@@ -126,4 +126,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(PasswordRecover);
+)(ResetPassword);
