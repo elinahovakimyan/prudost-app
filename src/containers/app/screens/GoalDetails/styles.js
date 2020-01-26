@@ -38,17 +38,6 @@ export const styles = StyleSheet.create({
     color: colors.darkGrey,
     fontSize: 16,
   },
-  category: {
-    fontSize: 14,
-    color: colors.yellow,
-    borderColor: colors.yellow,
-    letterSpacing: 0.78,
-    textTransform: 'capitalize',
-    borderWidth: 0.5,
-    borderRadius: 14,
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-  },
   categoryContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

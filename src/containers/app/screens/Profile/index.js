@@ -5,9 +5,11 @@ import {
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
+import Button from '../../../../components/common/Button';
 import StatCard from '../../../../components/shared/StatCard';
 import Score from '../../../../components/shared/Score';
-// import { getStats } from '../../redux/actions';
+import { clearAccessToken } from '../../../auth/redux/actions';
+import { logout } from '../../redux/actions';
 import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
@@ -26,6 +28,11 @@ class Profile extends React.PureComponent {
     //   backgroundColor: colors.blue,
     // },
   });
+
+  handleLogout = () => {
+    this.props.clearAccessToken();
+    this.props.logout();
+  }
 
   renderItem = (item) => (
     <StatCard
@@ -87,11 +94,13 @@ class Profile extends React.PureComponent {
             refreshControl={<RefreshControl refreshing={isLoading} />}
             renderItem={({ item }) => this.renderItem(item)}
             keyExtractor={(item) => String(item.title)}
-          // ListFooterComponent={<View style={styles.listFooter} />}
+            // ListFooterComponent={<View style={styles.listFooter} />}
             ListEmptyComponent={!isLoading
-            && <Text style={styles.emptyText}>No rewards found.</Text>}
+              && <Text style={styles.emptyText}>No rewards found.</Text>}
           />
         </View>
+
+        <Button buttonStyle={{ margin: 16 }} onPress={this.handleLogout} theme="dark">Log out</Button>
 
         <View style={styles.footer}>
           <Text style={styles.link}>Terms and Conditions</Text>
@@ -108,6 +117,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
+  logout,
+  clearAccessToken,
 };
 
 export default connect(

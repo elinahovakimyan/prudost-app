@@ -35,17 +35,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingLeft: 8,
-    paddingTop: 8,
+    paddingTop: 4,
   },
   streakTitle: {
     fontSize: 12,
     color: colors.grey,
   },
   streakNumberContainer: {
-    width: 18,
-    height: 18,
-    borderRadius: 9,
-    borderWidth: 1,
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 0.5,
     borderColor: colors.blue,
     alignItems: 'center',
     justifyContent: 'center',
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
   },
   streakNumber: {
     color: colors.blue,
-    fontSize: 13,
+    fontSize: 10,
+    textAlign: 'center',
   },
   iconContainer: {
     flexDirection: 'row',

@@ -16,7 +16,7 @@ export const setUser = (user, token) => ({
   token,
 });
 
-export const logout = () => ({
+export const clearAccessToken = () => ({
   type: actions.AUTH_LOGOUT,
 });
 

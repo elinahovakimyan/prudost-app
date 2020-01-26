@@ -141,7 +141,7 @@ class SignUp extends React.PureComponent {
     return (
       <Layout style={styles.screen}>
         <View style={styles.header}>
-          <Text style={styles.title}>Join doers&apos; commmunity</Text>
+          <Text style={styles.title}>Achieve Your Goals, Live the Dream!</Text>
         </View>
         <Input
           value={name}

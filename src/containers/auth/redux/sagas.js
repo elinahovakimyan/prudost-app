@@ -25,9 +25,9 @@ function sendLogin({ email, password }) {
   });
 }
 
-function sendSignUp({ username, email, password }) {
+function sendSignUp({ name, email, password }) {
   return request.post('/api/signup/', {
-    username,
+    name,
     email,
     password,
   });
@@ -57,8 +57,8 @@ function* handleLogin(action) {
         user: data.user,
       });
 
-      StorageUtils.setAccessToken(data.token);
-      StorageUtils.setUser(data.user);
+      yield StorageUtils.setAccessToken(data.token);
+      yield StorageUtils.setUser(data.user);
       addTokenToHttp(data.token);
 
       NavigationService.navigate('App');
@@ -98,12 +98,12 @@ function* handleSignUp(action) {
           user: loginInfo.data.user,
         });
 
-        StorageUtils.setAccessToken(loginInfo.data.token);
-        StorageUtils.setUser(loginInfo.data.user);
+        yield StorageUtils.setAccessToken(loginInfo.data.token);
+        yield StorageUtils.setUser(loginInfo.data.user);
         addTokenToHttp(loginInfo.data.token);
 
         // you can change the navigate for navigateAndResetStack to go to a protected route
-        NavigationService.navigate('TellUs');
+        NavigationService.navigate('App');
       }
     } else {
       yield put({

@@ -5,12 +5,14 @@ import { Text, TouchableOpacity } from 'react-native';
 import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
+import DatePicker from '../../../../components/common/DatePicker';
+import { categories } from '../../data';
 import { colors } from '../../../../utils/styles';
 import { addGoal } from '../../redux/actions';
 
 import { styles } from './styles';
-import AddTask from '../../../../components/shared/AddTask';
 
+const categoryOptions = categories.map((option) => ({ value: option.title, label: option.title }));
 
 class AddGoal extends React.PureComponent {
   static navigationOptions = ({ navigation }) => ({
@@ -35,6 +37,8 @@ class AddGoal extends React.PureComponent {
   state = {
     title: '',
     description: '',
+    category: null,
+    deadline: null,
   }
 
   componentDidMount() {
@@ -42,12 +46,17 @@ class AddGoal extends React.PureComponent {
   }
 
   handleSubmit = () => {
-    const { title, description } = this.state;
+    const {
+      title, description, category, deadline,
+    } = this.state;
+    const [DD, MM, YYYY] = deadline.split('/');
+    const formattedDeadline = [YYYY, MM, DD].join('-');
 
     this.props.addGoal({
       title,
       description,
-      datetime: new Date(),
+      category,
+      deadline: formattedDeadline,
     });
   }
 
@@ -58,7 +67,9 @@ class AddGoal extends React.PureComponent {
   }
 
   render() {
-    const { title, description } = this.state;
+    const {
+      title, description, category, deadline,
+    } = this.state;
 
     return (
       <Layout style={styles.screen}>
@@ -82,10 +93,20 @@ class AddGoal extends React.PureComponent {
         <OptionPicker
           headerStyle={styles.input}
           placeholder="Goal category"
-          options={[{ value: 'val', label: 'option' }]}
+          onChange={(val) => this.handleInputChange('category', val)}
+          value={category}
+          options={categoryOptions}
         />
 
-        <Text style={styles.sectionTitle}>TASKS</Text>
+        <DatePicker
+          inputStyle={styles.input}
+          placeholder="Deadline"
+          onChange={(val) => this.handleInputChange('deadline', val)}
+          value={deadline}
+        />
+
+
+        {/* <Text style={styles.sectionTitle}>TASKS</Text>
 
         <Input
           underlined
@@ -95,8 +116,7 @@ class AddGoal extends React.PureComponent {
           placeholderTextColor={colors.grey}
         />
 
-        <AddTask hasPadding={false} />
-        {/* <Text style={styles.newTask}>+ Add a new task</Text> */}
+        <AddTask hasPadding={false} /> */}
 
       </Layout>
     );

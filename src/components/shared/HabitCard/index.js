@@ -52,7 +52,7 @@ function HabitCard({ title, isCompleted, onPress }) {
           <View style={styles.footer}>
             <Text style={styles.streakTitle}>Current Streak:</Text>
             <View style={styles.streakNumberContainer}>
-              <Text style={styles.streakNumber}>8</Text>
+              <Text style={styles.streakNumber}>128</Text>
             </View>
             <Text style={styles.streakTitle}>Longest Streak:</Text>
             <View style={styles.streakNumberContainer}>

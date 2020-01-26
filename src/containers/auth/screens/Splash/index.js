@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import Layout from '../../../../components/shared/Layout';
@@ -7,17 +7,16 @@ import StorageUtils from '../../helpers/storage';
 import { addTokenToHttp } from '../../../../utils/http';
 import { colors } from '../../../../utils/styles';
 import { setUser } from '../../redux/actions';
+import { getRandomInt } from '../../../../utils/helpers';
 
 import { styles } from './styles';
+import { quotes } from './quotes';
 
 
 class Splash extends React.PureComponent {
   static navigationOptions = () => ({
-    headerStyle: {
-      height: 50,
-      backgroundColor: colors.blue,
-    },
-    headerTitle: () => null,
+    headerShown: false,
+    cardStyle: { backgroundColor: colors.blue },
   });
 
   timer = null;
@@ -33,12 +32,12 @@ class Splash extends React.PureComponent {
           .then(() => {
             this.timer = setTimeout(() => {
               this.props.navigation.navigate('App');
-            }, 800);
+            }, 2400);
           });
       } else {
         this.timer = setTimeout(() => {
           this.props.navigation.navigate('Auth');
-        }, 800);
+        }, 2400);
       }
     }
   }
@@ -48,10 +47,21 @@ class Splash extends React.PureComponent {
   }
 
   render() {
+    const quoteNumber = getRandomInt(quotes.length - 1);
+    const currentQuote = quotes[quoteNumber];
+
     return (
       <Layout>
         <View style={styles.container}>
           <Image style={styles.image} source={require('../../../../assets/images/logo.png')} />
+
+
+          {currentQuote ? (
+            <>
+              <Text style={styles.quoteText}>{currentQuote.quote}</Text>
+              <Text style={styles.quoteAuthor}>{`~ ${currentQuote.author}`}</Text>
+            </>
+          ) : null}
         </View>
       </Layout>
     );

@@ -62,8 +62,8 @@ const styles = StyleSheet.create({
     letterSpacing: 0.78,
     textTransform: 'capitalize',
     borderWidth: 0.5,
-    borderRadius: 14,
-    paddingHorizontal: 8,
+    borderRadius: 13,
+    paddingHorizontal: 9,
     paddingVertical: 4,
   },
   task: {

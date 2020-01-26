@@ -13,6 +13,7 @@ import { getGoals } from '../../redux/actions';
 import { categories } from '../../data';
 
 import { styles } from './styles';
+import EmptyCard from '../../../../components/shared/EmptyCard';
 
 
 class MainGoals extends React.PureComponent {
@@ -27,7 +28,15 @@ class MainGoals extends React.PureComponent {
   });
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
     this.props.getGoals();
+  }
+
+  goToAddGoal = () => {
+    this.props.navigation.push('AddGoal');
   }
 
   renderItem = (item) => {
@@ -36,10 +45,10 @@ class MainGoals extends React.PureComponent {
     return (
       <GoalCard
         title={item.title}
-        tasks={item.tasks}
+        tasks={[]}
         description={item.description}
         category={item.category}
-        onPress={() => navigation.push('GoalDetails', { goal: item })}
+        onPress={() => navigation.push('GoalDetails', { data: item })}
       />
     );
   }
@@ -70,20 +79,18 @@ class MainGoals extends React.PureComponent {
 
           <FlatList
             data={goals}
-            refreshing={isLoading}
             style={styles.container}
             renderItem={({ item }) => this.renderItem(item)}
             keyExtractor={(item) => String(item.id)}
             ListEmptyComponent={!isLoading
-                && <Text style={styles.emptyText}>No goals found.</Text>
-              }
+              && <EmptyCard buttonTitle="Add Goal" onButtonPress={this.goToAddGoal} />
+            }
             ListFooterComponent={<View style={styles.footer} />}
-            // ListHeaderComponent={<View style={styles.header} />}
-            refreshControl={<RefreshControl refreshing={isLoading} />}
+            refreshControl={<RefreshControl onRefresh={this.fetchData} refreshing={isLoading} />}
           />
         </View>
 
-        <AddButton onPress={() => navigation.push('AddGoal')} bottomSpace={155} />
+        <AddButton onPress={this.goToAddGoal} bottomSpace={155} />
       </Layout>
     );
   }
@@ -91,8 +98,8 @@ class MainGoals extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   goals: state.App.goals,
-  isLoading: state.App.isLoading,
   user: state.Auth.user,
+  isLoading: state.App.isLoading,
   goalsError: state.App.errors.Goals,
 });
 

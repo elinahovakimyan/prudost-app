@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  FlatList, View, Text, RefreshControl,
-} from 'react-native';
+import { FlatList, View, RefreshControl } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
@@ -11,6 +9,7 @@ import { getGoals } from '../../redux/actions';
 import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
+import EmptyCard from '../../../../components/shared/EmptyCard';
 
 
 class Goals extends React.PureComponent {
@@ -28,7 +27,15 @@ class Goals extends React.PureComponent {
   }
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
     this.props.getGoals();
+  }
+
+  goToAddGoal = () => {
+    this.props.navigation.push('AddGoal');
   }
 
   renderItem = (item) => {
@@ -37,32 +44,31 @@ class Goals extends React.PureComponent {
     return (
       <GoalCard
         title={item.title}
-        tasks={item.tasks}
+        tasks={[]}
         description={item.description}
         category={item.category}
-        onPress={() => navigation.push('GoalDetails', { goal: item })}
+        onPress={() => navigation.push('GoalDetails', { data: item })}
       />
     );
   }
 
   render() {
-    const { navigation, goals, isLoading } = this.props;
+    const { goals, isLoading } = this.props;
 
     return (
       <Layout style={styles.screen}>
         <FlatList
           data={goals}
-          refreshing={isLoading}
           style={styles.container}
           renderItem={({ item }) => this.renderItem(item)}
           keyExtractor={(item) => String(item.id)}
-          ListEmptyComponent={!isLoading && <Text style={styles.emptyText}>No goals found.</Text>}
+          ListEmptyComponent={!isLoading && <EmptyCard buttonTitle="Add Goal" onButtonPress={this.goToAddGoal} />}
           ListFooterComponent={<View style={styles.footer} />}
           ListHeaderComponent={<View style={styles.header} />}
-          refreshControl={<RefreshControl refreshing={isLoading} />}
+          refreshControl={<RefreshControl onRefresh={this.fetchData} refreshing={isLoading} />}
         />
 
-        <AddButton onPress={() => navigation.push('AddGoal')} />
+        <AddButton onPress={this.goToAddGoal} />
       </Layout>
     );
   }
@@ -70,8 +76,8 @@ class Goals extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   goals: state.App.goals,
-  isLoading: state.App.isLoading,
   user: state.Auth.user,
+  isLoading: state.App.isLoading,
   goalsError: state.App.errors.Goals,
 });
 

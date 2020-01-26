@@ -2,7 +2,7 @@ import * as actions from './constants';
 
 const initialState = {
   user: null,
-  accessToken: 'null',
+  accessToken: null,
   errors: {
     SignIn: null, SignUp: null, ResetPassword: null, User: null,
   },

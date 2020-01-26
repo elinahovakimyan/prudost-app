@@ -1,28 +1,42 @@
 import * as actions from './constants';
 
 export const getGoals = () => ({
-  type: actions.MAIN_GET_GOALS_REQUEST,
+  type: actions.APP_GET_GOALS_REQUEST,
 });
 
 export const addGoal = (goal) => ({
-  type: actions.MAIN_ADD_GOAL_REQUEST,
+  type: actions.APP_ADD_GOAL_REQUEST,
   goal,
 });
 
+export const getTasks = (goalId) => ({
+  type: actions.APP_GET_TASKS_REQUEST,
+  goalId,
+});
+
+export const addTask = (task) => ({
+  type: actions.APP_ADD_TASK_REQUEST,
+  task,
+});
+
 export const getRewards = () => ({
-  type: actions.MAIN_GET_REWARDS_REQUEST,
+  type: actions.APP_GET_REWARDS_REQUEST,
 });
 
 export const addReward = (reward) => ({
-  type: actions.MAIN_ADD_REWARD_REQUEST,
+  type: actions.APP_ADD_REWARD_REQUEST,
   reward,
 });
 
 export const getHabits = () => ({
-  type: actions.MAIN_GET_HABITS_REQUEST,
+  type: actions.APP_GET_HABITS_REQUEST,
 });
 
 export const addHabit = (habit) => ({
-  type: actions.MAIN_ADD_HABIT_REQUEST,
+  type: actions.APP_ADD_HABIT_REQUEST,
   habit,
+});
+
+export const logout = () => ({
+  type: actions.APP_LOGOUT,
 });

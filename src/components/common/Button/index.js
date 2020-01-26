@@ -15,6 +15,12 @@ function Button(props) {
     theme === 'dark' ? styles.dark : styles.light,
     buttonStyle,
   ];
+  const textStyles = [
+    styles.buttonText,
+    theme === 'dark' ? styles.lightText : styles.darkText,
+    circled ? styles.circledText : {},
+    textStyle,
+  ];
 
   return (
     <TouchableOpacity
@@ -24,7 +30,7 @@ function Button(props) {
       {icon || null}
       <Text
         uppercase={false}
-        style={[styles.buttonText, textStyle, circled ? styles.circledText : {}]}
+        style={textStyles}
       >
         {children}
       </Text>

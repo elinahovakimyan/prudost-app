@@ -4,7 +4,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 
-function CategoryCard({ category, onPress }) {
+function CategoryTag({ category, onPress }) {
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -16,4 +16,4 @@ function CategoryCard({ category, onPress }) {
   );
 }
 
-export default React.memo(CategoryCard);
+export default React.memo(CategoryTag);

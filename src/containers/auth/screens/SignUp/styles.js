@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   title: {
     color: colors.lightYellow,
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: 'left',
     fontWeight: '500',
     letterSpacing: 0.78,
   },

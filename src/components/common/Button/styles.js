@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: '500',
     fontSize: 16,
-    color: colors.blue,
+    // color: colors.blue,
     textAlign: 'center',
     lineHeight: 20,
   },
@@ -34,8 +34,14 @@ const styles = StyleSheet.create({
   block: {
     width: '100%',
   },
+  darkText: {
+    color: colors.blue,
+  },
+  lightText: {
+    color: colors.lightYellow,
+  },
   dark: {
-    backgroundColor: colors.black,
+    backgroundColor: colors.blue,
   },
   light: {
     backgroundColor: colors.lightYellow,

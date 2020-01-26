@@ -44,26 +44,4 @@ export const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 48,
   },
-  logoContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 30,
-    marginTop: 50,
-  },
-  logo: {
-    width: 160,
-    height: 160,
-  },
-  quoteText: {
-    textAlign: 'center',
-    color: colors.lightYellow,
-    fontSize: 18,
-    paddingTop: 8,
-  },
-  quoteAuthor: {
-    color: colors.white,
-    paddingTop: 16,
-    paddingRight: 16,
-  },
 });

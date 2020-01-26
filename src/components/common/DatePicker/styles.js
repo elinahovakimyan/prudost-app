@@ -1,3 +1,4 @@
+import { colors } from '../../../utils/styles';
 
 const styles = {
   container: {
@@ -9,7 +10,6 @@ const styles = {
     color: '#33638e',
   },
   dateInput: {
-    backgroundColor: 'white',
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderWidth: 0,
@@ -22,8 +22,7 @@ const styles = {
   placeholderText: {
     fontSize: 16,
     width: '100%',
-    fontWeight: '500',
-    color: '#000',
+    color: colors.grey,
   },
   dateText: {
     fontWeight: '500',

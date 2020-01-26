@@ -5,8 +5,9 @@ import {
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
-import AddButton from '../../../../components/common/AddButton';
 import HabitCard from '../../../../components/shared/HabitCard';
+import EmptyCard from '../../../../components/shared/EmptyCard';
+import AddButton from '../../../../components/common/AddButton';
 import { colors } from '../../../../utils/styles';
 import { getHabits } from '../../redux/actions';
 
@@ -24,7 +25,15 @@ class Habits extends React.PureComponent {
   });
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData = () => {
     this.props.getHabits();
+  }
+
+  goToAddHabit = () => {
+    this.props.navigation.push('AddHabit');
   }
 
   renderItem = (item) => (
@@ -36,7 +45,7 @@ class Habits extends React.PureComponent {
   )
 
   render() {
-    const { isLoading, habits, navigation } = this.props;
+    const { isLoading, habits } = this.props;
 
     return (
       <Layout style={styles.screen}>
@@ -47,14 +56,13 @@ class Habits extends React.PureComponent {
           refreshing={isLoading}
           style={styles.container}
           renderItem={({ item }) => this.renderItem(item)}
-          // TODO: Add id-s for tasks
-          keyExtractor={(item) => String(item.title)}
-          ListEmptyComponent={!isLoading && <Text style={styles.emptyText}>No tasks found.</Text>}
+          keyExtractor={(item) => String(item.id)}
+          ListEmptyComponent={!isLoading && <EmptyCard buttonTitle="Add Habit" onButtonPress={this.goToAddHabit} />}
           ListFooterComponent={<View style={styles.footer} />}
-          refreshControl={<RefreshControl refreshing={isLoading} />}
+          refreshControl={<RefreshControl onRefresh={this.fetchData} refreshing={isLoading} />}
         />
 
-        <AddButton onPress={() => navigation.push('AddHabit')} />
+        <AddButton onPress={this.goToAddHabit} />
       </Layout>
     );
   }

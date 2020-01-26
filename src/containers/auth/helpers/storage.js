@@ -13,7 +13,11 @@ const StorageUtils = {
   },
 
   setAccessToken: async (token) => {
-    AsyncStorage.setItem(Constants.ACCESS_TOKEN, token);
+    await AsyncStorage.setItem(Constants.ACCESS_TOKEN, token);
+  },
+
+  removeAccessToken: async () => {
+    await AsyncStorage.removeItem(Constants.ACCESS_TOKEN);
   },
 
   getUser: async () => {
@@ -23,7 +27,11 @@ const StorageUtils = {
 
   setUser: async (user) => {
     const userObject = user ? JSON.stringify(user) : null;
-    AsyncStorage.setItem(Constants.USER, userObject);
+    await AsyncStorage.setItem(Constants.USER, userObject);
+  },
+
+  removeUser: async () => {
+    await AsyncStorage.removeItem(Constants.USER);
   },
 };
 

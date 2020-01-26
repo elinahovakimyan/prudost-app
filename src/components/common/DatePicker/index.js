@@ -7,7 +7,7 @@ import styles from './styles';
 class CustomDatePicker extends React.PureComponent {
   render() {
     const {
-      value, onChange, placeholder, format,
+      value, onChange, placeholder, format, inputStyle,
     } = this.props;
 
     return (
@@ -15,14 +15,14 @@ class CustomDatePicker extends React.PureComponent {
         style={styles.container}
         customStyles={{
           btnTextConfirm: styles.btnTextConfirm,
-          dateInput: styles.dateInput,
+          dateInput: [styles.dateInput, inputStyle],
           placeholderText: styles.placeholderText,
           dateText: styles.dateText,
         }}
         date={value}
         placeholder={placeholder || 'Select date'}
         mode="date"
-        maxDate={new Date()}
+        minDate={new Date()}
         format={format}
         minuteInterval={10}
         confirmBtnText="Confirm"
@@ -35,7 +35,7 @@ class CustomDatePicker extends React.PureComponent {
 }
 
 CustomDatePicker.defaultProps = {
-  format: 'DD-MM-YYYY',
+  format: 'DD/MM/YYYY',
 };
 
 export default React.memo(CustomDatePicker);

@@ -10,6 +10,7 @@ import AddTask from '../../../../components/shared/AddTask';
 import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
+import CategoryTag from '../../../../components/shared/CategoryTag';
 
 
 class GoalDetails extends React.PureComponent {
@@ -48,15 +49,13 @@ class GoalDetails extends React.PureComponent {
 
   render() {
     const { navigation, isLoading } = this.props;
-    const { goal } = navigation.state.params;
-    const { category } = goal;
+    const { data } = navigation.state.params;
+    const category = data.category || {};
 
     return (
       <Layout style={styles.screen}>
         <View style={styles.categoryContainer}>
-          <Text style={[styles.category, { borderColor: category.color, color: category.color }]}>
-            {category.title || 'Unknown'}
-          </Text>
+          <CategoryTag category={category} />
 
           <View style={styles.iconContainer}>
             <TouchableOpacity>
@@ -68,15 +67,15 @@ class GoalDetails extends React.PureComponent {
           </View>
         </View>
 
-        <Text style={styles.title}>{goal.title}</Text>
-        <Text style={styles.description}>{goal.description}</Text>
+        <Text style={styles.title}>{data.title}</Text>
+        <Text style={styles.description}>{data.description}</Text>
 
         <Text style={styles.sectionTitle}>TASKS</Text>
 
         <AddTask hasHorizaontalPadding />
 
         <FlatList
-          data={goal.tasks || []}
+          data={data.tasks || []}
           refreshing={isLoading}
           style={styles.container}
           renderItem={({ item }) => this.renderItem(item)}

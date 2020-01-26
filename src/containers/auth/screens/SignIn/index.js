@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Image } from 'react-native';
+import { View, Text } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
@@ -8,10 +8,9 @@ import Input from '../../../../components/common/Input';
 import ErrorBox from '../../../../components/common/ErrorBox';
 import { login } from '../../redux/actions';
 import { validateEmail } from '../../helpers/validation';
-import { quotes } from './quotes';
 
 import { styles } from './styles';
-import { getRandomInt } from '../../../../utils/helpers';
+
 
 class SignIn extends React.PureComponent {
   state = {
@@ -19,16 +18,7 @@ class SignIn extends React.PureComponent {
     password: '',
     validationError: '',
     isSubmitting: false,
-    currentQuote: null,
   };
-
-  componentDidMount() {
-    const quoteNumber = getRandomInt(quotes.length - 1);
-
-    this.setState({
-      currentQuote: quotes[quoteNumber],
-    });
-  }
 
   handleEmailChange = (email) => {
     this.setState({ email }, () => {
@@ -113,12 +103,12 @@ class SignIn extends React.PureComponent {
   }
 
   render() {
-    const { email, password, currentQuote } = this.state;
+    const { email, password } = this.state;
 
     return (
       <Layout style={styles.screen}>
         <View style={styles.header}>
-          <Text style={styles.title}>Welcome</Text>
+          <Text style={styles.title}>Welcome Back!</Text>
 
           <Button
             block={false}
@@ -151,21 +141,6 @@ class SignIn extends React.PureComponent {
             Forgot password?
         </Text>
 
-        <View style={styles.logoContainer}>
-          <Image
-            resizeMode="contain"
-            style={styles.logo}
-            source={require('../../../../assets/images/logo.png')}
-          />
-
-          {currentQuote ? (
-            <>
-              <Text style={styles.quoteText}>{currentQuote.quote}</Text>
-              <Text style={styles.quoteAuthor}>{`~ ${currentQuote.author}`}</Text>
-            </>
-          ) : null}
-
-        </View>
       </Layout>
     );
   }
