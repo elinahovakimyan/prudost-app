@@ -19,14 +19,14 @@ import {
 
 
 function sendLogin({ email, password }) {
-  return request.goal('/api/v1/login/', {
+  return request.post('/api/login/', {
     username: email,
     password,
   });
 }
 
 function sendSignUp({ username, email, password }) {
-  return request.goal('/api/v1/signup/', {
+  return request.post('/api/signup/', {
     username,
     email,
     password,
@@ -34,7 +34,7 @@ function sendSignUp({ username, email, password }) {
 }
 
 function sendPasswordRecovery(email) {
-  return request.goal('/rest-auth/password/reset/', {
+  return request.post('/rest-auth/password/reset/', {
     email,
   });
 }
@@ -46,19 +46,20 @@ function* handleLogin(action) {
   } = action;
 
   try {
-    // const { status, data } = yield call(sendLogin, { email, password });
+    const { status, data } = yield call(sendLogin, { email, password });
+    console.log('data :', data);
+    console.log('status :', status);
 
-    if (email && password) {
-    // if (status === 200) {
-    //   yield put({
-    //     type: AUTH_LOGIN_SUCCESS,
-    //     accessToken: data.token,
-    //     user: data.user,
-    //   });
+    if (status === 200) {
+      yield put({
+        type: AUTH_LOGIN_SUCCESS,
+        accessToken: data.token,
+        user: data.user,
+      });
 
-      //   StorageUtils.setAccessToken(data.token);
-      //   StorageUtils.setUser(data.user);
-      //   addTokenToHttp(data.token);
+      StorageUtils.setAccessToken(data.token);
+      StorageUtils.setUser(data.user);
+      addTokenToHttp(data.token);
 
       NavigationService.navigate('App');
     } else {

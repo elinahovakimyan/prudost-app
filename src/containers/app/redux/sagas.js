@@ -28,9 +28,9 @@ import { request } from '../../../utils/http';
 import { goals, rewards, habits } from '../data';
 
 
-// function getGoals() {
-//   return request.get('/api/v1/goals/');
-// }
+function getGoals() {
+  return request.get('/api/goal/');
+}
 
 // function getRewaards() {
 //   return request.get('/api/v1/rewards/');
@@ -51,11 +51,11 @@ function* handleGetGoals() {
       isLoading: true,
     });
 
-    // const { status, data } = yield call(getGoals);
-    // const { status } = yield call(getGoals);
+    const { status, data } = yield call(getGoals);
+    console.log('status :', status);
+    console.log('data :', data);
 
-    // if (status === 200) {
-    if (true) {
+    if (status === 200) {
       yield put({
         type: MAIN_GET_GOALS_SUCCESS,
         goals,

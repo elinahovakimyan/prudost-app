@@ -18,7 +18,7 @@ class Goals extends React.PureComponent {
     const { category } = navigation.state.params;
 
     return ({
-      headerTitle: 'Goals',
+      headerTitle: `${category.title} Goals`,
       headerTintColor: colors.white,
       headerTitleStyle: styles.headerTitle,
       headerStyle: {

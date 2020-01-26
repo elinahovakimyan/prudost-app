@@ -12,9 +12,9 @@ const SplashNavigator = createStackNavigator(
 );
 
 const SwitchNavigator = createSwitchNavigator({
-  App: AppNavigator,
   Splash: SplashNavigator,
   Auth: AuthNavigator,
+  App: AppNavigator,
 });
 
 const MainNavigator = createAppContainer(SwitchNavigator);
