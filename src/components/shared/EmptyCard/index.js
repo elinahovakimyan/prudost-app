@@ -11,7 +11,9 @@ function EmptyCard({ buttonTitle, onButtonPress }) {
     <View style={styles.container}>
       <Image style={styles.image} source={require('../../../assets/images/empty.png')} />
 
-      <Button block={false} onPress={onButtonPress}>{buttonTitle}</Button>
+      {buttonTitle && onButtonPress
+        ? <Button block={false} onPress={onButtonPress}>{buttonTitle}</Button>
+        : null}
     </View>
   );
 }

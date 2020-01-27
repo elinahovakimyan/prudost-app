@@ -20,7 +20,6 @@ function RewardCard({
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         { text: 'Yes', onPress: () => console.log('OK Pressed') },

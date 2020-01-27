@@ -3,5 +3,16 @@ from .models import Goal, Task
 
 # Register your models here.
 
-admin.site.register(Goal)
-admin.site.register(Task)
+class TaskInline(admin.TabularInline):
+    model = Task
+
+
+class GoalAdmin(admin.ModelAdmin):
+    '''
+        Admin View for
+    '''
+    inlines = [
+        TaskInline,
+    ]
+
+admin.site.register(Goal, GoalAdmin)

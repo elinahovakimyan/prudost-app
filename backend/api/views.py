@@ -59,6 +59,11 @@ class GoalViewset(viewsets.ModelViewSet):
     queryset = Goal.objects.all()
 
     # def get_queryset(self):
+    #     return Goal.objects.filter(user=self.request.user.id)
+    #     return User.objects.filter(user=self.request.user.id)
+    # tasks = Task.objects.filter(goal )
+
+    # def get_queryset(self):
     #     return User.objects.filter(user=self.request.user.id)
 
     @action(detail=True, methods=['get'])

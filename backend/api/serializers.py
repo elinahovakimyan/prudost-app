@@ -79,14 +79,23 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'email', 'name', 'about_me', 'city', 'zip_code', 'website']
 
 
-class GoalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Goal
-        fields = '__all__'
-
-
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = '__all__'
+
+
+class GoalSerializer(serializers.ModelSerializer):
+    tasks = TaskSerializer(many=True)
+
+    class Meta:
+        model = Goal
+        fields = ['id', 'title', 'description', 'deadline', 'category', 'completed', 'tasks']
+
+    def create(self, validated_data):
+        tasks_data = validated_data.pop('tasks')
+        goal = Goal.objects.create(**validated_data)
+        for task_data in tasks_data:
+            Task.objects.create(goal=goal, **task_data)
+        return goal
 

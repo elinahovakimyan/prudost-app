@@ -11,7 +11,7 @@ import styles from './styles';
 function GoalCard({
   title, category, onPress, tasks,
 }) {
-  const completedTasks = tasks.filter((task) => task.isCompleted);
+  const completedTasks = tasks.filter((task) => task.completed);
   const completedPercentage = (completedTasks.length / tasks.length) * 100;
 
   return (

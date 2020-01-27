@@ -1,16 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, RefreshControl, Image, TouchableOpacity, Alert,
+  FlatList, View, Text, RefreshControl, Image, TouchableOpacity, Alert, ActivityIndicator,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
+import EmptyCard from '../../../../components/shared/EmptyCard';
 import TaskCard from '../../../../components/shared/TaskCard';
 import AddTask from '../../../../components/shared/AddTask';
+import CategoryTag from '../../../../components/shared/CategoryTag';
 import { colors } from '../../../../utils/styles';
+import {
+  addTask, updateTask, deleteTask, deleteGoal,
+} from '../../redux/actions';
 
 import { styles } from './styles';
-import CategoryTag from '../../../../components/shared/CategoryTag';
 
 
 class GoalDetails extends React.PureComponent {
@@ -25,78 +29,107 @@ class GoalDetails extends React.PureComponent {
 
   renderItem = (item) => (
     <TaskCard
-      title={item.title}
-      isCompleted={item.isCompleted}
-      onPress={() => {}}
+      task={item}
+      onUpdate={this.props.updateTask}
+      onDelete={this.props.deleteTask}
     />
   )
 
+  sendToEdit = () => {
+    const { goal } = this.props;
+
+    this.props.navigation.push('AddGoal', { goal });
+  }
+
   handleDelete = () => {
+    const { goal } = this.props;
+
     Alert.alert(
       'Delete the goal?',
       'Are you sure you want to delete this goal?',
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
-        { text: 'Yes', onPress: () => console.log('OK Pressed') },
+        { text: 'Yes', onPress: () => this.props.deleteGoal(goal.id) },
       ],
       { cancelable: false },
     );
   }
 
+  handleSubmit = (text) => {
+    const { goal } = this.props;
+
+    this.props.addTask({
+      text,
+      goal: goal.id,
+    });
+  }
+
   render() {
-    const { navigation, isLoading } = this.props;
-    const { data } = navigation.state.params;
-    const category = data.category || {};
+    const { goal, isLoading } = this.props;
+    const category = goal ? goal.category : '';
 
-    return (
-      <Layout style={styles.screen}>
-        <View style={styles.categoryContainer}>
-          <CategoryTag category={category} />
+    if (goal) {
+      return (
+        <Layout style={styles.screen}>
+          <View style={styles.categoryContainer}>
+            <CategoryTag category={category} />
 
-          <View style={styles.iconContainer}>
-            <TouchableOpacity>
-              <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.handleDelete}>
-              <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
-            </TouchableOpacity>
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={this.sendToEdit}>
+                <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.handleDelete}>
+                <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
 
-        <Text style={styles.title}>{data.title}</Text>
-        <Text style={styles.description}>{data.description}</Text>
+          <Text style={styles.title}>{goal.title}</Text>
+          <Text style={styles.description}>{goal.description}</Text>
 
-        <Text style={styles.sectionTitle}>TASKS</Text>
+          <Text style={styles.sectionTitle}>TASKS</Text>
 
-        <AddTask hasHorizaontalPadding />
+          <AddTask hasHorizaontalPadding onSubmit={this.handleSubmit} />
 
-        <FlatList
-          data={data.tasks || []}
-          refreshing={isLoading}
-          style={styles.container}
-          renderItem={({ item }) => this.renderItem(item)}
-          // TODO: Add id-s for tasks
-          keyExtractor={(item) => String(item.title)}
-          ListEmptyComponent={!isLoading && <Text style={styles.emptyText}>No tasks found.</Text>}
-          ListFooterComponent={<View style={styles.footer} />}
-          refreshControl={<RefreshControl refreshing={isLoading} />}
-        />
+          <FlatList
+            data={goal.tasks || []}
+            refreshing={isLoading}
+            style={styles.container}
+            renderItem={({ item }) => this.renderItem(item)}
+            keyExtractor={(item) => String(item.id)}
+            ListEmptyComponent={!isLoading && <EmptyCard />}
+            ListFooterComponent={<View style={styles.footer} />}
+            refreshControl={<RefreshControl refreshing={isLoading} />}
+          />
+        </Layout>
+      );
+    }
 
-      </Layout>
-    );
+    return <ActivityIndicator />;
   }
 }
 
-const mapStateToProps = (state) => ({
-  goals: state.App.goals,
-  isLoading: state.App.isLoading,
-  goalsError: state.App.errors.Goals,
-});
+const mapStateToProps = (state, ownProps) => {
+  const { goalId } = ownProps.navigation.state.params;
+
+  return ({
+    goal: state.App.goals.find((g) => g.id === goalId),
+    isLoading: state.App.isLoading,
+    goalsError: state.App.errors.Goals,
+  });
+};
+
+const mapDispatchToProps = {
+  addTask,
+  updateTask,
+  deleteTask,
+  deleteGoal,
+};
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(GoalDetails);

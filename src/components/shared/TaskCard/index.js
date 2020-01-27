@@ -8,8 +8,9 @@ import RadioButton from '../../common/RadioButton';
 import styles from './styles';
 
 
-function TaskCard({ title, isCompleted, onPress }) {
+function TaskCard({ task, onUpdate, onDelete }) {
   const [isEditing, toggleEdit] = useState(false);
+  const [value, onChange] = useState(task.text);
 
   const handleDelete = () => {
     Alert.alert(
@@ -18,32 +19,41 @@ function TaskCard({ title, isCompleted, onPress }) {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
-        { text: 'Yes', onPress: () => console.log('OK Pressed') },
+        { text: 'Yes', onPress: () => onDelete(task.id) },
       ],
       { cancelable: false },
     );
   };
 
+  const handleCompleteTogggle = () => {
+    onUpdate({ completed: !task.completed, id: task.id });
+  };
+
+  const handleTextChange = () => {
+    onUpdate({ text: value, id: task.id });
+    toggleEdit(false);
+  };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity style={styles.container} onPress={handleCompleteTogggle}>
       <View style={styles.content}>
-        <RadioButton isChecked={isCompleted} />
+        <RadioButton isChecked={task.completed} />
         {isEditing
           ? (
             <TextInput
               multiline
               autoFocus
               editable={isEditing}
-              value={title}
+              value={value}
+              onChangeText={onChange}
               style={styles.text}
             />
           )
           : (
             <Text style={styles.text}>
-              {title}
+              {task.text}
             </Text>
           )}
 
@@ -52,7 +62,7 @@ function TaskCard({ title, isCompleted, onPress }) {
       <View style={styles.iconContainer}>
         {isEditing
           ? (
-            <TouchableOpacity onPress={() => toggleEdit(false)}>
+            <TouchableOpacity onPress={handleTextChange}>
               <Image source={require('../../../assets/icons/done.png')} style={styles.icon} />
             </TouchableOpacity>
           ) : (

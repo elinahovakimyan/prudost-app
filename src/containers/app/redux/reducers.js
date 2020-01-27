@@ -10,6 +10,7 @@ const initialState = {
     AddGoal: null,
     Tasks: null,
     AddTask: null,
+    UpdateTask: null,
     Rewards: null,
     AddReward: null,
     Habits: null,
@@ -39,6 +40,10 @@ export const AppReducer = (state = initialState, action) => {
       return { ...state, errors: { AddTask: null } };
     case actions.APP_ADD_TASK_ERROR:
       return { ...state, errors: { AddTask: action.error } };
+    case actions.APP_UPDATE_TASK_SUCCESS:
+      return { ...state, errors: { UpdateTask: null } };
+    case actions.APP_UPDATE_TASK_ERROR:
+      return { ...state, errors: { UpdateTask: action.error } };
     case actions.APP_GET_REWARDS_SUCCESS:
       return { ...state, rewards: action.rewards, errors: { Rewards: null } };
     case actions.APP_GET_REWARDS_ERROR:

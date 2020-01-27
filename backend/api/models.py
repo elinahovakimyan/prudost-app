@@ -19,7 +19,7 @@ class Goal(models.Model):
 
 
 class Task(models.Model):
-    goal = models.ForeignKey('Goal', related_name='tasks', on_delete=models.CASCADE)
+    goal = models.ForeignKey('Goal', related_name='tasks', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=200, default='')
     completed = models.BooleanField(default=False)
 

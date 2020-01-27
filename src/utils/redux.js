@@ -4,12 +4,10 @@ import * as NavigationService from '../navigator/NavigationService';
 
 export function* sagasRunner({
   successType, errorType, errorMessage, route, callFunc, callData,
-  dataId, updateType, updateData, loadingType, sendResponseAsParams,
+  dataId, updateType, updateData, loadingType, sendResponseAsParams, additionalFunc,
 }) {
   try {
     const { status, data } = yield call(callFunc, ...callData);
-    console.log('status :', status);
-    console.log('res :', data);
 
     yield put({
       type: loadingType,
@@ -28,6 +26,10 @@ export function* sagasRunner({
           type: updateType,
           payload: updateData || null,
         });
+      }
+
+      if (additionalFunc) {
+        additionalFunc(status, data);
       }
 
       if (route) {

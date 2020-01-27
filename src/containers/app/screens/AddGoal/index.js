@@ -8,44 +8,85 @@ import OptionPicker from '../../../../components/common/OptionPicker';
 import DatePicker from '../../../../components/common/DatePicker';
 import { categories } from '../../data';
 import { colors } from '../../../../utils/styles';
-import { addGoal } from '../../redux/actions';
+import { addGoal, updateGoal } from '../../redux/actions';
 
 import { styles } from './styles';
 
 const categoryOptions = categories.map((option) => ({ value: option.title, label: option.title }));
+const getDatePickerFormat = (date) => {
+  let formattedDate = null;
+
+  if (date) {
+    const [YYYY, MM, DD] = date.split('-');
+    formattedDate = [DD, MM, YYYY].join('/');
+  }
+
+  return formattedDate;
+};
+
 
 class AddGoal extends React.PureComponent {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: 'New Goal',
-    headerTintColor: '#fff',
-    headerStyle: styles.headerStyle,
-    headerLeft: () => (
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.cancelText}>Cancel</Text>
-      </TouchableOpacity>
-    ),
-    headerRight: () => (
-      <TouchableOpacity
-        style={styles.actionTextContainer}
-        onPress={navigation.getParam('submitGoal')}
-      >
-        <Text style={styles.actionText}>Add</Text>
-      </TouchableOpacity>
-    ),
-  });
+  static navigationOptions = ({ navigation }) => {
+    const isEditing = navigation.state.params?.goal;
+    return ({
+      headerTitle: isEditing ? 'Edit Goal' : 'New Goal',
+      headerTintColor: '#fff',
+      headerStyle: styles.headerStyle,
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.cancelText}>Cancel</Text>
+        </TouchableOpacity>
+      ),
+      headerRight: () => (
+        <TouchableOpacity
+          style={styles.actionTextContainer}
+          onPress={navigation.getParam('submitGoal')}
+        >
+          <Text style={styles.actionText}>{isEditing ? 'Save' : 'Add'}</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }
 
   state = {
-    title: '',
-    description: '',
-    category: null,
-    deadline: null,
+    title: this.props.navigation.state.params?.goal?.title,
+    description: this.props.navigation.state.params?.goal?.description,
+    category: this.props.navigation.state.params?.goal?.category,
+    deadline: getDatePickerFormat(this.props.navigation.state.params?.goal?.deadline),
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ submitGoal: this.handleSubmit });
+    const isEditing = this.props.navigation.state.params?.goal;
+
+    this.props.navigation.setParams({
+      submitGoal: isEditing ? this.handleSave : this.handleAdd,
+    });
   }
 
-  handleSubmit = () => {
+  handleSave = () => {
+    const goal = this.props.navigation.state.params?.goal;
+    const {
+      title, description, category, deadline,
+    } = this.state;
+    let formattedDeadline;
+
+    if (goal && deadline === goal.deadline) {
+      formattedDeadline = goal.deadline;
+    } else {
+      const [DD, MM, YYYY] = deadline.split('/');
+      formattedDeadline = [YYYY, MM, DD].join('-');
+    }
+
+    this.props.updateGoal({
+      id: goal.id,
+      title,
+      description,
+      category,
+      deadline: formattedDeadline,
+    });
+  }
+
+  handleAdd = () => {
     const {
       title, description, category, deadline,
     } = this.state;
@@ -57,6 +98,7 @@ class AddGoal extends React.PureComponent {
       description,
       category,
       deadline: formattedDeadline,
+      tasks: [],
     });
   }
 
@@ -125,6 +167,7 @@ class AddGoal extends React.PureComponent {
 
 const mapDispatchToProps = {
   addGoal,
+  updateGoal,
 };
 
 export default connect(

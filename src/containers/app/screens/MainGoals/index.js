@@ -8,12 +8,12 @@ import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
 import CategoryCard from '../../../../components/shared/CategoryCard';
 import AddButton from '../../../../components/common/AddButton';
+import EmptyCard from '../../../../components/shared/EmptyCard';
 import { colors } from '../../../../utils/styles';
 import { getGoals } from '../../redux/actions';
 import { categories } from '../../data';
 
 import { styles } from './styles';
-import EmptyCard from '../../../../components/shared/EmptyCard';
 
 
 class MainGoals extends React.PureComponent {
@@ -45,10 +45,10 @@ class MainGoals extends React.PureComponent {
     return (
       <GoalCard
         title={item.title}
-        tasks={[]}
+        tasks={item.tasks}
         description={item.description}
         category={item.category}
-        onPress={() => navigation.push('GoalDetails', { data: item })}
+        onPress={() => navigation.push('GoalDetails', { goalId: item.id })}
       />
     );
   }

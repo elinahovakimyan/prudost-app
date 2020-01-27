@@ -26,7 +26,8 @@ function AddTask({ onSubmit, hasHorizaontalPadding }) {
 
             <TouchableOpacity onPress={() => {
               // eslint-disable-next-line
-              onSubmit && onSubmit();
+              onSubmit && onSubmit(value);
+              onChange('');
               toggleAdd(false);
             }}
             >

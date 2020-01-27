@@ -18,7 +18,6 @@ function HabitCard({ title, isCompleted, onPress }) {
       [
         {
           text: 'Cancel',
-          onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         { text: 'Yes', onPress: () => console.log('OK Pressed') },

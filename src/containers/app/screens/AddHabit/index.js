@@ -51,7 +51,6 @@ class AddReward extends React.PureComponent {
   }
 
   handleInputChange = (key, value) => {
-    console.log('value :', value);
     this.setState({
       [key]: value,
     });

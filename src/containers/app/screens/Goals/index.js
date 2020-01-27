@@ -5,11 +5,11 @@ import { FlatList, View, RefreshControl } from 'react-native';
 import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
 import AddButton from '../../../../components/common/AddButton';
+import EmptyCard from '../../../../components/shared/EmptyCard';
 import { getGoals } from '../../redux/actions';
 import { colors } from '../../../../utils/styles';
 
 import { styles } from './styles';
-import EmptyCard from '../../../../components/shared/EmptyCard';
 
 
 class Goals extends React.PureComponent {
@@ -47,7 +47,7 @@ class Goals extends React.PureComponent {
         tasks={[]}
         description={item.description}
         category={item.category}
-        onPress={() => navigation.push('GoalDetails', { data: item })}
+        onPress={() => navigation.push('GoalDetails', { goalId: item.id })}
       />
     );
   }

@@ -47,8 +47,6 @@ function* handleLogin(action) {
 
   try {
     const { status, data } = yield call(sendLogin, { email, password });
-    console.log('data :', data);
-    console.log('status :', status);
 
     if (status === 200) {
       yield put({
@@ -69,7 +67,6 @@ function* handleLogin(action) {
       });
     }
   } catch (error) {
-    console.log('error :', error);
     yield put({
       type: AUTH_LOGIN_ERROR,
       error: "Can't sign in with provided credentials",
