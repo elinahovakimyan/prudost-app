@@ -1,4 +1,4 @@
-import { colors } from '../../../utils/styles';
+import { colors } from '../../../utils';
 
 const styles = {
   container: {

@@ -43,7 +43,7 @@ import {
   APP_DELETE_GOAL_REQUEST,
   APP_DELETE_TASK_REQUEST,
 } from './constants';
-import { request, addTokenToHttp } from '../../../utils/http';
+import { request, addTokenToHttp } from '../../../utils';
 import { rewards, habits } from '../data';
 import StorageUtils from '../../auth/helpers/storage';
 

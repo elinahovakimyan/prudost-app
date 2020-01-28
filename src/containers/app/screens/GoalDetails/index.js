@@ -9,7 +9,7 @@ import EmptyCard from '../../../../components/shared/EmptyCard';
 import TaskCard from '../../../../components/shared/TaskCard';
 import AddTask from '../../../../components/shared/AddTask';
 import CategoryTag from '../../../../components/shared/CategoryTag';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 import {
   addTask, updateTask, deleteTask, deleteGoal,
 } from '../../redux/actions';
@@ -73,7 +73,7 @@ class GoalDetails extends React.PureComponent {
 
     if (goal) {
       return (
-        <Layout style={styles.screen}>
+        <Layout isLoading={isLoading} style={styles.screen}>
           <View style={styles.categoryContainer}>
             <CategoryTag category={category} />
 

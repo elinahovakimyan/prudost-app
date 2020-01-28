@@ -10,7 +10,7 @@ import StatCard from '../../../../components/shared/StatCard';
 import Score from '../../../../components/shared/Score';
 import { clearAccessToken } from '../../../auth/redux/actions';
 import { logout } from '../../redux/actions';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 
 import { styles } from './styles';
 import List from '../../../../components/shared/List';

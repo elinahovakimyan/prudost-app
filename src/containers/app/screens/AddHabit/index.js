@@ -6,7 +6,7 @@ import Switch from '../../../../components/common/Switch';
 import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
 import { addReward } from '../../redux/actions';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 
 import { styles } from './styles';
 

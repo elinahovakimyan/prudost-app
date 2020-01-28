@@ -3,7 +3,7 @@ import {
 } from 'redux-saga/effects';
 
 import * as NavigationService from '../../../navigator/NavigationService';
-import { request, addTokenToHttp } from '../../../utils/http';
+import { request, addTokenToHttp } from '../../../utils';
 import StorageUtils from '../helpers/storage';
 import {
   AUTH_LOGIN_REQUEST,

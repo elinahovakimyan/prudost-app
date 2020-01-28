@@ -1,6 +1,8 @@
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 
+import Quiz from './screens/Quiz';
+
 /* Goals */
 import Goals from './screens/Goals';
 import MainGoals from './screens/MainGoals';
@@ -18,8 +20,7 @@ import AddReward from './screens/AddReward';
 /* Profile */
 import Profile from './screens/Profile';
 
-import { getTabIcon } from '../../utils/navigation';
-import { colors } from '../../utils/styles';
+import { getTabIcon, colors } from '../../utils';
 
 
 const GoalsStack = createStackNavigator(
@@ -71,7 +72,7 @@ const ProfileStack = createStackNavigator(
   },
 );
 
-const AppNavigator = createBottomTabNavigator(
+const TabNavigator = createBottomTabNavigator(
   {
     Goals: GoalsStack,
     Habits: HabitsStack,
@@ -95,5 +96,14 @@ const AppNavigator = createBottomTabNavigator(
     },
   },
 );
+
+const AppNavigator = createStackNavigator({
+  Tabs: TabNavigator,
+  Quiz: { screen: Quiz },
+}, {
+  defaultNavigationOptions: {
+    headerShown: false,
+  },
+});
 
 export default AppNavigator;

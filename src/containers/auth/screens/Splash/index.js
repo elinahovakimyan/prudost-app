@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 
 import Layout from '../../../../components/shared/Layout';
 import StorageUtils from '../../helpers/storage';
-import { addTokenToHttp } from '../../../../utils/http';
-import { colors } from '../../../../utils/styles';
+import { addTokenToHttp, getRandomInt, colors } from '../../../../utils';
 import { setUser } from '../../redux/actions';
-import { getRandomInt } from '../../../../utils/helpers';
 
 import { styles } from './styles';
 import { quotes } from './quotes';
@@ -32,12 +30,12 @@ class Splash extends React.PureComponent {
           .then(() => {
             this.timer = setTimeout(() => {
               this.props.navigation.navigate('App');
-            }, 2400);
+            }, 500);
           });
       } else {
         this.timer = setTimeout(() => {
           this.props.navigation.navigate('Auth');
-        }, 2400);
+        }, 500);
       }
     }
   }

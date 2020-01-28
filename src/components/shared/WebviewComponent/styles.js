@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
-import { colors } from '../../../utils/styles';
+import { colors } from '../../../utils';
 
 const styles = StyleSheet.create({
   webView: {

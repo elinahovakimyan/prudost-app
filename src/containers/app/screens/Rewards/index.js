@@ -9,7 +9,7 @@ import RewardCard from '../../../../components/shared/RewardCard';
 import AddButton from '../../../../components/common/AddButton';
 import Score from '../../../../components/shared/Score';
 import { getRewards } from '../../redux/actions';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 
 import { styles } from './styles';
 

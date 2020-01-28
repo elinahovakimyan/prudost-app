@@ -7,7 +7,7 @@ import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
 import DatePicker from '../../../../components/common/DatePicker';
 import { categories } from '../../data';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 import { addGoal, updateGoal } from '../../redux/actions';
 
 import { styles } from './styles';
@@ -110,11 +110,11 @@ class AddGoal extends React.PureComponent {
 
   render() {
     const {
-      title, description, category, deadline,
+      title, description, category, deadline, isLoading,
     } = this.state;
 
     return (
-      <Layout style={styles.screen}>
+      <Layout isLoading={isLoading} style={styles.screen}>
         <Input
           underlined
           value={title}
@@ -165,12 +165,16 @@ class AddGoal extends React.PureComponent {
   }
 }
 
+const mapStateToProps = (state) => ({
+  isLoading: state.App.isLoading,
+});
+
 const mapDispatchToProps = {
   addGoal,
   updateGoal,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(AddGoal);

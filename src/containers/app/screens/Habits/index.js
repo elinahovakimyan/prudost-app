@@ -8,7 +8,7 @@ import Layout from '../../../../components/shared/Layout';
 import HabitCard from '../../../../components/shared/HabitCard';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import AddButton from '../../../../components/common/AddButton';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 import { getHabits } from '../../redux/actions';
 
 import { styles } from './styles';

@@ -9,7 +9,7 @@ import GoalCard from '../../../../components/shared/GoalCard';
 import CategoryCard from '../../../../components/shared/CategoryCard';
 import AddButton from '../../../../components/common/AddButton';
 import EmptyCard from '../../../../components/shared/EmptyCard';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 import { getGoals } from '../../redux/actions';
 import { categories } from '../../data';
 
@@ -57,7 +57,7 @@ class MainGoals extends React.PureComponent {
     const { navigation, goals, isLoading } = this.props;
 
     return (
-      <Layout style={styles.screen}>
+      <Layout isLoading={isLoading} style={styles.screen}>
         <View>
           <View>
             <ScrollView

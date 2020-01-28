@@ -7,7 +7,7 @@ import GoalCard from '../../../../components/shared/GoalCard';
 import AddButton from '../../../../components/common/AddButton';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import { getGoals } from '../../redux/actions';
-import { colors } from '../../../../utils/styles';
+import { colors } from '../../../../utils';
 
 import { styles } from './styles';
 

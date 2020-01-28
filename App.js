@@ -3,7 +3,7 @@ import { Provider as ReduxProvider } from 'react-redux';
 
 import SplashScreen from './src/containers/auth/screens/Splash';
 import { store } from './src/redux/store';
-import { setupHttpConfig } from './src/utils/http';
+import { setupHttpConfig } from './src/utils';
 import Navigator from './Navigator';
 
 class App extends React.Component {
