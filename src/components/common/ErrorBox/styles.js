@@ -1,13 +1,9 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-    marginTop: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   errorText: {
+    padding: 10,
+    paddingTop: 30,
     textAlign: 'center',
     color: '#ed3e3e',
   },

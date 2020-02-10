@@ -44,7 +44,7 @@ class Goals extends React.PureComponent {
     return (
       <GoalCard
         title={item.title}
-        tasks={[]}
+        tasks={item.tasks}
         description={item.description}
         category={item.category}
         onPress={() => navigation.push('GoalDetails', { goalId: item.id })}

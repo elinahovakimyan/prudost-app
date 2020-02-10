@@ -91,208 +91,107 @@ function addReward({ reward }) {
 
 function* handleGetGoals() {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status, data } = yield call(getGoals);
 
     if (status >= 200 && status < 300) {
-      yield put({
-        type: APP_GET_GOALS_SUCCESS,
-        payload: data,
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_GET_GOALS_SUCCESS, payload: data });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     } else {
-      yield put({
-        type: APP_GET_GOALS_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_GET_GOALS_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_GET_GOALS_ERROR,
       error: "Can't get goals.",
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 
-function* handleAddGoal(action) {
-  const { goal } = action;
-
+function* handleAddGoal({ goal }) {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status, data } = yield call(addGoal, { goal });
 
     if (status >= 200 && status < 300) {
-      yield put({
-        type: APP_ADD_GOAL_SUCCESS,
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
-
-      yield put({
-        type: APP_GET_GOALS_REQUEST,
-      });
+      yield put({ type: APP_ADD_GOAL_SUCCESS });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+      yield put({ type: APP_GET_GOALS_REQUEST });
 
       NavigationService.navigate('GoalDetails', { goalId: data.id });
     } else {
-      yield put({
-        type: APP_ADD_GOAL_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_ADD_GOAL_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_ADD_GOAL_ERROR,
-      error: "Can't add a goal.",
+      error: 'Something went wrong. Please try again.',
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 
-function* handleUpdateGoal(action) {
-  const { goal } = action;
-
+function* handleUpdateGoal({ goal }) {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status } = yield call(updateGoal, { goal });
 
     if (status >= 200 && status < 300) {
-      yield put({
-        type: APP_UPDATE_GOAL_SUCCESS,
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
-
-      yield put({
-        type: APP_GET_GOALS_REQUEST,
-      });
+      yield put({ type: APP_UPDATE_GOAL_SUCCESS });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+      yield put({ type: APP_GET_GOALS_REQUEST });
 
       NavigationService.navigate('GoalDetails', { goalId: goal.id });
     } else {
-      yield put({
-        type: APP_UPDATE_GOAL_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_UPDATE_GOAL_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_UPDATE_GOAL_ERROR,
       error: "Can't update a goal.",
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 
-function* handleDeleteGoal(action) {
-  const { goalId } = action;
-
+function* handleDeleteGoal({ goalId }) {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status } = yield call(deleteGoal, { goalId });
 
     if (status >= 200 && status < 300) {
-      yield put({
-        type: APP_DELETE_GOAL_SUCCESS,
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
-
-      yield put({
-        type: APP_GET_GOALS_REQUEST,
-      });
+      yield put({ type: APP_DELETE_GOAL_SUCCESS });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+      yield put({ type: APP_GET_GOALS_REQUEST });
 
       NavigationService.navigate('MainGoals');
     } else {
-      yield put({
-        type: APP_DELETE_GOAL_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_DELETE_GOAL_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_DELETE_GOAL_ERROR,
-      error: "Can't add a goal.",
+      error: "Can't delete a goal.",
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
-function* handleGetTasks(action) {
-  const { goalId } = action;
-
+function* handleGetTasks({ goalId }) {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status, data } = yield call(getTasks, { goalId });
 
@@ -302,189 +201,95 @@ function* handleGetTasks(action) {
         payload: data,
         dataId: goalId,
       });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     } else {
-      yield put({
-        type: APP_GET_TASKS_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_GET_TASKS_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_GET_TASKS_ERROR,
       error: "Can't add a goal.",
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 
-function* handleAddTask(action) {
-  const { task } = action;
-
+function* handleAddTask({ task }) {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status } = yield call(addTask, { task });
 
     if (status >= 200 && status < 300) {
-      yield put({
-        type: APP_ADD_TASK_SUCCESS,
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
-
-      yield put({
-        type: APP_GET_GOALS_REQUEST,
-      });
+      yield put({ type: APP_ADD_TASK_SUCCESS });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+      yield put({ type: APP_GET_GOALS_REQUEST });
     } else {
-      yield put({
-        type: APP_ADD_TASK_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_ADD_TASK_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_ADD_TASK_ERROR,
       error: "Can't add a task.",
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 
-function* handleUpdateTask(action) {
-  const { task } = action;
-
+function* handleUpdateTask({ task }) {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status } = yield call(updateTask, { task });
 
     if (status >= 200 && status < 300) {
-      yield put({
-        type: APP_UPDATE_TASK_SUCCESS,
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
-
-      yield put({
-        type: APP_GET_GOALS_REQUEST,
-      });
+      yield put({ type: APP_UPDATE_TASK_SUCCESS });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+      yield put({ type: APP_GET_GOALS_REQUEST });
     } else {
-      yield put({
-        type: APP_UPDATE_TASK_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_UPDATE_TASK_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_UPDATE_TASK_ERROR,
       error: "Can't add a task.",
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 
-function* handleDeleteTask(action) {
-  const { taskId } = action;
-  console.log('taskId :', taskId);
-
+function* handleDeleteTask({ taskId }) {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status } = yield call(deleteTask, { taskId });
 
     if (status >= 200 && status < 300) {
-      yield put({
-        type: APP_DELETE_TASK_SUCCESS,
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
-
-      yield put({
-        type: APP_GET_GOALS_REQUEST,
-      });
+      yield put({ type: APP_DELETE_TASK_SUCCESS });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+      yield put({ type: APP_GET_GOALS_REQUEST });
     } else {
-      yield put({
-        type: APP_DELETE_TASK_ERROR,
-        error: 'Unknown Error',
-      });
-
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_DELETE_TASK_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
       type: APP_DELETE_TASK_ERROR,
       error: "Can't add a task.",
     });
-
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 function* handleGetRewards() {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     // const { status, data } = yield call(getGoals);
     // const { status } = yield call(getGoals);
@@ -496,20 +301,14 @@ function* handleGetRewards() {
         rewards,
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     } else {
       yield put({
         type: APP_GET_REWARDS_ERROR,
         error: 'Unknown Error',
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
@@ -517,10 +316,7 @@ function* handleGetRewards() {
       error: "Can't get goals.",
     });
 
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
@@ -528,10 +324,7 @@ function* handleAddReward(action) {
   const { goal } = action;
 
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status, data } = yield call(addReward, { goal });
 
@@ -541,10 +334,7 @@ function* handleAddReward(action) {
         goals: data,
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
 
       yield put({
         type: APP_GET_REWARDS_REQUEST,
@@ -557,10 +347,7 @@ function* handleAddReward(action) {
         error: 'Unknown Error',
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
@@ -568,19 +355,13 @@ function* handleAddReward(action) {
       error: "Can't add a goal.",
     });
 
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 function* handleGetHabits() {
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     // const { status, data } = yield call(getGoals);
     // const { status } = yield call(getGoals);
@@ -592,20 +373,14 @@ function* handleGetHabits() {
         habits,
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     } else {
       yield put({
         type: APP_GET_HABITS_ERROR,
         error: 'Unknown Error',
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
@@ -613,10 +388,7 @@ function* handleGetHabits() {
       error: "Can't get habits.",
     });
 
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
@@ -624,10 +396,7 @@ function* handleAddHabit(action) {
   const { habit } = action;
 
   try {
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: true,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     const { status } = yield call(addReward, { habit });
 
@@ -636,10 +405,7 @@ function* handleAddHabit(action) {
         type: APP_ADD_HABIT_SUCCESS,
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
 
       yield put({
         type: APP_GET_HABITS_REQUEST,
@@ -652,10 +418,7 @@ function* handleAddHabit(action) {
         error: 'Unknown Error',
       });
 
-      yield put({
-        type: APP_CHANGE_LOADING_STATE,
-        isLoading: false,
-      });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
     yield put({
@@ -663,10 +426,7 @@ function* handleAddHabit(action) {
       error: "Can't add a goal.",
     });
 
-    yield put({
-      type: APP_CHANGE_LOADING_STATE,
-      isLoading: false,
-    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 

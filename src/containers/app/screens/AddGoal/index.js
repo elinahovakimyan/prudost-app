@@ -6,6 +6,7 @@ import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
 import DatePicker from '../../../../components/common/DatePicker';
+import ErrorBox from '../../../../components/common/ErrorBox';
 import { categories } from '../../data';
 import { colors } from '../../../../utils';
 import { addGoal, updateGoal } from '../../redux/actions';
@@ -73,7 +74,7 @@ class AddGoal extends React.PureComponent {
     if (goal && deadline === goal.deadline) {
       formattedDeadline = goal.deadline;
     } else {
-      const [DD, MM, YYYY] = deadline.split('/');
+      const [DD, MM, YYYY] = deadline ? deadline.split('/') : [];
       formattedDeadline = [YYYY, MM, DD].join('-');
     }
 
@@ -90,7 +91,7 @@ class AddGoal extends React.PureComponent {
     const {
       title, description, category, deadline,
     } = this.state;
-    const [DD, MM, YYYY] = deadline.split('/');
+    const [DD, MM, YYYY] = deadline ? deadline.split('/') : [];
     const formattedDeadline = [YYYY, MM, DD].join('-');
 
     this.props.addGoal({
@@ -160,6 +161,8 @@ class AddGoal extends React.PureComponent {
 
         <AddTask hasPadding={false} /> */}
 
+        <ErrorBox errorText={this.props.addGoalError} />
+
       </Layout>
     );
   }
@@ -167,6 +170,7 @@ class AddGoal extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   isLoading: state.App.isLoading,
+  addGoalError: state.App.errors.AddGoal,
 });
 
 const mapDispatchToProps = {

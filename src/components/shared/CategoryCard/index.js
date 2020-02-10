@@ -11,7 +11,7 @@ function CategoryTag({ category, onPress }) {
       style={[styles.container, { backgroundColor: category.color }]}
     >
       <Text style={styles.title}>{`${category.title} Goals`}</Text>
-      <Text style={styles.goalsIndicator}>6 goals</Text>
+      <Text style={styles.goalsIndicator}>0 goals</Text>
     </TouchableOpacity>
   );
 }
