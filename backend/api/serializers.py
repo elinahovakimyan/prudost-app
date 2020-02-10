@@ -10,7 +10,7 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from rest_framework import serializers
 from rest_auth.serializers import PasswordResetSerializer
-from .models import Goal, Task
+from .models import Goal, Task, Category
 
 User = get_user_model()
 
@@ -90,7 +90,7 @@ class GoalSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Goal
-        fields = ['id', 'title', 'description', 'deadline', 'category', 'completed', 'tasks']
+        fields = '__all__'
 
     def create(self, validated_data):
         tasks_data = validated_data.pop('tasks')
@@ -99,3 +99,8 @@ class GoalSerializer(serializers.ModelSerializer):
             Task.objects.create(goal=goal, **task_data)
         return goal
 
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'

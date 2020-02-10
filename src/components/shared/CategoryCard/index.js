@@ -4,14 +4,14 @@ import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 
-function CategoryTag({ category, onPress }) {
+function CategoryTag({ category, goalsNumber, onPress }) {
   return (
     <TouchableOpacity
       onPress={onPress}
       style={[styles.container, { backgroundColor: category.color }]}
     >
       <Text style={styles.title}>{`${category.title} Goals`}</Text>
-      <Text style={styles.goalsIndicator}>0 goals</Text>
+      <Text style={styles.goalsIndicator}>{goalsNumber > 1 ? `${goalsNumber} goals` : `${goalsNumber} goal`}</Text>
     </TouchableOpacity>
   );
 }

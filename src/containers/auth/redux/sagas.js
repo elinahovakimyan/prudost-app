@@ -15,6 +15,7 @@ import {
   AUTH_SIGNUP_SUCCESS,
   AUTH_PASSWORD_RECOVER_SUCCESS,
   AUTH_PASSWORD_RECOVER_ERROR,
+  AUTH_LOGOUT,
 } from './constants';
 
 
@@ -145,8 +146,20 @@ function* handlePasswordRecovery(action) {
   }
 }
 
+function* handleLogout() {
+  try {
+    yield StorageUtils.removeAccessToken();
+    yield StorageUtils.removeUser();
+    // addTokenToHttp(null);
+    NavigationService.navigate('Auth');
+  } catch (error) {
+    console.warn('error :', error);
+  }
+}
+
 export default all([
   takeLatest(AUTH_LOGIN_REQUEST, handleLogin),
   takeLatest(AUTH_SIGNUP_REQUEST, handleSignUp),
   takeLatest(AUTH_PASSWORD_RECOVER_REQUEST, handlePasswordRecovery),
+  takeLatest(AUTH_LOGOUT, handleLogout),
 ]);

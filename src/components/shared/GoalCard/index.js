@@ -18,10 +18,11 @@ function GoalCard({
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <View style={styles.contentContainer}>
         <View style={styles.content}>
-          <View style={styles.categoryContainer}>
-            <CategoryTag category={category} />
-          </View>
-
+          {category && (
+            <View style={styles.categoryContainer}>
+              <CategoryTag category={category} />
+            </View>
+          )}
           <Text style={styles.title}>{title}</Text>
         </View>
         <Image source={require('../../../assets/icons/next.png')} style={styles.icon} />

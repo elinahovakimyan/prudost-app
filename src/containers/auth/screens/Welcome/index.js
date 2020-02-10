@@ -34,7 +34,6 @@ const slides = [
 class WelcomeScreen extends React.PureComponent {
   static navigationOptions = {
     headerShown: false,
-    header: null,
   }
 
   render() {

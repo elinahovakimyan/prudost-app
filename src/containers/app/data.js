@@ -1,24 +1,3 @@
-export const categories = [
-  {
-    id: 1,
-    color: '#37B68E',
-    title: 'Career',
-    icon: '',
-  },
-  {
-    id: 2,
-    title: 'Family',
-    color: '#ff6666',
-    icon: '',
-  },
-  {
-    id: 3,
-    title: 'Personal',
-    color: '#088da5',
-    icon: '',
-  },
-];
-
 export const rewards = [
   {
     id: 1,

@@ -22,7 +22,6 @@ export function setupHttpConfig() {
 }
 
 export function addTokenToHttp(token) {
-  console.log('token :', token);
   return new Promise((resolve) => {
     // do something asynchronous which eventually calls either:
     if (token) {

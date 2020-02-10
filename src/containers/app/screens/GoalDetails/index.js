@@ -68,8 +68,7 @@ class GoalDetails extends React.PureComponent {
   }
 
   render() {
-    const { goal, isLoading } = this.props;
-    const category = goal ? goal.category : '';
+    const { goal, category, isLoading } = this.props;
 
     if (goal) {
       return (
@@ -114,9 +113,12 @@ class GoalDetails extends React.PureComponent {
 
 const mapStateToProps = (state, ownProps) => {
   const { goalId } = ownProps.navigation.state.params;
+  const goal = state.App.goals.find((g) => g.id === goalId);
+  const category = state.App.categories.find((c) => c.id === goal?.category);
 
   return ({
-    goal: state.App.goals.find((g) => g.id === goalId),
+    goal,
+    category,
     isLoading: state.App.isLoading,
     goalsError: state.App.errors.Goals,
   });

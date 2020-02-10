@@ -7,13 +7,11 @@ import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
 import DatePicker from '../../../../components/common/DatePicker';
 import ErrorBox from '../../../../components/common/ErrorBox';
-import { categories } from '../../data';
 import { colors } from '../../../../utils';
 import { addGoal, updateGoal } from '../../redux/actions';
 
 import { styles } from './styles';
 
-const categoryOptions = categories.map((option) => ({ value: option.title, label: option.title }));
 const getDatePickerFormat = (date) => {
   let formattedDate = null;
 
@@ -88,6 +86,7 @@ class AddGoal extends React.PureComponent {
   }
 
   handleAdd = () => {
+    const { profile } = this.props;
     const {
       title, description, category, deadline,
     } = this.state;
@@ -95,6 +94,7 @@ class AddGoal extends React.PureComponent {
     const formattedDeadline = [YYYY, MM, DD].join('-');
 
     this.props.addGoal({
+      user: profile.id,
       title,
       description,
       category,
@@ -138,7 +138,7 @@ class AddGoal extends React.PureComponent {
           placeholder="Goal category"
           onChange={(val) => this.handleInputChange('category', val)}
           value={category}
-          options={categoryOptions}
+          options={this.props.categories}
         />
 
         <DatePicker
@@ -170,6 +170,8 @@ class AddGoal extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   isLoading: state.App.isLoading,
+  profile: state.App.profile,
+  categories: state.App.categories.map((option) => ({ value: option.id, label: option.title })),
   addGoalError: state.App.errors.AddGoal,
 });
 

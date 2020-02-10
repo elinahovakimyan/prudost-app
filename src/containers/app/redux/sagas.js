@@ -29,7 +29,6 @@ import {
   APP_ADD_HABIT_ERROR,
   APP_GET_HABITS_REQUEST,
   APP_ADD_HABIT_REQUEST,
-  APP_LOGOUT,
   APP_UPDATE_TASK_ERROR,
   APP_UPDATE_TASK_SUCCESS,
   APP_UPDATE_TASK_REQUEST,
@@ -42,11 +41,24 @@ import {
   APP_UPDATE_GOAL_REQUEST,
   APP_DELETE_GOAL_REQUEST,
   APP_DELETE_TASK_REQUEST,
+  APP_GET_CATEGORIES_SUCCESS,
+  APP_GET_CATEGORIES_ERROR,
+  APP_GET_CATEGORIES_REQUEST,
+  APP_GET_PROFILE_SUCCESS,
+  APP_GET_PROFILE_ERROR,
+  APP_GET_PROFILE_REQUEST,
 } from './constants';
-import { request, addTokenToHttp } from '../../../utils';
-import { rewards, habits } from '../data';
-import StorageUtils from '../../auth/helpers/storage';
+import { request } from '../../../utils';
+import { rewards } from '../data';
 
+
+function getProfile() {
+  return request.get('/api/profile/');
+}
+
+function getCategories() {
+  return request.get('/api/category/');
+}
 
 function getGoals() {
   return request.get('/api/goal/');
@@ -84,10 +96,36 @@ function deleteTask({ taskId }) {
 //   return request.get('/api/rewards/');
 // }
 
+function getHabits() {
+  return request.get('/api/habits/');
+}
+
 function addReward({ reward }) {
   return request.post('/api/reward/', reward);
 }
 
+
+function* handleGetProfile() {
+  try {
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
+
+    const { status, data } = yield call(getProfile);
+
+    if (status >= 200 && status < 300 && data?.length) {
+      yield put({ type: APP_GET_PROFILE_SUCCESS, payload: data[0] });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+    } else {
+      yield put({ type: APP_GET_PROFILE_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+    }
+  } catch (error) {
+    yield put({
+      type: APP_GET_PROFILE_ERROR,
+      error: "Can't get profile.",
+    });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+  }
+}
 
 function* handleGetGoals() {
   try {
@@ -103,10 +141,27 @@ function* handleGetGoals() {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_GET_GOALS_ERROR,
-      error: "Can't get goals.",
-    });
+    yield put({ type: APP_GET_GOALS_ERROR, error: "Can't get goals." });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+  }
+}
+
+
+function* handleGetCategories() {
+  try {
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
+
+    const { status, data } = yield call(getCategories);
+
+    if (status >= 200 && status < 300) {
+      yield put({ type: APP_GET_CATEGORIES_SUCCESS, payload: data });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+    } else {
+      yield put({ type: APP_GET_CATEGORIES_ERROR, error: 'Unknown Error' });
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+    }
+  } catch (error) {
+    yield put({ type: APP_GET_CATEGORIES_ERROR, error: "Can't get categories." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -129,10 +184,7 @@ function* handleAddGoal({ goal }) {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_ADD_GOAL_ERROR,
-      error: 'Something went wrong. Please try again.',
-    });
+    yield put({ type: APP_ADD_GOAL_ERROR, error: 'Something went wrong. Please try again.' });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -155,10 +207,7 @@ function* handleUpdateGoal({ goal }) {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_UPDATE_GOAL_ERROR,
-      error: "Can't update a goal.",
-    });
+    yield put({ type: APP_UPDATE_GOAL_ERROR, error: "Can't update a goal." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -181,10 +230,7 @@ function* handleDeleteGoal({ goalId }) {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_DELETE_GOAL_ERROR,
-      error: "Can't delete a goal.",
-    });
+    yield put({ type: APP_DELETE_GOAL_ERROR, error: "Can't delete a goal." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -207,10 +253,7 @@ function* handleGetTasks({ goalId }) {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_GET_TASKS_ERROR,
-      error: "Can't add a goal.",
-    });
+    yield put({ type: APP_GET_TASKS_ERROR, error: "Can't add a goal." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -231,10 +274,7 @@ function* handleAddTask({ task }) {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_ADD_TASK_ERROR,
-      error: "Can't add a task.",
-    });
+    yield put({ type: APP_ADD_TASK_ERROR, error: "Can't add a task." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -255,10 +295,7 @@ function* handleUpdateTask({ task }) {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_UPDATE_TASK_ERROR,
-      error: "Can't add a task.",
-    });
+    yield put({ type: APP_UPDATE_TASK_ERROR, error: "Can't add a task." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -279,10 +316,7 @@ function* handleDeleteTask({ taskId }) {
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_DELETE_TASK_ERROR,
-      error: "Can't add a task.",
-    });
+    yield put({ type: APP_DELETE_TASK_ERROR, error: "Can't add a task." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -292,61 +326,35 @@ function* handleGetRewards() {
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
     // const { status, data } = yield call(getGoals);
-    // const { status } = yield call(getGoals);
 
     // if (status === 200) {
     if (true) {
-      yield put({
-        type: APP_GET_REWARDS_SUCCESS,
-        rewards,
-      });
-
+      yield put({ type: APP_GET_REWARDS_SUCCESS, rewards });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     } else {
-      yield put({
-        type: APP_GET_REWARDS_ERROR,
-        error: 'Unknown Error',
-      });
-
+      yield put({ type: APP_GET_REWARDS_ERROR, error: 'Unknown Error' });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_GET_REWARDS_ERROR,
-      error: "Can't get goals.",
-    });
-
+    yield put({ type: APP_GET_REWARDS_ERROR, error: "Can't get goals." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
-function* handleAddReward(action) {
-  const { goal } = action;
-
+function* handleAddReward({ reward }) {
   try {
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
-    const { status, data } = yield call(addReward, { goal });
+    const { status, data } = yield call(addReward, { reward });
 
     if (status === 201) {
-      yield put({
-        type: APP_ADD_REWARD_SUCCESS,
-        goals: data,
-      });
-
+      yield put({ type: APP_ADD_REWARD_SUCCESS, rewards: data });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+      yield put({ type: APP_GET_REWARDS_REQUEST });
 
-      yield put({
-        type: APP_GET_REWARDS_REQUEST,
-      });
-
-      NavigationService.navigate('Goals');
+      NavigationService.navigate('Rewards');
     } else {
-      yield put({
-        type: APP_ADD_REWARD_ERROR,
-        error: 'Unknown Error',
-      });
-
+      yield put({ type: APP_ADD_REWARD_ERROR, error: 'Unknown Error' });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
@@ -354,7 +362,6 @@ function* handleAddReward(action) {
       type: APP_ADD_REWARD_ERROR,
       error: "Can't add a goal.",
     });
-
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -363,31 +370,17 @@ function* handleGetHabits() {
   try {
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
-    // const { status, data } = yield call(getGoals);
-    // const { status } = yield call(getGoals);
+    const { status, data } = yield call(getHabits);
 
-    // if (status === 200) {
-    if (true) {
-      yield put({
-        type: APP_GET_HABITS_SUCCESS,
-        habits,
-      });
-
+    if (status >= 200 && status < 300) {
+      yield put({ type: APP_GET_HABITS_SUCCESS, habits: data });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     } else {
-      yield put({
-        type: APP_GET_HABITS_ERROR,
-        error: 'Unknown Error',
-      });
-
+      yield put({ type: APP_GET_HABITS_ERROR, error: 'Unknown Error' });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_GET_HABITS_ERROR,
-      error: "Can't get habits.",
-    });
-
+    yield put({ type: APP_GET_HABITS_ERROR, error: "Can't get habits." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -401,46 +394,23 @@ function* handleAddHabit(action) {
     const { status } = yield call(addReward, { habit });
 
     if (status === 201) {
-      yield put({
-        type: APP_ADD_HABIT_SUCCESS,
-      });
-
+      yield put({ type: APP_ADD_HABIT_SUCCESS });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
-
-      yield put({
-        type: APP_GET_HABITS_REQUEST,
-      });
-
-      NavigationService.navigate('Habits');
+      yield put({ type: APP_GET_HABITS_REQUEST });
     } else {
-      yield put({
-        type: APP_ADD_HABIT_ERROR,
-        error: 'Unknown Error',
-      });
-
+      yield put({ type: APP_ADD_HABIT_ERROR, error: 'Unknown Error' });
       yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
     }
   } catch (error) {
-    yield put({
-      type: APP_ADD_HABIT_ERROR,
-      error: "Can't add a goal.",
-    });
-
+    yield put({ type: APP_ADD_HABIT_ERROR, error: "Can't add a goal." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
 
 
-function* handleLogout() {
-  yield StorageUtils.removeAccessToken('');
-  yield StorageUtils.removeUser('');
-
-  addTokenToHttp('');
-  NavigationService.navigate('Auth');
-}
-
-
 export default all([
+  takeLatest(APP_GET_PROFILE_REQUEST, handleGetProfile),
+  takeLatest(APP_GET_CATEGORIES_REQUEST, handleGetCategories),
   takeLatest(APP_GET_GOALS_REQUEST, handleGetGoals),
   takeLatest(APP_ADD_GOAL_REQUEST, handleAddGoal),
   takeLatest(APP_UPDATE_GOAL_REQUEST, handleUpdateGoal),
@@ -453,5 +423,4 @@ export default all([
   takeLatest(APP_ADD_REWARD_REQUEST, handleAddReward),
   takeLatest(APP_GET_HABITS_REQUEST, handleGetHabits),
   takeLatest(APP_ADD_HABIT_REQUEST, handleAddHabit),
-  takeLatest(APP_LOGOUT, handleLogout),
 ]);

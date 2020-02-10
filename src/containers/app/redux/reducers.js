@@ -2,10 +2,14 @@ import * as actions from './constants';
 
 const initialState = {
   goals: [],
+  categories: [],
   tasks: {},
+  profile: {},
   rewards: [],
   isLoading: false,
   errors: {
+    Profile: null,
+    Categories: null,
     Goals: null,
     AddGoal: null,
     Tasks: null,
@@ -20,6 +24,14 @@ const initialState = {
 
 export const AppReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actions.APP_GET_PROFILE_SUCCESS:
+      return { ...state, profile: action.payload, errors: { Profile: null } };
+    case actions.APP_GET_PROFILE_ERROR:
+      return { ...state, errors: { Profile: action.error } };
+    case actions.APP_GET_CATEGORIES_SUCCESS:
+      return { ...state, categories: action.payload, errors: { Categories: null } };
+    case actions.APP_GET_CATEGORIES_ERROR:
+      return { ...state, errors: { Categories: action.error } };
     case actions.APP_GET_GOALS_SUCCESS:
       return { ...state, goals: action.payload, errors: { Goals: null } };
     case actions.APP_GET_GOALS_ERROR:

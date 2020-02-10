@@ -6,7 +6,7 @@ import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
 import AddButton from '../../../../components/common/AddButton';
 import EmptyCard from '../../../../components/shared/EmptyCard';
-import { getGoals } from '../../redux/actions';
+import { getGoals, getCategories } from '../../redux/actions';
 import { colors } from '../../../../utils';
 
 import { styles } from './styles';
@@ -26,10 +26,6 @@ class Goals extends React.PureComponent {
     });
   }
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
   fetchData = () => {
     this.props.getGoals();
   }
@@ -46,14 +42,14 @@ class Goals extends React.PureComponent {
         title={item.title}
         tasks={item.tasks}
         description={item.description}
-        category={item.category}
         onPress={() => navigation.push('GoalDetails', { goalId: item.id })}
       />
     );
   }
 
   render() {
-    const { goals, isLoading } = this.props;
+    const { navigation, isLoading } = this.props;
+    const goals = navigation.getParams('goals', []);
 
     return (
       <Layout style={styles.screen}>
@@ -75,6 +71,7 @@ class Goals extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
+  categories: state.App.categories,
   goals: state.App.goals,
   user: state.Auth.user,
   isLoading: state.App.isLoading,
@@ -83,6 +80,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   getGoals,
+  getCategories,
 };
 
 export default connect(

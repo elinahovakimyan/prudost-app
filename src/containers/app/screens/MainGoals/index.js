@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, RefreshControl, ScrollView,
+  FlatList, View, Text, ScrollView,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -10,8 +10,7 @@ import CategoryCard from '../../../../components/shared/CategoryCard';
 import AddButton from '../../../../components/common/AddButton';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import { colors } from '../../../../utils';
-import { getGoals } from '../../redux/actions';
-import { categories } from '../../data';
+import { getGoals, getCategories, getProfile } from '../../redux/actions';
 
 import { styles } from './styles';
 
@@ -33,6 +32,8 @@ class MainGoals extends React.PureComponent {
 
   fetchData = () => {
     this.props.getGoals();
+    this.props.getCategories();
+    this.props.getProfile();
   }
 
   goToAddGoal = () => {
@@ -40,40 +41,46 @@ class MainGoals extends React.PureComponent {
   }
 
   renderItem = (item) => {
-    const { navigation } = this.props;
+    const { navigation, categories } = this.props;
+    const currentCategory = categories.find((c) => c.id === item.category);
 
     return (
       <GoalCard
         title={item.title}
         tasks={item.tasks}
         description={item.description}
-        category={item.category}
+        category={currentCategory}
         onPress={() => navigation.push('GoalDetails', { goalId: item.id })}
       />
     );
   }
 
   render() {
-    const { navigation, goals, isLoading } = this.props;
+    const {
+      navigation, goals, categories, isLoading,
+    } = this.props;
 
     return (
       <Layout isLoading={isLoading} style={styles.screen}>
         <View>
-          <View>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={styles.categoryContainer}
-            >
-              {categories.map((category) => (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.categoryContainer}
+          >
+            {categories.map((category) => {
+              const categoryGoals = goals.filter((g) => g.category === category.id);
+
+              return (
                 <CategoryCard
                   key={category.id}
                   category={category}
-                  onPress={() => navigation.push('Goals', { category })}
+                  goalsNumber={categoryGoals?.length}
+                  onPress={() => navigation.push('Goals', { category, goals: categoryGoals })}
                 />
-              ))}
-            </ScrollView>
-          </View>
+              );
+            })}
+          </ScrollView>
 
           <Text style={styles.title}>All goals</Text>
 
@@ -86,7 +93,7 @@ class MainGoals extends React.PureComponent {
               && <EmptyCard buttonTitle="Add Goal" onButtonPress={this.goToAddGoal} />
             }
             ListFooterComponent={<View style={styles.footer} />}
-            refreshControl={<RefreshControl onRefresh={this.fetchData} refreshing={isLoading} />}
+            // refreshControl={<RefreshControl onRefresh={this.fetchData} refreshing={isLoading} />}
           />
         </View>
 
@@ -98,13 +105,15 @@ class MainGoals extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   goals: state.App.goals,
-  user: state.Auth.user,
+  categories: state.App.categories,
   isLoading: state.App.isLoading,
   goalsError: state.App.errors.Goals,
 });
 
 const mapDispatchToProps = {
   getGoals,
+  getCategories,
+  getProfile,
 };
 
 export default connect(

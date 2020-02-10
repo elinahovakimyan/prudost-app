@@ -1,5 +1,14 @@
 import * as actions from './constants';
 
+
+export const getProfile = () => ({
+  type: actions.APP_GET_PROFILE_REQUEST,
+});
+
+export const getCategories = () => ({
+  type: actions.APP_GET_CATEGORIES_REQUEST,
+});
+
 export const getGoals = () => ({
   type: actions.APP_GET_GOALS_REQUEST,
 });

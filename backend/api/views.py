@@ -7,8 +7,8 @@ from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
-from .models import Goal, Task
-from .serializers import GoalSerializer, SignupSerializer, UserSerializer, ProfileSerializer, TaskSerializer
+from .models import Goal, Task, Category
+from .serializers import GoalSerializer, SignupSerializer, UserSerializer, ProfileSerializer, TaskSerializer, CategorySerializer
 
 User = get_user_model()
 
@@ -58,10 +58,8 @@ class GoalViewset(viewsets.ModelViewSet):
 
     queryset = Goal.objects.all()
 
-    # def get_queryset(self):
-    #     return Goal.objects.filter(user=self.request.user.id)
-    #     return User.objects.filter(user=self.request.user.id)
-    # tasks = Task.objects.filter(goal )
+    def get_queryset(self):
+        return Goal.objects.filter(user=self.request.user.id)
 
     # def get_queryset(self):
     #     return User.objects.filter(user=self.request.user.id)
@@ -78,3 +76,10 @@ class TaskViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = Task.objects.all()
+
+
+class CategoryViewset(viewsets.ModelViewSet):
+    serializer_class = CategorySerializer
+    permission_classes = [IsAuthenticated]
+
+    queryset = Category.objects.all()
