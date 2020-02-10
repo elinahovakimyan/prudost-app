@@ -49,7 +49,7 @@ class Goals extends React.PureComponent {
 
   render() {
     const { navigation, isLoading } = this.props;
-    const goals = navigation.getParams('goals', []);
+    const { goals } = navigation.state.params;
 
     return (
       <Layout style={styles.screen}>
