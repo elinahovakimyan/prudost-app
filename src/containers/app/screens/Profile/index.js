@@ -73,6 +73,7 @@ class Profile extends React.PureComponent {
         onPress: () => {},
       },
     ];
+    console.log('this.props.profile :', this.props.profile);
 
 
     return (
@@ -87,7 +88,7 @@ class Profile extends React.PureComponent {
 
         <View>
           <FlatList
-            data={data || []}
+            data={data}
             numColumns={2}
             style={styles.container}
             refreshing={isLoading}
@@ -114,6 +115,7 @@ class Profile extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   isLoading: state.App.isLoading,
+  profile: state.App.profile,
 });
 
 const mapDispatchToProps = {

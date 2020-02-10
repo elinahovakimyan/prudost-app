@@ -14,9 +14,7 @@ class User(AbstractUser):
     name = models.CharField(_("Name of User"), blank=True,
                             null=True, max_length=255)
     about_me = models.TextField(blank=True, null=True)
-    city = models.CharField(max_length=150, blank=True, null=True,)
-    zip_code = models.CharField(max_length=150, blank=True, null=True,)
-    website = models.URLField(blank=True, null=True)
+    score = models.CharField(max_length=150, default=0, null=True,)
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})
