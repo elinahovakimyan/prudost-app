@@ -9,23 +9,31 @@ import styles from './styles';
 
 
 function RewardCard({
-  title, isUnlocked, onPress, pointsRequired, pointsRemaining,
+  item, isUnlocked, onPress, pointsRemaining, onUpdate, onDelete, onUse,
 }) {
   const [isEditing, toggleEdit] = useState(false);
+  const [title, onChange] = useState(item.title);
 
   const handleDelete = () => {
     Alert.alert(
-      'Delete the task?',
-      'Are you sure you want to delete this task?',
+      'Delete the reward?',
+      'Are you sure you want to delete this reward?',
       [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        { text: 'Yes', onPress: () => console.log('OK Pressed') },
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Yes', onPress: () => onDelete(item.id) },
       ],
       { cancelable: false },
     );
+  };
+
+  const handleSave = () => {
+    toggleEdit(false);
+    onUpdate({ id: item.id, title });
+  };
+
+  const handleUse = () => {
+    onUse(item);
+    onUpdate({ id: item.id, used: true });
   };
 
   return (
@@ -40,6 +48,7 @@ function RewardCard({
               block={false}
               buttonStyle={styles.useButton}
               textStyle={styles.useButtonText}
+              onPress={handleUse}
             >
               Use
             </Button>
@@ -53,8 +62,9 @@ function RewardCard({
               <TextInput
                 multiline
                 autoFocus
-                editable={isEditing}
                 value={title}
+                editable={isEditing}
+                onChangeText={onChange}
                 style={[styles.text, isUnlocked ? styles.unLockedText : {}]}
               />
             )
@@ -67,7 +77,7 @@ function RewardCard({
             )}
 
           <Text style={styles.points}>
-            {isUnlocked ? `${pointsRequired} points` : `${pointsRemaining} points remaining`}
+            {isUnlocked ? `${item.points} points` : `${pointsRemaining} points remaining`}
           </Text>
         </View>
 
@@ -76,7 +86,7 @@ function RewardCard({
       <View style={styles.iconContainer}>
         {isEditing
           ? (
-            <TouchableOpacity onPress={() => toggleEdit(false)}>
+            <TouchableOpacity onPress={handleSave}>
               <Image source={require('../../../assets/icons/done.png')} style={styles.icon} />
             </TouchableOpacity>
           ) : (

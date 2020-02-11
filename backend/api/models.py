@@ -7,11 +7,11 @@ User = get_user_model()
 
 class Goal(models.Model):
     title = models.CharField(max_length=150)
-    description = models.CharField(max_length=300)
+    description = models.CharField(max_length=300, blank=True, null=True)
     category = models.ForeignKey(
         'Category', related_name='categories', on_delete=models.CASCADE, blank=True, null=True
     )
-    user = models.ForeignKey(User, related_name='users', on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, related_name='users_1', on_delete=models.CASCADE, blank=True, null=True)
     deadline = models.DateField()
     completed = models.BooleanField(default=False)
 
@@ -37,6 +37,21 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.title
+
+
+class Reward(models.Model):
+    title = models.CharField(max_length=150)
+    description = models.CharField(max_length=300, blank=True, null=True)
+    points = models.IntegerField(default=0)
+    user = models.ForeignKey(User, related_name='users_2',
+                             on_delete=models.CASCADE, blank=True, null=True)
+    used = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = 'Rewards'
 
     def __str__(self):
         return self.title

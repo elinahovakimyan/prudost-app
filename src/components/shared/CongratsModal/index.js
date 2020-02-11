@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Modal, Text, View, Image,
 } from 'react-native';
@@ -47,15 +47,13 @@ const getContentByType = (type) => {
   }
 };
 
-function CongratsModal({ type }) {
-  const [visible, toggleVisibility] = useState(true);
-
+function CongratsModal({ type, visible, toggleVisibility }) {
   const currentContent = getContentByType(type);
 
   return (
     <Modal
-      animationType="slide"
       transparent
+      animationType="fade"
       presentationStyle="overFullScreen"
       visible={visible}
       onRequestClose={() => toggleVisibility(false)}

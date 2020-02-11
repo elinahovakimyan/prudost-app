@@ -16,10 +16,7 @@ function HabitCard({ title, isCompleted, onPress }) {
       'Delete the task?',
       'Are you sure you want to delete this task?',
       [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
+        { text: 'Cancel', style: 'cancel' },
         { text: 'Yes', onPress: () => console.log('OK Pressed') },
       ],
       { cancelable: false },

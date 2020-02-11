@@ -21,9 +21,9 @@ const timeOptions = [
 const moneyOptions = [
   { value: 0, label: 'No money' },
   { value: 5, label: 'Less than 5 USD (5 points)' },
-  { value: 20, label: '5 - 10 USD (20 points)' },
-  { value: 50, label: '10 - 30 USD (50 points)' },
-  { value: 80, label: '30 - 80 USD (80 points)' },
+  { value: 20, label: '5 - 20 USD (20 points)' },
+  { value: 50, label: '21 - 50 USD (50 points)' },
+  { value: 80, label: '51 - 100 USD (80 points)' },
   { value: 100, label: 'More than 100 USD (100 points)' },
 ];
 
@@ -59,12 +59,13 @@ class AddReward extends React.PureComponent {
   }
 
   handleSubmit = () => {
-    const { title, points } = this.state;
+    const { profile } = this.props;
+    const { title, timePoints, moneyPoints } = this.state;
 
     this.props.addReward({
       title,
-      points,
-      datetime: new Date(),
+      points: timePoints + moneyPoints,
+      user: profile.id,
     });
   }
 
@@ -78,6 +79,7 @@ class AddReward extends React.PureComponent {
     const {
       title, timePoints, moneyPoints,
     } = this.state;
+    console.log('this.props.profile :', this.props.profile);
 
     return (
       <Layout style={styles.screen}>
@@ -121,11 +123,15 @@ class AddReward extends React.PureComponent {
   }
 }
 
+const mapStateToProps = (state) => ({
+  profile: state.App.profile,
+});
+
 const mapDispatchToProps = {
   addReward,
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(AddReward);

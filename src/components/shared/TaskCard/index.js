@@ -8,7 +8,9 @@ import RadioButton from '../../common/RadioButton';
 import styles from './styles';
 
 
-function TaskCard({ task, onUpdate, onDelete }) {
+function TaskCard({
+  task, onUpdate, onDelete, onComplete, onUncomplete,
+}) {
   const [isEditing, toggleEdit] = useState(false);
   const [value, onChange] = useState(task.text);
 
@@ -17,10 +19,7 @@ function TaskCard({ task, onUpdate, onDelete }) {
       'Delete the task?',
       'Are you sure you want to delete this task?',
       [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
+        { text: 'Cancel', style: 'cancel' },
         { text: 'Yes', onPress: () => onDelete(task.id) },
       ],
       { cancelable: false },
@@ -28,6 +27,12 @@ function TaskCard({ task, onUpdate, onDelete }) {
   };
 
   const handleCompleteTogggle = () => {
+    if (task.completed) {
+      onUncomplete();
+    } else {
+      onComplete();
+    }
+
     onUpdate({ completed: !task.completed, id: task.id });
   };
 

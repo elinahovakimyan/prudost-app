@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Goal, Task, Category
+from .models import Goal, Task, Category, Reward
 
 # Register your models here.
 
@@ -17,3 +17,4 @@ class GoalAdmin(admin.ModelAdmin):
 
 admin.site.register(Goal, GoalAdmin)
 admin.site.register(Category)
+admin.site.register(Reward)

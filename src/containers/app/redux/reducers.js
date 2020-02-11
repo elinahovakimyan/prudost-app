@@ -28,6 +28,10 @@ export const AppReducer = (state = initialState, action) => {
       return { ...state, profile: action.payload, errors: { Profile: null } };
     case actions.APP_GET_PROFILE_ERROR:
       return { ...state, errors: { Profile: action.error } };
+    case actions.APP_UPDATE_PROFILE_SUCCESS:
+      return { ...state, profile: action.payload, errors: { Profile: null } };
+    case actions.APP_UPDATE_PROFILE_ERROR:
+      return { ...state, errors: { Profile: action.error } };
     case actions.APP_GET_CATEGORIES_SUCCESS:
       return { ...state, categories: action.payload, errors: { Categories: null } };
     case actions.APP_GET_CATEGORIES_ERROR:
@@ -57,7 +61,7 @@ export const AppReducer = (state = initialState, action) => {
     case actions.APP_UPDATE_TASK_ERROR:
       return { ...state, errors: { UpdateTask: action.error } };
     case actions.APP_GET_REWARDS_SUCCESS:
-      return { ...state, rewards: action.rewards, errors: { Rewards: null } };
+      return { ...state, rewards: action.payload, errors: { Rewards: null } };
     case actions.APP_GET_REWARDS_ERROR:
       return { ...state, errors: { Rewards: action.error } };
     case actions.APP_ADD_REWARD_SUCCESS:

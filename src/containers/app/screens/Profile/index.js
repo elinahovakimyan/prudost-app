@@ -8,25 +8,19 @@ import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
 import StatCard from '../../../../components/shared/StatCard';
 import Score from '../../../../components/shared/Score';
+import List from '../../../../components/shared/List';
 import { clearAccessToken } from '../../../auth/redux/actions';
 import { logout } from '../../redux/actions';
 import { colors } from '../../../../utils';
 
 import { styles } from './styles';
-import List from '../../../../components/shared/List';
 
-// TODO: this should come from redux
-const score = 40;
 
 class Profile extends React.PureComponent {
   static navigationOptions = () => ({
     headerTitle: 'Profile',
     headerTintColor: colors.white,
     headerShown: false,
-    // headerTitleStyle: styles.headerTitle,
-    // headerStyle: {
-    //   backgroundColor: colors.blue,
-    // },
   });
 
   handleLogout = () => {
@@ -42,7 +36,7 @@ class Profile extends React.PureComponent {
   )
 
   render() {
-    const { isLoading } = this.props;
+    const { isLoading, profile } = this.props;
     const data = [
       {
         number: 22,
@@ -73,13 +67,15 @@ class Profile extends React.PureComponent {
         onPress: () => {},
       },
     ];
-    console.log('this.props.profile :', this.props.profile);
-
 
     return (
       <Layout style={styles.screen}>
         <View style={styles.content}>
-          <Score score={score} numberStyle={styles.scoreText} titleStyle={styles.titleText} />
+          <Score
+            score={profile.score}
+            numberStyle={styles.scoreText}
+            titleStyle={styles.titleText}
+          />
         </View>
 
         <View style={styles.listContainer}>
@@ -101,7 +97,9 @@ class Profile extends React.PureComponent {
           />
         </View>
 
-        <Button buttonStyle={{ margin: 16 }} onPress={this.handleLogout} theme="dark">Log out</Button>
+        <View style={styles.buttonContainer}>
+          <Button onPress={this.handleLogout} theme="dark">Log out</Button>
+        </View>
 
         <View style={styles.footer}>
           <Text style={styles.link}>Terms and Conditions</Text>

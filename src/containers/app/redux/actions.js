@@ -5,6 +5,11 @@ export const getProfile = () => ({
   type: actions.APP_GET_PROFILE_REQUEST,
 });
 
+export const updateProfile = (profile) => ({
+  type: actions.APP_UPDATE_PROFILE_REQUEST,
+  profile,
+});
+
 export const getCategories = () => ({
   type: actions.APP_GET_CATEGORIES_REQUEST,
 });
@@ -54,6 +59,16 @@ export const getRewards = () => ({
 
 export const addReward = (reward) => ({
   type: actions.APP_ADD_REWARD_REQUEST,
+  reward,
+});
+
+export const deleteReward = (rewardId) => ({
+  type: actions.APP_DELETE_REWARD_REQUEST,
+  rewardId,
+});
+
+export const updateReward = (reward) => ({
+  type: actions.APP_UPDATE_REWARD_REQUEST,
   reward,
 });
 

@@ -5,11 +5,7 @@ import { colors } from '../../../../utils';
 export const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.lightGrey,
-    position: 'relative',
     paddingHorizontal: 0,
-  },
-  container: {
-    paddingHorizontal: 16,
   },
   headerTitle: {
     fontSize: 20,
@@ -43,5 +39,24 @@ export const styles = StyleSheet.create({
   emptyText: {
     textAlign: 'center',
     padding: 30,
+  },
+  scoreContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 16,
+  },
+  scoreLabel: {
+    fontWeight: '600',
+    color: colors.darkGrey,
+    fontSize: 20,
+  },
+  scoreText: {
+    fontWeight: '600',
+    color: colors.blue,
+    fontSize: 20,
+  },
+  listContainer: {
+    paddingHorizontal: 16,
   },
 });

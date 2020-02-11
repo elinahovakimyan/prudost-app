@@ -56,4 +56,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 30,
   },
+  buttonContainer: {
+    padding: 16,
+  },
 });

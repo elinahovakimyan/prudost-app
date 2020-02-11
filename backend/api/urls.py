@@ -9,6 +9,7 @@ router.register('profile', views.ProfileViewSet, basename='profile')
 router.register('goal', views.GoalViewset, basename='goal')
 router.register('task', views.TaskViewset, basename='task')
 router.register('category', views.CategoryViewset, basename='category')
+router.register('reward', views.RewardViewset, basename='reward')
 
 urlpatterns = [
     path('', include(router.urls)),

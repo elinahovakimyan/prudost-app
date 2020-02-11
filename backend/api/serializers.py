@@ -10,7 +10,7 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 from rest_framework import serializers
 from rest_auth.serializers import PasswordResetSerializer
-from .models import Goal, Task, Category
+from .models import Goal, Task, Category, Reward
 
 User = get_user_model()
 
@@ -103,4 +103,10 @@ class GoalSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
+        fields = '__all__'
+
+
+class RewardSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Reward
         fields = '__all__'
