@@ -63,24 +63,26 @@ class MainGoals extends React.PureComponent {
     return (
       <Layout isLoading={isLoading} style={styles.screen}>
         <View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={styles.categoryContainer}
-          >
-            {categories.map((category) => {
-              const categoryGoals = goals.filter((g) => g.category === category.id);
+          <View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              style={styles.categoryContainer}
+            >
+              {categories.map((category) => {
+                const categoryGoals = goals.filter((g) => g.category === category.id);
 
-              return (
-                <CategoryCard
-                  key={category.id}
-                  category={category}
-                  goalsNumber={categoryGoals?.length}
-                  onPress={() => navigation.push('Goals', { category, goals: categoryGoals })}
-                />
-              );
-            })}
-          </ScrollView>
+                return (
+                  <CategoryCard
+                    key={category.id}
+                    category={category}
+                    goalsNumber={categoryGoals?.length}
+                    onPress={() => navigation.push('Goals', { category, goals: categoryGoals })}
+                  />
+                );
+              })}
+            </ScrollView>
+          </View>
 
           <Text style={styles.title}>All goals</Text>
 

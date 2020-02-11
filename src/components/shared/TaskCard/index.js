@@ -37,7 +37,7 @@ function TaskCard({ task, onUpdate, onDelete }) {
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handleCompleteTogggle}>
+    <TouchableOpacity activeOpacity={1} style={styles.container} onPress={handleCompleteTogggle}>
       <View style={styles.content}>
         <RadioButton isChecked={task.completed} />
         {isEditing

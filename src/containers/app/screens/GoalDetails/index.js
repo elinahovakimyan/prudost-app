@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, RefreshControl, Image, TouchableOpacity, Alert, ActivityIndicator,
+  FlatList, View, Text, Image, TouchableOpacity, Alert, ActivityIndicator,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -27,7 +27,7 @@ class GoalDetails extends React.PureComponent {
     },
   });
 
-  renderItem = (item) => (
+  renderItem = ({ item }) => (
     <TaskCard
       task={item}
       onUpdate={this.props.updateTask}
@@ -72,7 +72,7 @@ class GoalDetails extends React.PureComponent {
 
     if (goal) {
       return (
-        <Layout isLoading={isLoading} style={styles.screen}>
+        <Layout isLoading={!goal} style={styles.screen}>
           <View style={styles.categoryContainer}>
             <CategoryTag category={category} />
 
@@ -95,13 +95,11 @@ class GoalDetails extends React.PureComponent {
 
           <FlatList
             data={goal.tasks || []}
-            refreshing={isLoading}
             style={styles.container}
-            renderItem={({ item }) => this.renderItem(item)}
+            renderItem={this.renderItem}
             keyExtractor={(item) => String(item.id)}
             ListEmptyComponent={!isLoading && <EmptyCard />}
             ListFooterComponent={<View style={styles.footer} />}
-            refreshControl={<RefreshControl refreshing={isLoading} />}
           />
         </Layout>
       );
