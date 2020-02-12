@@ -62,10 +62,4 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  filterIcon: {
-    width: 20,
-    height: 20,
-    resizeMode: 'contain',
-    marginHorizontal: 16,
-  },
 });

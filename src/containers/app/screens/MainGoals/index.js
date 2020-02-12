@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, ScrollView, Image,
+  FlatList, View, Text, ScrollView,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -13,38 +13,33 @@ import { colors } from '../../../../utils';
 import {
   getGoals, getCategories, getProfile, getRewards,
 } from '../../redux/actions';
+import FilterSection from '../../../../components/shared/FilterSection';
+import { filterOptions } from '../../data';
 
 import { styles } from './styles';
 
 
-class MainGoals extends React.PureComponent {
-  static navigationOptions = () => ({
-    headerTitle: 'All Goals',
-    headerTintColor: colors.white,
-    headerShown: false,
-    headerTitleStyle: styles.headerTitle,
-    headerStyle: {
-      backgroundColor: colors.blue,
-    },
-  });
+const MainGoals = (props) => {
+  const {
+    navigation, goals, categories, isLoading,
+  } = props;
 
-  componentDidMount() {
-    this.fetchData();
-  }
+  const fetchData = () => {
+    props.getGoals();
+    props.getCategories();
+    props.getRewards();
+    props.getProfile();
+  };
 
-  fetchData = () => {
-    this.props.getGoals();
-    this.props.getCategories();
-    this.props.getRewards();
-    this.props.getProfile();
-  }
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  goToAddGoal = () => {
-    this.props.navigation.push('AddGoal');
-  }
+  const goToAddGoal = () => {
+    props.navigation.push('AddGoal');
+  };
 
-  renderItem = (item) => {
-    const { navigation, categories } = this.props;
+  const renderItem = (item) => {
     const currentCategory = categories.find((c) => c.id === item.category);
 
     return (
@@ -56,60 +51,61 @@ class MainGoals extends React.PureComponent {
         onPress={() => navigation.push('GoalDetails', { goalId: item.id })}
       />
     );
-  }
+  };
 
-  render() {
-    const {
-      navigation, goals, categories, isLoading,
-    } = this.props;
-
-    return (
-      <Layout isLoading={isLoading} style={styles.screen}>
+  return (
+    <Layout isLoading={isLoading} style={styles.screen}>
+      <View>
         <View>
-          <View>
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={styles.categoryContainer}
-            >
-              {categories.map((category) => {
-                const categoryGoals = goals.filter((g) => g.category === category.id);
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.categoryContainer}
+          >
+            {categories.map((category) => {
+              const categoryGoals = goals.filter((g) => g.category === category.id);
 
-                return (
-                  <CategoryCard
-                    key={category.id}
-                    category={category}
-                    goalsNumber={categoryGoals?.length}
-                    onPress={() => navigation.push('Goals', { category, goals: categoryGoals })}
-                  />
-                );
-              })}
-            </ScrollView>
-          </View>
-
-          <View style={styles.row}>
-            <Text style={styles.title}>All goals</Text>
-            <Image style={styles.filterIcon} source={require('../../../../assets/icons/filter.png')} />
-          </View>
-
-          <FlatList
-            data={goals}
-            style={styles.container}
-            renderItem={({ item }) => this.renderItem(item)}
-            keyExtractor={(item) => String(item.id)}
-            ListEmptyComponent={!isLoading
-              && <EmptyCard buttonTitle="Add Goal" onButtonPress={this.goToAddGoal} />
-            }
-            ListFooterComponent={<View style={styles.footer} />}
-            // refreshControl={<RefreshControl onRefresh={this.fetchData} refreshing={isLoading} />}
-          />
+              return (
+                <CategoryCard
+                  key={category.id}
+                  category={category}
+                  goalsNumber={categoryGoals?.length}
+                  onPress={() => navigation.push('Goals', { category, goals: categoryGoals })}
+                />
+              );
+            })}
+          </ScrollView>
         </View>
 
-        <AddButton onPress={this.goToAddGoal} bottomSpace={155} />
-      </Layout>
-    );
-  }
-}
+        <View style={styles.row}>
+          <Text style={styles.title}>All goals</Text>
+          <FilterSection options={filterOptions} />
+        </View>
+
+        <FlatList
+          data={goals}
+          style={styles.container}
+          renderItem={({ item }) => renderItem(item)}
+          keyExtractor={(item) => String(item.id)}
+          ListEmptyComponent={<EmptyCard buttonTitle="Add Goal" onButtonPress={goToAddGoal} />}
+          ListFooterComponent={<View style={styles.footer} />}
+        />
+      </View>
+
+      <AddButton onPress={goToAddGoal} bottomSpace={155} />
+    </Layout>
+  );
+};
+
+MainGoals.navigationOptions = () => ({
+  headerTitle: 'All Goals',
+  headerTintColor: colors.white,
+  headerShown: false,
+  headerTitleStyle: styles.headerTitle,
+  headerStyle: {
+    backgroundColor: colors.blue,
+  },
+});
 
 const mapStateToProps = (state) => ({
   goals: state.App.goals.filter((g) => !g.completed),

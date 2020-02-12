@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../../utils';
 
 
 const styles = StyleSheet.create({
@@ -6,17 +7,18 @@ const styles = StyleSheet.create({
     height: 16,
     width: 16,
     borderWidth: 1,
-    borderColor: '#fff',
-    borderRadius: 3,
+    borderColor: colors.blue,
+    borderRadius: 4,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 2,
   },
-  innerIcon: {
-    width: 14,
-    resizeMode: 'contain',
-    marginRight: -6,
+  innerSquare: {
+    height: 8,
+    width: 8,
+    borderRadius: 2,
+    backgroundColor: colors.blue,
   },
 });
 
