@@ -56,6 +56,9 @@ import {
   APP_UPDATE_PROFILE_SUCCESS,
   APP_UPDATE_PROFILE_ERROR,
   APP_UPDATE_PROFILE_REQUEST,
+  APP_GET_ALL_TASKS_SUCCESS,
+  APP_GET_ALL_TASKS_ERROR,
+  APP_GET_ALL_TASKS_REQUEST,
 } from './constants';
 import { request } from '../../../utils';
 
@@ -78,6 +81,10 @@ function getGoals() {
 
 function getTasks({ goalId }) {
   return request.get(`/api/goal/${goalId}/get_tasks/`);
+}
+
+function getAllTasks() {
+  return request.get('/api/task/');
 }
 
 function addGoal({ goal }) {
@@ -201,13 +208,13 @@ function* handleAddGoal({ goal }) {
   try {
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
 
-    const { status, data } = yield call(addGoal, { goal });
+    const { status } = yield call(addGoal, { goal });
 
     if (status >= 200 && status < 300) {
       yield put({ type: APP_ADD_GOAL_SUCCESS });
       yield put({ type: APP_GET_GOALS_REQUEST });
 
-      NavigationService.navigate('GoalDetails', { goalId: data.id });
+      NavigationService.navigate('MainGoals');
     } else {
       yield put({ type: APP_ADD_GOAL_ERROR, error: 'Unknown Error' });
     }
@@ -260,6 +267,24 @@ function* handleDeleteGoal({ goalId }) {
   }
 }
 
+function* handleGetAllTasks() {
+  try {
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
+
+    const { status, data } = yield call(getAllTasks);
+
+    if (status === 200) {
+      yield put({ type: APP_GET_ALL_TASKS_SUCCESS, payload: data });
+    } else {
+      yield put({ type: APP_GET_ALL_TASKS_ERROR, error: 'Unknown Error' });
+    }
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+  } catch (error) {
+    yield put({ type: APP_GET_TASKS_ERROR, error: "Can't get tasks." });
+    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
+  }
+}
+
 function* handleGetTasks({ goalId }) {
   try {
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
@@ -277,7 +302,7 @@ function* handleGetTasks({ goalId }) {
     }
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   } catch (error) {
-    yield put({ type: APP_GET_TASKS_ERROR, error: "Can't add a goal." });
+    yield put({ type: APP_GET_TASKS_ERROR, error: "Can't get tasks." });
     yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: false });
   }
 }
@@ -465,6 +490,7 @@ export default all([
   takeLatest(APP_ADD_GOAL_REQUEST, handleAddGoal),
   takeLatest(APP_UPDATE_GOAL_REQUEST, handleUpdateGoal),
   takeLatest(APP_DELETE_GOAL_REQUEST, handleDeleteGoal),
+  takeLatest(APP_GET_ALL_TASKS_REQUEST, handleGetAllTasks),
   takeLatest(APP_GET_TASKS_REQUEST, handleGetTasks),
   takeLatest(APP_ADD_TASK_REQUEST, handleAddTask),
   takeLatest(APP_UPDATE_TASK_REQUEST, handleUpdateTask),

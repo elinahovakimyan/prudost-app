@@ -99,6 +99,7 @@ class AddGoal extends React.PureComponent {
       description,
       category,
       deadline: formattedDeadline,
+      createdAt: new Date(),
       tasks: [],
     });
   }

@@ -47,7 +47,7 @@ const getContentByType = (type) => {
   }
 };
 
-function CongratsModal({ type, visible, toggleVisibility }) {
+function CongratsModal({ type, visible, onClose }) {
   const currentContent = getContentByType(type);
 
   return (
@@ -56,7 +56,7 @@ function CongratsModal({ type, visible, toggleVisibility }) {
       animationType="fade"
       presentationStyle="overFullScreen"
       visible={visible}
-      onRequestClose={() => toggleVisibility(false)}
+      onRequestClose={onClose}
     >
       <View style={styles.content}>
         <Text style={styles.text}>
@@ -72,7 +72,7 @@ function CongratsModal({ type, visible, toggleVisibility }) {
         )}
 
         <Button
-          onPress={() => toggleVisibility(false)}
+          onPress={onClose}
           buttonStyle={styles.button}
         >
           {currentContent.buttonText}

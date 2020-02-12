@@ -59,15 +59,16 @@ class GoalViewset(viewsets.ModelViewSet):
     queryset = Goal.objects.all()
 
     def get_queryset(self):
-        return Goal.objects.filter(user=self.request.user.id)
+        return Goal.objects.filter(user=self.request.user.id).order_by('-createdAt')
 
     # def get_queryset(self):
     #     return User.objects.filter(user=self.request.user.id)
 
     @action(detail=True, methods=['get'])
     def get_tasks(self, request, pk=None):
-        cat = self.get_object()
-        serializer = TaskSerializer(cat.tasks.all(), many=True)
+        g = self.get_object()
+        serializer = TaskSerializer(
+            g.tasks.all().order_by('-createdAt'), many=True)
         return Response(serializer.data)
 
 
@@ -76,6 +77,9 @@ class TaskViewset(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     queryset = Task.objects.all()
+
+    def get_queryset(self):
+        return Task.objects.filter(user=self.request.user.id).order_by('-createdAt')
 
 
 class CategoryViewset(viewsets.ModelViewSet):

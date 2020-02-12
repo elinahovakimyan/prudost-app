@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../utils';
 
 const styles = StyleSheet.create({
-  category: {
+  tag: {
     fontSize: 14,
     color: colors.yellow,
     borderColor: colors.yellow,

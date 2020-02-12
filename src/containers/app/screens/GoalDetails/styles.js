@@ -60,4 +60,15 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 30,
   },
+  row: {
+    flexDirection: 'row',
+  },
+  firstTag: {
+    marginRight: 8,
+  },
+  headerText: {
+    color: colors.white,
+    fontWeight: '500',
+    marginHorizontal: 8,
+  },
 });

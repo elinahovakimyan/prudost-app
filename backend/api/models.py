@@ -13,6 +13,7 @@ class Goal(models.Model):
     )
     user = models.ForeignKey(User, related_name='users_1', on_delete=models.CASCADE, blank=True, null=True)
     deadline = models.DateField()
+    createdAt = models.DateTimeField(null=True)
     completed = models.BooleanField(default=False)
 
     class Meta:
@@ -24,8 +25,10 @@ class Goal(models.Model):
 
 class Task(models.Model):
     goal = models.ForeignKey('Goal', related_name='tasks', on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, related_name='users_3', on_delete=models.CASCADE, blank=True, null=True)
     text = models.CharField(max_length=200, default='')
     completed = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(null=True)
 
     def __str__(self):
         return self.text
@@ -49,6 +52,7 @@ class Reward(models.Model):
     user = models.ForeignKey(User, related_name='users_2',
                              on_delete=models.CASCADE, blank=True, null=True)
     used = models.BooleanField(default=False)
+    createdAt = models.DateTimeField(null=True)
 
     class Meta:
         verbose_name_plural = 'Rewards'

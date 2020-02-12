@@ -3,7 +3,7 @@ import {
   View, Text, TouchableOpacity, Image,
 } from 'react-native';
 
-import CategoryTag from '../CategoryTag';
+import Tag from '../../common/Tag';
 
 import styles from './styles';
 
@@ -20,7 +20,7 @@ function GoalCard({
         <View style={styles.content}>
           {category && (
             <View style={styles.categoryContainer}>
-              <CategoryTag category={category} />
+              <Tag title={category?.title} color={category?.color} />
             </View>
           )}
           <Text style={styles.title}>{title}</Text>

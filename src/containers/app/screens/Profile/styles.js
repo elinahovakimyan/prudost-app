@@ -6,38 +6,32 @@ export const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   container: {
     paddingHorizontal: 16,
-    marginTop: 32,
   },
   content: {
     backgroundColor: colors.blue,
-    paddingBottom: 48,
+    paddingBottom: 64,
     shadowColor: '#727982',
     shadowOpacity: 0.5,
     shadowRadius: 6,
     shadowOffset: { height: 1, width: 1 },
     elevation: 6,
   },
-  scoreText: {
-    color: colors.white,
-  },
-  titleText: {
-    color: colors.white,
-    letterSpacing: 0.7,
-  },
   listContainer: {
     paddingHorizontal: 20,
   },
   list: {
-    marginTop: -32,
+    marginTop: -40,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 16,
   },
   circle: {
     backgroundColor: colors.darkGrey,
@@ -51,6 +45,10 @@ export const styles = StyleSheet.create({
   },
   link: {
     color: colors.grey,
+    width: '40%',
+  },
+  rightAlign: {
+    textAlign: 'right',
   },
   emptyText: {
     textAlign: 'center',
@@ -58,5 +56,6 @@ export const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 16,
+    paddingBottom: 200,
   },
 });

@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, Image, TouchableOpacity, Alert, ActivityIndicator,
+  FlatList, View, Text, Image, TouchableOpacity, Alert,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import TaskCard from '../../../../components/shared/TaskCard';
 import AddTask from '../../../../components/shared/AddTask';
-import CategoryTag from '../../../../components/shared/CategoryTag';
-import { colors } from '../../../../utils';
+import CongratsModal from '../../../../components/shared/CongratsModal';
+import Tag from '../../../../components/common/Tag';
+import { colors, formatDate } from '../../../../utils';
 import {
-  addTask, updateTask, deleteTask, deleteGoal, updateProfile,
+  addTask, updateTask, deleteTask, deleteGoal, updateProfile, updateGoal,
 } from '../../redux/actions';
 
 import { styles } from './styles';
-import CongratsModal from '../../../../components/shared/CongratsModal';
 
 
 const GoalDetails = (props) => {
@@ -24,6 +24,28 @@ const GoalDetails = (props) => {
   } = props;
   const [modalVisible, toggleModal] = useState(false);
   const [modalType, changeModalType] = useState('task');
+
+  const handleGoalComplete = () => {
+    changeModalType('goal');
+    toggleModal(true);
+    props.updateGoal({ id: goal.id, completed: true });
+    props.updateProfile({ id: profile.id, score: profile.score + 10 });
+  };
+
+  const handleMarkComplete = () => {
+    Alert.alert(
+      'Mark the goal as completed?',
+      '',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Yes', onPress: handleGoalComplete },
+      ],
+    );
+  };
+
+  useEffect(() => {
+    props.navigation.setParams({ onGoalComplete: handleMarkComplete });
+  }, []);
 
   const handleTaskComplete = () => {
     changeModalType('task');
@@ -43,6 +65,11 @@ const GoalDetails = (props) => {
 
   const sendToEdit = () => {
     props.navigation.push('AddGoal', { goal });
+  };
+
+  const handleModalClose = () => {
+    toggleModal(false);
+    props.navigation.navigate('MainGoals');
   };
 
   const handleDelete = () => {
@@ -68,59 +95,69 @@ const GoalDetails = (props) => {
   );
 
   const handleSubmit = (text) => {
-    props.addTask({ text, goal: goal.id });
+    props.addTask({
+      text, goal: goal.id, createdAt: new Date(), user: profile.id,
+    });
   };
 
-  if (goal) {
-    return (
-      <Layout isLoading={!goal} style={styles.screen}>
-        <View style={styles.categoryContainer}>
-          <CategoryTag category={category} />
-
-          <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={sendToEdit}>
-              <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleDelete}>
-              <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
-            </TouchableOpacity>
-          </View>
+  return (
+    <Layout isLoading={!goal} style={styles.screen}>
+      <View style={styles.categoryContainer}>
+        <View style={styles.row}>
+          <Tag title={category?.title} color={category?.color} style={styles.firstTag} />
+          <Tag title={formatDate(goal?.deadline)} color="#B53737" />
         </View>
 
-        <Text style={styles.title}>{goal.title}</Text>
-        <Text style={styles.description}>{goal.description}</Text>
+        <View style={styles.iconContainer}>
+          <TouchableOpacity onPress={sendToEdit}>
+            <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleDelete}>
+            <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
+          </TouchableOpacity>
+        </View>
+      </View>
 
-        <Text style={styles.sectionTitle}>TASKS</Text>
+      <Text style={styles.title}>{goal.title}</Text>
+      <Text style={styles.description}>{goal.description}</Text>
 
-        <AddTask hasHorizaontalPadding onSubmit={handleSubmit} />
+      <Text style={styles.sectionTitle}>TASKS</Text>
 
-        <FlatList
-          data={goal.tasks || []}
-          style={styles.container}
-          renderItem={renderItem}
-          keyExtractor={(item) => String(item.id)}
-          ListEmptyComponent={!isLoading && <EmptyCard />}
-          ListFooterComponent={<View style={styles.footer} />}
-        />
+      <AddTask hasHorizaontalPadding onSubmit={handleSubmit} />
 
-        <CongratsModal
-          type={modalType}
-          visible={modalVisible}
-          toggleVisibility={toggleModal}
-        />
-      </Layout>
-    );
-  }
+      <FlatList
+        data={goal.tasks || []}
+        style={styles.container}
+        renderItem={renderItem}
+        keyExtractor={(item) => String(item.id)}
+        ListEmptyComponent={!isLoading && <EmptyCard />}
+        ListFooterComponent={<View style={styles.footer} />}
+      />
 
-  return <ActivityIndicator />;
+      <CongratsModal
+        type={modalType}
+        visible={modalVisible}
+        onClose={handleModalClose}
+      />
+    </Layout>
+  );
 };
 
-GoalDetails.navigationOptions = () => ({
+GoalDetails.navigationOptions = ({ navigation }) => ({
   headerTitle: 'Goal Details',
   headerTintColor: colors.white,
   headerTitleStyle: styles.headerTitle,
   headerStyle: {
     backgroundColor: colors.blue,
+  },
+  headerRight: () => {
+    const onPress = navigation.state.params?.onGoalComplete;
+
+    return (
+      <Text onPress={() => onPress && onPress()} style={styles.headerText}>
+        Mark as Done
+      </Text>
+    );
   },
 });
 
@@ -143,6 +180,7 @@ const mapDispatchToProps = {
   updateTask,
   deleteTask,
   deleteGoal,
+  updateGoal,
   updateProfile,
 };
 

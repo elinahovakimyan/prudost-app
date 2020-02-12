@@ -7,13 +7,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 24,
+    paddingVertical: 8,
   },
   title: {
     paddingHorizontal: 16,
     paddingBottom: 16,
     fontWeight: '600',
-    color: colors.darkGrey,
+    color: colors.white,
+    letterSpacing: 0.7,
     marginTop: 32,
     fontSize: 20,
   },
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   score: {
-    color: colors.blue,
+    color: colors.white,
     fontSize: 45,
   },
 });

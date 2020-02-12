@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, ScrollView,
+  FlatList, View, Text, ScrollView, Image,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -10,7 +10,9 @@ import CategoryCard from '../../../../components/shared/CategoryCard';
 import AddButton from '../../../../components/common/AddButton';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import { colors } from '../../../../utils';
-import { getGoals, getCategories, getProfile } from '../../redux/actions';
+import {
+  getGoals, getCategories, getProfile, getRewards,
+} from '../../redux/actions';
 
 import { styles } from './styles';
 
@@ -33,6 +35,7 @@ class MainGoals extends React.PureComponent {
   fetchData = () => {
     this.props.getGoals();
     this.props.getCategories();
+    this.props.getRewards();
     this.props.getProfile();
   }
 
@@ -84,7 +87,10 @@ class MainGoals extends React.PureComponent {
             </ScrollView>
           </View>
 
-          <Text style={styles.title}>All goals</Text>
+          <View style={styles.row}>
+            <Text style={styles.title}>All goals</Text>
+            <Image style={styles.filterIcon} source={require('../../../../assets/icons/filter.png')} />
+          </View>
 
           <FlatList
             data={goals}
@@ -106,7 +112,7 @@ class MainGoals extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
-  goals: state.App.goals,
+  goals: state.App.goals.filter((g) => !g.completed),
   categories: state.App.categories,
   isLoading: state.App.isLoading,
   goalsError: state.App.errors.Goals,
@@ -115,6 +121,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   getGoals,
   getCategories,
+  getRewards,
   getProfile,
 };
 

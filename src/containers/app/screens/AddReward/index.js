@@ -64,6 +64,7 @@ class AddReward extends React.PureComponent {
 
     this.props.addReward({
       title,
+      createdAt: new Date(),
       points: timePoints + moneyPoints,
       user: profile.id,
     });
@@ -79,7 +80,6 @@ class AddReward extends React.PureComponent {
     const {
       title, timePoints, moneyPoints,
     } = this.state;
-    console.log('this.props.profile :', this.props.profile);
 
     return (
       <Layout style={styles.screen}>

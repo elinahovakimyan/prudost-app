@@ -33,6 +33,10 @@ export const deleteGoal = (goalId) => ({
   goalId,
 });
 
+export const getAllTasks = () => ({
+  type: actions.APP_GET_ALL_TASKS_REQUEST,
+});
+
 export const getTasks = (goalId) => ({
   type: actions.APP_GET_TASKS_REQUEST,
   goalId,

@@ -57,4 +57,15 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingRight: 16,
   },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  filterIcon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    marginHorizontal: 16,
+  },
 });

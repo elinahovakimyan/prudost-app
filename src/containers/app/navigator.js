@@ -33,6 +33,7 @@ const GoalsStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerLayoutPreset: 'center',
+      headerBackTitleVisible: false,
     },
   },
 );
@@ -57,6 +58,7 @@ const RewardsStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerLayoutPreset: 'center',
+      headerBackTitleVisible: false,
     },
   },
 );
@@ -68,6 +70,7 @@ const ProfileStack = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerLayoutPreset: 'center',
+      headerBackTitleVisible: false,
     },
   },
 );

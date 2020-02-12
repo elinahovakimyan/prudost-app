@@ -5,13 +5,13 @@ import { View, Text, SectionList } from 'react-native';
 import Layout from '../../../../components/shared/Layout';
 import RewardCard from '../../../../components/shared/RewardCard';
 import AddButton from '../../../../components/common/AddButton';
+import CongratsModal from '../../../../components/shared/CongratsModal';
 import {
   getRewards, updateReward, deleteReward, updateProfile,
 } from '../../redux/actions';
 import { colors } from '../../../../utils';
 
 import { styles } from './styles';
-import CongratsModal from '../../../../components/shared/CongratsModal';
 
 const Rewards = (props) => {
   const {
@@ -19,10 +19,6 @@ const Rewards = (props) => {
   } = props;
   const [sortedRewards, setSortedRewards] = useState([]);
   const [modalVisible, toggleModal] = useState(false);
-
-  useEffect(() => {
-    props.getRewards();
-  }, []);
 
   const sortRewards = () => {
     const lockedRewards = [];
@@ -110,7 +106,7 @@ const Rewards = (props) => {
 
       <AddButton onPress={() => navigation.push('AddReward')} bottomSpace={155} />
 
-      <CongratsModal type="reward" visible={modalVisible} toggleVisibility={toggleModal} />
+      <CongratsModal type="reward" visible={modalVisible} onClose={() => toggleModal(false)} />
     </Layout>
   );
 };

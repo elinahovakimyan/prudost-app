@@ -10,3 +10,11 @@ export function range(start, end) {
   }
   return ans;
 }
+
+export const formatDate = (date) => {
+  const dateParts = date.split('-');
+  const [YYYY, MM, DD] = dateParts;
+  const formattedDate = [DD, MM, YYYY].join('-');
+
+  return formattedDate;
+};

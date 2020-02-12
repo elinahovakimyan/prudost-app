@@ -3,6 +3,7 @@ import * as actions from './constants';
 const initialState = {
   goals: [],
   categories: [],
+  allTasks: [],
   tasks: {},
   profile: {},
   rewards: [],
@@ -50,6 +51,10 @@ export const AppReducer = (state = initialState, action) => {
       return { ...state, errors: { Tasks: action.error } };
     case actions.APP_ADD_GOAL_SUCCESS:
       return { ...state, errors: { AddGoal: null } };
+    case actions.APP_GET_ALL_TASKS_SUCCESS:
+      return { ...state, allTasks: action.payload, errors: { Tasks: null } };
+    case actions.APP_GET_ALL_TASKS_ERROR:
+      return { ...state, errors: { Tasks: action.error } };
     case actions.APP_ADD_GOAL_ERROR:
       return { ...state, errors: { AddGoal: action.error } };
     case actions.APP_ADD_TASK_SUCCESS:
