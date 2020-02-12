@@ -67,8 +67,7 @@ class GoalViewset(viewsets.ModelViewSet):
     @action(detail=True, methods=['get'])
     def get_tasks(self, request, pk=None):
         g = self.get_object()
-        serializer = TaskSerializer(
-            g.tasks.all().order_by('-createdAt'), many=True)
+        serializer = TaskSerializer(g.tasks.all(), many=True)
         return Response(serializer.data)
 
 
