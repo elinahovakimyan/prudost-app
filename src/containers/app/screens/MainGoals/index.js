@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   FlatList, View, Text, ScrollView,
@@ -23,6 +23,8 @@ const MainGoals = (props) => {
   const {
     navigation, goals, categories, isLoading,
   } = props;
+  const [filters, setFilters] = useState(['not_started', 'in_progress']);
+  const [filteredGoals, setFilteredGoals] = useState([]);
 
   const fetchData = () => {
     props.getGoals();
@@ -35,6 +37,23 @@ const MainGoals = (props) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const updatedGoals = [];
+
+    goals.forEach((goal) => {
+      const completedTasks = goal.tasks.filter((t) => t.completed);
+      if (filters.includes('not_started') && !goal.completed && completedTasks.length === 0) {
+        updatedGoals.push(goal);
+      } else if (filters.includes('in_progress') && !goal.completed && completedTasks.length > 0) {
+        updatedGoals.push(goal);
+      } else if (filters.includes('completed') && goal.completed) {
+        updatedGoals.push(goal);
+      }
+    });
+
+    setFilteredGoals(updatedGoals);
+  }, [filters, goals]);
+
   const goToAddGoal = () => {
     props.navigation.push('AddGoal');
   };
@@ -46,6 +65,7 @@ const MainGoals = (props) => {
       <GoalCard
         title={item.title}
         tasks={item.tasks}
+        completed={item.completed}
         description={item.description}
         category={currentCategory}
         onPress={() => navigation.push('GoalDetails', { goalId: item.id })}
@@ -79,11 +99,15 @@ const MainGoals = (props) => {
 
         <View style={styles.row}>
           <Text style={styles.title}>All goals</Text>
-          <FilterSection options={filterOptions} />
+          <FilterSection
+            options={filterOptions}
+            selectedFilters={filters}
+            onChange={setFilters}
+          />
         </View>
 
         <FlatList
-          data={goals}
+          data={filteredGoals}
           style={styles.container}
           renderItem={({ item }) => renderItem(item)}
           keyExtractor={(item) => String(item.id)}
@@ -108,7 +132,7 @@ MainGoals.navigationOptions = () => ({
 });
 
 const mapStateToProps = (state) => ({
-  goals: state.App.goals.filter((g) => !g.completed),
+  goals: state.App.goals,
   categories: state.App.categories,
   isLoading: state.App.isLoading,
   goalsError: state.App.errors.Goals,

@@ -7,6 +7,7 @@ const { height } = Dimensions.get('window');
 export const styles = StyleSheet.create({
   screen: {
     height,
+    paddingTop: 16,
   },
   header: {
     marginTop: 50,

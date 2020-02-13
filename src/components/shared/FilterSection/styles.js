@@ -5,9 +5,6 @@ import { colors } from '../../../utils';
 const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-  },
   icon: {
     width: 20,
     height: 20,
@@ -40,7 +37,7 @@ const styles = StyleSheet.create({
   optionsContainer: {
     borderRadius: 16,
     backgroundColor: '#fff',
-    paddingHorizontal: 40,
+    paddingHorizontal: 48,
     paddingVertical: 24,
     maxHeight: 220,
     shadowColor: '#000',
@@ -60,6 +57,7 @@ const styles = StyleSheet.create({
   optionText: {
     paddingVertical: 8,
     paddingHorizontal: 12,
+    color: colors.darkGrey,
   },
   doneButton: {
     marginTop: 26,

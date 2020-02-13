@@ -20,6 +20,9 @@ class Profile extends React.PureComponent {
     headerTitleStyle: styles.headerTitle,
     headerStyle: {
       backgroundColor: colors.blue,
+      shadowRadius: 0,
+      shadowOffset: { height: 0 },
+      height: 60,
     },
   });
 
@@ -72,7 +75,6 @@ class Profile extends React.PureComponent {
             <Text style={styles.link}>Terms & Conditions</Text>
           </View>
         </View>
-
       </Layout>
     );
   }

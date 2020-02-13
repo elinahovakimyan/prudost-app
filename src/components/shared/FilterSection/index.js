@@ -10,16 +10,21 @@ import styles from './styles';
 
 
 const FilterSection = (props) => {
-  const { options, style } = props;
-  const [visible, toggleModal] = useState(true);
+  const { options, selectedFilters, onChange } = props;
+  const [visible, toggleModal] = useState(false);
 
-  const handleSelect = (option) => {
-    props.onChange(option);
-    toggleModal(false);
+  const onFilterPress = (value) => {
+    if (selectedFilters.includes(value)) {
+      const updatedFilters = selectedFilters.filter((f) => f !== value);
+      onChange(updatedFilters);
+    } else {
+      const updatedFilters = [...selectedFilters, value];
+      onChange(updatedFilters);
+    }
   };
 
   return (
-    <View style={[styles.container, style]}>
+    <>
       <TouchableOpacity onPress={() => toggleModal(true)}>
         <Image style={styles.icon} source={require('../../../assets/icons/filter.png')} />
       </TouchableOpacity>
@@ -31,19 +36,19 @@ const FilterSection = (props) => {
       >
         <TouchableOpacity
           style={styles.modalContainer}
-          onPress={() => { toggleModal(false); }}
+          onPress={() => toggleModal(false)}
         >
           <TouchableOpacity activeOpacity={1} onPress={() => null} style={styles.optionsContainer}>
             <Text style={styles.title}>Progress</Text>
             {options?.map((option) => (
               <TouchableOpacity
                 key={option.id}
-                onPress={() => handleSelect(option)}
+                onPress={() => onFilterPress(option.value)}
               >
                 <View style={styles.option}>
-                  <Checkbox isChecked={option.id !== 3} />
+                  <Checkbox isChecked={selectedFilters.includes(option.value)} />
                   <Text style={styles.optionText}>
-                    {option.label || option.name}
+                    {option.label}
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -58,7 +63,7 @@ const FilterSection = (props) => {
           </TouchableOpacity>
         </TouchableOpacity>
       </Modal>
-    </View>
+    </>
   );
 };
 

@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
   },
   content: {
     backgroundColor: colors.blue,
-    paddingBottom: 64,
+    paddingBottom: 96,
     shadowColor: '#727982',
     shadowOpacity: 0.5,
     shadowRadius: 6,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   list: {
-    marginTop: -40,
+    marginTop: -48,
   },
   footer: {
     flexDirection: 'row',
@@ -56,6 +56,6 @@ export const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 16,
-    paddingBottom: 200,
+    paddingBottom: 180,
   },
 });

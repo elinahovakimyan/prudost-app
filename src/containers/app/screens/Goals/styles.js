@@ -11,6 +11,13 @@ export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
   },
+  row: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    paddingTop: 24,
+    paddingRight: 8,
+  },
   backIcon: {
     width: 21.5,
     resizeMode: 'contain',

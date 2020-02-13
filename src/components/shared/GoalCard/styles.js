@@ -34,9 +34,12 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     paddingRight: 8,
   },
-  categoryContainer: {
+  tagsContainer: {
     flexDirection: 'row',
-    paddingBottom: 8,
+  },
+  tag: {
+    marginRight: 8,
+    marginBottom: 8,
   },
   descriptionContainer: {
     flexDirection: 'row',

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, SectionList } from 'react-native';
+import {
+  View, Text, SectionList, Alert,
+} from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import RewardCard from '../../../../components/shared/RewardCard';
@@ -60,12 +62,23 @@ const Rewards = (props) => {
     });
   };
 
+  const handleUsePress = () => {
+    Alert.alert(
+      'You deserve it!',
+      'Are you sure you want to use this reward now?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Yes', onPress: handleRewardUse },
+      ],
+    );
+  };
+
   const renderItem = (item) => (
     <RewardCard
       item={item}
       isUnlocked={profile.score >= item.points}
       pointsRemaining={item.points - profile.score}
-      onUse={handleRewardUse}
+      onUse={handleUsePress}
       onUpdate={props.updateReward}
       onDelete={props.deleteReward}
     />

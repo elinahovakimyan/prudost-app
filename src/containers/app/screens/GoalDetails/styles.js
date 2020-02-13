@@ -60,11 +60,14 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 30,
   },
-  row: {
+  tagsRow: {
     flexDirection: 'row',
+    maxWidth: '70%',
+    flexWrap: 'wrap',
   },
-  firstTag: {
+  tag: {
     marginRight: 8,
+    marginVertical: 4,
   },
   headerText: {
     color: colors.white,

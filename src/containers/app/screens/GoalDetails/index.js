@@ -26,15 +26,20 @@ const GoalDetails = (props) => {
   const [modalType, changeModalType] = useState('task');
 
   const handleGoalComplete = () => {
-    changeModalType('goal');
-    toggleModal(true);
-    props.updateGoal({ id: goal.id, completed: true });
-    props.updateProfile({ id: profile.id, score: profile.score + 10 });
+    if (goal.completed) {
+      props.updateGoal({ id: goal.id, completed: false });
+      props.updateProfile({ id: profile.id, score: profile.score - 10 });
+    } else {
+      changeModalType('goal');
+      toggleModal(true);
+      props.updateGoal({ id: goal.id, completed: true });
+      props.updateProfile({ id: profile.id, score: profile.score + 10 });
+    }
   };
 
   const handleMarkComplete = () => {
     Alert.alert(
-      'Mark the goal as completed?',
+      `Mark the goal as ${goal.completed ? 'not' : ''} completed?`,
       '',
       [
         { text: 'Cancel', style: 'cancel' },
@@ -46,6 +51,10 @@ const GoalDetails = (props) => {
   useEffect(() => {
     props.navigation.setParams({ onGoalComplete: handleMarkComplete });
   }, []);
+
+  useEffect(() => {
+    props.navigation.setParams({ goal });
+  }, [goal]);
 
   const handleTaskComplete = () => {
     changeModalType('task');
@@ -103,9 +112,11 @@ const GoalDetails = (props) => {
   return (
     <Layout isLoading={!goal} style={styles.screen}>
       <View style={styles.categoryContainer}>
-        <View style={styles.row}>
-          <Tag title={category?.title} color={category?.color} style={styles.firstTag} />
-          <Tag title={formatDate(goal?.deadline)} color="#B53737" />
+        <View style={styles.tagsRow}>
+          {goal?.completed
+           && <Tag title="Completed" color={colors.green} style={styles.tag} />}
+          <Tag title={category?.title} color={category?.color} style={styles.tag} />
+          <Tag title={formatDate(goal?.deadline)} color="#B53737" style={styles.tag} />
         </View>
 
         <View style={styles.iconContainer}>
@@ -152,10 +163,11 @@ GoalDetails.navigationOptions = ({ navigation }) => ({
   },
   headerRight: () => {
     const onPress = navigation.state.params?.onGoalComplete;
+    const goal = navigation.state.params?.goal;
 
     return (
       <Text onPress={() => onPress && onPress()} style={styles.headerText}>
-        Mark as Done
+        {`Mark as ${goal?.completed ? 'Undone' : 'Done'}`}
       </Text>
     );
   },

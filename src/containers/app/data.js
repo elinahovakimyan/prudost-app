@@ -2,17 +2,17 @@ export const filterOptions = [
   {
     id: 1,
     label: 'Not started',
-    value: 'Not started',
+    value: 'not_started',
   },
   {
     id: 2,
     label: 'In progress',
-    value: 'In progress',
+    value: 'in_progress',
   },
   {
     id: 3,
     label: 'Completed',
-    value: 'Completed',
+    value: 'completed',
   },
 ];
 
