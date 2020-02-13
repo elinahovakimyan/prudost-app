@@ -17,6 +17,7 @@ import FilterSection from '../../../../components/shared/FilterSection';
 import { filterOptions } from '../../data';
 
 import { styles } from './styles';
+import Pricing from '../../../../components/shared/Pricing';
 
 
 const MainGoals = (props) => {
@@ -115,6 +116,8 @@ const MainGoals = (props) => {
           ListFooterComponent={<View style={styles.footer} />}
         />
       </View>
+
+      <Pricing />
 
       <AddButton onPress={goToAddGoal} bottomSpace={155} />
     </Layout>

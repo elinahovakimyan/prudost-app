@@ -1,0 +1,98 @@
+import { StyleSheet, Dimensions } from 'react-native';
+
+import { colors } from '../../../utils';
+
+const { height, width } = Dimensions.get('window');
+
+const styles = StyleSheet.create({
+  icon: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
+    marginHorizontal: 16,
+  },
+  headerText: {
+    marginVertical: 12,
+    fontSize: 16,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: colors.darkGrey,
+  },
+  title: {
+    marginVertical: 8,
+    fontSize: 32,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: colors.blue,
+  },
+  subtitle: {
+    marginVertical: 8,
+    fontSize: 16,
+    fontWeight: '500',
+    textAlign: 'center',
+    color: colors.blue,
+  },
+  text: {
+    fontWeight: '500',
+    fontSize: 14,
+    lineHeight: 17,
+    color: '#0A0A0A',
+    maxWidth: '85%',
+  },
+  modalContainer: {
+    height,
+    width,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    // backgroundColor: 'rgba(0,0,0,0.2)',
+  },
+  optionsContainer: {
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    backgroundColor: colors.lightYellow,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 48,
+    paddingVertical: 24,
+    height: '80%',
+    width: '100%',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.30,
+    elevation: 2,
+  },
+  option: {
+    backgroundColor: '#fff',
+    padding: 16,
+    shadowColor: '#727982',
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    shadowOffset: { height: 1, width: 1 },
+    marginVertical: 12,
+    borderRadius: 12,
+    width: '100%',
+  },
+  optionText: {
+    fontSize: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    color: colors.darkGrey,
+  },
+  optionTitle: {
+    fontSize: 24,
+    paddingVertical: 4,
+    paddingHorizontal: 12,
+    color: colors.darkGrey,
+  },
+  doneButton: {
+    marginVertical: 24,
+  },
+});
+
+
+export default styles;

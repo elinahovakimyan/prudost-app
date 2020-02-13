@@ -16,6 +16,21 @@ export const filterOptions = [
   },
 ];
 
+export const priceOptions = [
+  {
+    id: 1,
+    price: 11.99,
+    subscription: 'yearly',
+    label: '$0.99 / month',
+  },
+  {
+    id: 2,
+    price: 2.99,
+    subscription: 'monthly',
+    label: '$2.99 / month',
+  },
+];
+
 export const habits = [
   {
     id: 1,
