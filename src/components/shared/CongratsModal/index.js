@@ -26,7 +26,7 @@ const getContentByType = (type) => {
       };
     case 'goal':
       return {
-        text: 'Yohooo! You did it! You achieved one more goal. I am so proud of you!',
+        text: 'Yohooo, you did it! You achieved one more goal. So proud of you!',
         points: 10,
         image: require('../../../assets/images/goal.png'),
         buttonText: 'Keep up the great job!',
@@ -58,25 +58,24 @@ function CongratsModal({ type, visible, onClose }) {
       visible={visible}
       onRequestClose={onClose}
     >
-      <View style={styles.content}>
-        <Text style={styles.text}>
-          {currentContent.text}
-        </Text>
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <Text style={styles.text}>
+            {currentContent.text}
+          </Text>
 
-        <Image style={styles.image} source={currentContent.image} />
+          <Image style={styles.image} source={currentContent.image} />
 
-        {currentContent.points && (
+          {currentContent.points && (
           <Text style={styles.points}>
             {`+${currentContent.points}`}
           </Text>
-        )}
+          )}
 
-        <Button
-          onPress={onClose}
-          buttonStyle={styles.button}
-        >
-          {currentContent.buttonText}
-        </Button>
+          <Button onPress={onClose} buttonStyle={styles.button}>
+            {currentContent.buttonText}
+          </Button>
+        </View>
       </View>
     </Modal>
   );

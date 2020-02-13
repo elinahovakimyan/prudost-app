@@ -22,7 +22,7 @@ const GoalDetails = (props) => {
   const {
     goal, category, isLoading, profile,
   } = props;
-  const [modalVisible, toggleModal] = useState(false);
+  const [modalVisible, toggleModal] = useState(true);
   const [modalType, changeModalType] = useState('task');
 
   const handleGoalComplete = () => {

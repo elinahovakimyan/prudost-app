@@ -8,6 +8,7 @@ import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
 import CategoryCard from '../../../../components/shared/CategoryCard';
 import AddButton from '../../../../components/common/AddButton';
+import Pricing from '../../../../components/shared/Pricing';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import { colors } from '../../../../utils';
 import {
@@ -17,7 +18,6 @@ import FilterSection from '../../../../components/shared/FilterSection';
 import { filterOptions } from '../../data';
 
 import { styles } from './styles';
-import Pricing from '../../../../components/shared/Pricing';
 
 
 const MainGoals = (props) => {

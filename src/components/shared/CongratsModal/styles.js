@@ -1,37 +1,50 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { colors } from '../../../utils';
 
 const styles = StyleSheet.create({
-  content: {
+  container: {
     backgroundColor: 'rgba(0,0,0,0.75)',
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
+    height: '100%',
     paddingHorizontal: 16,
     flexDirection: 'column',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
   },
+  content: {
+    backgroundColor: '#fff',
+    width: '90%',
+    paddingHorizontal: 16,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 16,
+    padding: 24,
+  },
   text: {
-    color: colors.lightYellow,
-    fontSize: 32,
-    lineHeight: 40,
+    color: colors.darkGrey,
+    fontSize: 24,
+    lineHeight: 30,
     fontWeight: '500',
-    marginTop: 100,
     textAlign: 'center',
   },
   points: {
-    color: colors.lightYellow,
-    fontSize: 48,
+    color: colors.blue,
+    fontSize: 40,
     fontWeight: '500',
     textAlign: 'center',
+    marginBottom: 16,
+    borderWidth: 1,
+    borderRadius: 38,
+    borderColor: colors.blue,
+    padding: 12,
   },
   image: {
     resizeMode: 'contain',
-    height: 250,
+    height: 200,
+    margin: 24,
   },
   button: {
-    marginBottom: 100,
   },
 });
 
