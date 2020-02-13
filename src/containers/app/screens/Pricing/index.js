@@ -6,15 +6,12 @@ import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
 import Score from '../../../../components/shared/Score';
 import List from '../../../../components/shared/List';
-import WebviewComponent from '../../../../components/shared/WebviewComponent';
 import { clearAccessToken } from '../../../auth/redux/actions';
 import { logout, getAllTasks } from '../../redux/actions';
 import { colors } from '../../../../utils';
 
 import { styles } from './styles';
 
-const termsUrl = 'https://prudost.com/terms-and-conditions';
-const privacyUrl = 'https://prudost.com/privacy-policy-2';
 
 class Profile extends React.PureComponent {
   static navigationOptions = () => ({
@@ -29,11 +26,6 @@ class Profile extends React.PureComponent {
     },
   });
 
-  state = {
-    showWebview: false,
-    currentWebviewUrl: '',
-  }
-
   componentDidMount() {
     this.props.getAllTasks();
   }
@@ -43,15 +35,7 @@ class Profile extends React.PureComponent {
     this.props.logout();
   }
 
-  showWebview = (url) => {
-    this.setState({
-      currentWebviewUrl: url,
-      showWebview: true,
-    });
-  }
-
   render() {
-    const { showWebview, currentWebviewUrl } = this.state;
     const {
       isLoading, profile, completedGoals, usedRewards, completedTasks,
     } = this.props;
@@ -86,25 +70,11 @@ class Profile extends React.PureComponent {
           <Button onPress={this.handleLogout} theme="dark">Log out</Button>
 
           <View style={styles.footer}>
-            <Text
-              style={[styles.link, styles.rightAlign]}
-              onPress={() => this.showWebview(privacyUrl)}
-            >
-              Privacy Policy
-            </Text>
+            <Text style={[styles.link, styles.rightAlign]}>Privacy Policy</Text>
             <View style={styles.circle} />
-            <Text
-              style={styles.link}
-              onPress={() => this.showWebview(termsUrl)}
-            >
-              Terms & Conditions
-            </Text>
+            <Text style={styles.link}>Terms & Conditions</Text>
           </View>
         </View>
-
-        {showWebview && currentWebviewUrl && (
-          <WebviewComponent key={currentWebviewUrl} uri={currentWebviewUrl} />
-        )}
       </Layout>
     );
   }

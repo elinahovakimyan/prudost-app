@@ -26,33 +26,31 @@ function WebviewComponent({ uri }) {
   const _onNavigationStateChange = (e) => console.log(e);
 
   return (
-    <SafeAreaView>
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={visible}
-        onRequestClose={() => toggleVisibility(false)}
-      >
-        <WebView
-          style={styles.webView}
-          javaScriptEnabled
-          startInLoadingState
-          source={{ uri }}
-          onNavigationStateChange={_onNavigationStateChange}
-          injectedJavaScript={
+    <Modal
+      animationType="slide"
+      transparent={false}
+      visible={visible}
+      onRequestClose={() => toggleVisibility(false)}
+    >
+      <WebView
+        style={styles.webView}
+        javaScriptEnabled
+        startInLoadingState
+        source={{ uri }}
+        onNavigationStateChange={_onNavigationStateChange}
+        injectedJavaScript={
             Platform.OS === 'android' ? _injectJS() : ''
           }
-          renderLoading={_Indicator}
-          onLoad={_onLoad}
-        />
-        <TouchableOpacity
-          style={styles.closeButtonWithWrapper}
-          onPress={() => toggleVisibility(false)}
-        >
-          <Text style={styles.closeText}>Close</Text>
-        </TouchableOpacity>
-      </Modal>
-    </SafeAreaView>
+        renderLoading={_Indicator}
+        onLoad={_onLoad}
+      />
+      <TouchableOpacity
+        style={styles.closeButtonWithWrapper}
+        onPress={() => toggleVisibility(false)}
+      >
+        <Text style={styles.closeText}>Close</Text>
+      </TouchableOpacity>
+    </Modal>
   );
 }
 
