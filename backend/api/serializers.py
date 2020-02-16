@@ -76,7 +76,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'name', 'about_me', 'score']
+        fields = ['id', 'email', 'name', 'about_me', 'is_upgraded', 'score']
 
 
 class TaskSerializer(serializers.ModelSerializer):

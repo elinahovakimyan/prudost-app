@@ -9,6 +9,7 @@ import EmptyCard from '../../../../components/shared/EmptyCard';
 import TaskCard from '../../../../components/shared/TaskCard';
 import AddTask from '../../../../components/shared/AddTask';
 import CongratsModal from '../../../../components/shared/CongratsModal';
+import Pricing from '../../../../components/shared/Pricing';
 import Tag from '../../../../components/common/Tag';
 import { colors, formatDate } from '../../../../utils';
 import {
@@ -22,8 +23,10 @@ const GoalDetails = (props) => {
   const {
     goal, category, isLoading, profile,
   } = props;
-  const [modalVisible, toggleModal] = useState(true);
+  const [modalVisible, toggleModal] = useState(false);
   const [modalType, changeModalType] = useState('task');
+  const [isPricingVisible, togglePricingModal] = useState(false);
+  const [isAdding, toggleAddTask] = useState(false);
 
   const handleGoalComplete = () => {
     if (goal.completed) {
@@ -34,6 +37,14 @@ const GoalDetails = (props) => {
       toggleModal(true);
       props.updateGoal({ id: goal.id, completed: true });
       props.updateProfile({ id: profile.id, score: profile.score + 10 });
+    }
+  };
+
+  const handleAddTask = () => {
+    if (goal.tasks.length >= 3 && !profile.is_upgraded) {
+      togglePricingModal(true);
+    } else {
+      toggleAddTask(true);
     }
   };
 
@@ -134,7 +145,12 @@ const GoalDetails = (props) => {
 
       <Text style={styles.sectionTitle}>TASKS</Text>
 
-      <AddTask hasHorizaontalPadding onSubmit={handleSubmit} />
+      <AddTask
+        isAdding={isAdding}
+        onAdd={handleAddTask}
+        onDone={() => toggleAddTask(false)}
+        onSubmit={handleSubmit}
+      />
 
       <FlatList
         data={goal.tasks || []}
@@ -149,6 +165,13 @@ const GoalDetails = (props) => {
         type={modalType}
         visible={modalVisible}
         onClose={handleModalClose}
+      />
+
+      <Pricing
+        label="tasks"
+        isVisible={isPricingVisible}
+        onClose={() => togglePricingModal(false)}
+        onOptionPress={() => { }}
       />
     </Layout>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Text, TouchableOpacity, View, Modal,
 } from 'react-native';
@@ -22,55 +22,41 @@ const PriceOption = ({ option, onPress }) => (
   </TouchableOpacity>
 );
 
-const Pricing = (props) => {
-  const { selectedFilters, onChange } = props;
-  const [visible, toggleModal] = useState(false);
+const Pricing = ({
+  onOptionPress, onClose, isVisible, label,
+}) => (
+  <Modal
+    transparent
+    animationType="slide"
+    visible={isVisible}
+    onRequestClose={onClose}
+  >
+    <TouchableOpacity style={styles.modalContainer} onPress={onClose}>
+      <TouchableOpacity activeOpacity={1} onPress={() => null} style={styles.optionsContainer}>
+        <View style={styles.fullWidth}>
+          <Text style={styles.headerText}>{`You have hit your limit of 3 ${label}`}</Text>
+          <View style={styles.line} />
+          <Text style={styles.headerText}>UPGRADE YOUR ACCOUNT</Text>
+          <Text style={styles.title}>Invest in your goals</Text>
+          <Text style={styles.subtitle}>Unlimited goals, tasks and rewards</Text>
+        </View>
 
-  const onOptionPress = (value) => {
-    if (selectedFilters.includes(value)) {
-      const updatedFilters = selectedFilters.filter((f) => f !== value);
-      onChange(updatedFilters);
-    } else {
-      const updatedFilters = [...selectedFilters, value];
-      onChange(updatedFilters);
-    }
-  };
+        <View style={styles.fullWidth}>
+          {priceOptions?.map((option) => (
+            <PriceOption key={option.id} option={option} onPress={onOptionPress} />
+          ))}
+        </View>
 
-  return (
-    <Modal
-      transparent
-      animationType="slide"
-      visible={visible}
-      onRequestClose={() => { toggleModal(false); }}
-    >
-      <TouchableOpacity
-        style={styles.modalContainer}
-        onPress={() => toggleModal(false)}
-      >
-        <TouchableOpacity activeOpacity={1} onPress={() => null} style={styles.optionsContainer}>
-          <View>
-            <Text style={styles.headerText}>UPGRADE YOUR ACCOUNT</Text>
-            <Text style={styles.title}>Invest in your goals</Text>
-            <Text style={styles.subtitle}>Unlimited goals, tasks and rewards</Text>
-          </View>
-
-          <View style={{ width: '100%' }}>
-            {priceOptions?.map((option) => (
-              <PriceOption key={option.id} option={option} onPress={onOptionPress} />
-            ))}
-          </View>
-
-          <Button
-            theme="dark"
-            buttonStyle={styles.doneButton}
-            onPress={() => toggleModal(false)}
-          >
-              Cancel
-          </Button>
-        </TouchableOpacity>
+        <Button
+          theme="dark"
+          buttonStyle={styles.doneButton}
+          onPress={onClose}
+        >
+          Cancel
+        </Button>
       </TouchableOpacity>
-    </Modal>
-  );
-};
+    </TouchableOpacity>
+  </Modal>
+);
 
 export default Pricing;

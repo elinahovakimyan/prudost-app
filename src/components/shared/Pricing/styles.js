@@ -5,12 +5,6 @@ import { colors } from '../../../utils';
 const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  icon: {
-    width: 20,
-    height: 20,
-    resizeMode: 'contain',
-    marginHorizontal: 16,
-  },
   headerText: {
     marginVertical: 12,
     fontSize: 16,
@@ -45,7 +39,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    // backgroundColor: 'rgba(0,0,0,0.2)',
   },
   optionsContainer: {
     borderTopLeftRadius: 24,
@@ -92,6 +85,13 @@ const styles = StyleSheet.create({
   doneButton: {
     marginVertical: 24,
   },
+  line: {
+    height: 1,
+    width: '100%',
+    backgroundColor: colors.white,
+    marginVertical: 8,
+  },
+  fullWidth: { width: '100%' },
 });
 
 

@@ -22,8 +22,9 @@ import { styles } from './styles';
 
 const MainGoals = (props) => {
   const {
-    navigation, goals, categories, isLoading,
+    navigation, goals, categories, isLoading, profile,
   } = props;
+  const [isPricingVisible, toggleModal] = useState(false);
   const [filters, setFilters] = useState(['not_started', 'in_progress']);
   const [filteredGoals, setFilteredGoals] = useState([]);
 
@@ -55,8 +56,12 @@ const MainGoals = (props) => {
     setFilteredGoals(updatedGoals);
   }, [filters, goals]);
 
-  const goToAddGoal = () => {
-    props.navigation.push('AddGoal');
+  const handleAddGoal = () => {
+    if (goals.length >= 3 && !profile.is_upgraded) {
+      toggleModal(true);
+    } else {
+      props.navigation.push('AddGoal');
+    }
   };
 
   const renderItem = (item) => {
@@ -112,14 +117,19 @@ const MainGoals = (props) => {
           style={styles.container}
           renderItem={({ item }) => renderItem(item)}
           keyExtractor={(item) => String(item.id)}
-          ListEmptyComponent={<EmptyCard buttonTitle="Add Goal" onButtonPress={goToAddGoal} />}
+          ListEmptyComponent={<EmptyCard buttonTitle="Add Goal" onButtonPress={handleAddGoal} />}
           ListFooterComponent={<View style={styles.footer} />}
         />
       </View>
 
-      <Pricing />
+      <Pricing
+        label="goals"
+        isVisible={isPricingVisible}
+        onClose={() => toggleModal(false)}
+        onOptionPress={() => {}}
+      />
 
-      <AddButton onPress={goToAddGoal} bottomSpace={155} />
+      <AddButton onPress={handleAddGoal} bottomSpace={155} />
     </Layout>
   );
 };
@@ -135,6 +145,7 @@ MainGoals.navigationOptions = () => ({
 });
 
 const mapStateToProps = (state) => ({
+  profile: state.App.profile,
   goals: state.App.goals,
   categories: state.App.categories,
   isLoading: state.App.isLoading,

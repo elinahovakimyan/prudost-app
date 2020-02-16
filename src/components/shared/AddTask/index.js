@@ -6,46 +6,51 @@ import {
 import styles from './styles';
 
 
-function AddTask({ onSubmit, hasHorizaontalPadding }) {
-  const [isAdding, toggleAdd] = useState(false);
+function AddTask({
+  isAdding, onAdd, onDone, onSubmit, hasHorizaontalPadding,
+}) {
   const [value, onChange] = useState('');
 
+  if (isAdding) {
+    return (
+      <View style={[styles.inputContainer, hasHorizaontalPadding ? styles.padding : {}]}>
+        <TextInput
+          multiline
+          value={value}
+          onChangeText={onChange}
+          onBlur={onDone}
+          placeholderTextColor="#515151"
+          style={styles.input}
+        />
+
+        <TouchableOpacity onPress={() => {
+          if (value) {
+            // eslint-disable-next-line
+            onSubmit && onSubmit(value);
+            onChange('');
+          }
+          onDone();
+        }}
+        >
+          <Image source={require('../../../assets/icons/done.png')} style={styles.doneIcon} />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   return (
-    <>
-      {isAdding
-        ? (
-          <View style={[styles.inputContainer, hasHorizaontalPadding ? styles.padding : {}]}>
-            <TextInput
-              multiline
-              value={value}
-              onChangeText={onChange}
-              onBlur={() => toggleAdd(false)}
-              placeholderTextColor="#515151"
-              style={styles.input}
-            />
-
-            <TouchableOpacity onPress={() => {
-              // eslint-disable-next-line
-              onSubmit && onSubmit(value);
-              onChange('');
-              toggleAdd(false);
-            }}
-            >
-              <Image source={require('../../../assets/icons/done.png')} style={styles.doneIcon} />
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <TouchableOpacity
-            style={[styles.addTaskContainer, hasHorizaontalPadding ? styles.padding : {}]}
-            onPress={() => toggleAdd(true)}
-          >
-            <Image source={require('../../../assets/icons/plus_grey.png')} style={styles.addTaskIcon} />
-            <Text style={styles.addTaskTitle}>Add a new task</Text>
-          </TouchableOpacity>
-        )}
-
-    </>
+    <TouchableOpacity
+      style={[styles.addTaskContainer, hasHorizaontalPadding ? styles.padding : {}]}
+      onPress={onAdd}
+    >
+      <Image source={require('../../../assets/icons/plus_grey.png')} style={styles.addTaskIcon} />
+      <Text style={styles.addTaskTitle}>Add a new task</Text>
+    </TouchableOpacity>
   );
 }
+
+AddTask.defaultProps = {
+  hasHorizaontalPadding: true,
+};
 
 export default React.memo(AddTask);

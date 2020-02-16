@@ -7,6 +7,7 @@ import GoalCard from '../../../../components/shared/GoalCard';
 import FilterSection from '../../../../components/shared/FilterSection';
 import AddButton from '../../../../components/common/AddButton';
 import EmptyCard from '../../../../components/shared/EmptyCard';
+import Pricing from '../../../../components/shared/Pricing';
 import { getGoals, getCategories } from '../../redux/actions';
 import { colors } from '../../../../utils';
 import { filterOptions } from '../../data';
@@ -15,8 +16,9 @@ import { styles } from './styles';
 
 
 const Goals = (props) => {
-  const { navigation, isLoading } = props;
+  const { navigation, isLoading, profile } = props;
   const { goals } = navigation.state.params;
+  const [isPricingVisible, toggleModal] = useState(false);
   const [filters, setFilters] = useState(['not_started', 'in_progress']);
   const [filteredGoals, setFilteredGoals] = useState([]);
 
@@ -41,8 +43,12 @@ const Goals = (props) => {
     props.getGoals();
   };
 
-  const goToAddGoal = () => {
-    props.navigation.push('AddGoal');
+  const handleAddGoal = () => {
+    if (goals.length >= 3 && !profile.is_upgraded) {
+      toggleModal(true);
+    } else {
+      props.navigation.push('AddGoal');
+    }
   };
 
   const renderItem = (item) => (
@@ -70,13 +76,20 @@ const Goals = (props) => {
         style={styles.container}
         renderItem={({ item }) => renderItem(item)}
         keyExtractor={(item) => String(item.id)}
-        ListEmptyComponent={!isLoading && <EmptyCard buttonTitle="Add Goal" onButtonPress={goToAddGoal} />}
+        ListEmptyComponent={!isLoading && <EmptyCard buttonTitle="Add Goal" onButtonPress={handleAddGoal} />}
         ListFooterComponent={<View style={styles.footer} />}
         ListHeaderComponent={<View style={styles.header} />}
         refreshControl={<RefreshControl onRefresh={fetchData} refreshing={isLoading} />}
       />
 
-      <AddButton onPress={goToAddGoal} />
+      <AddButton onPress={handleAddGoal} />
+
+      <Pricing
+        label="goals"
+        isVisible={isPricingVisible}
+        onClose={() => toggleModal(false)}
+        onOptionPress={() => { }}
+      />
     </Layout>
   );
 };
@@ -97,7 +110,7 @@ Goals.navigationOptions = ({ navigation }) => {
 const mapStateToProps = (state) => ({
   categories: state.App.categories,
   goals: state.App.goals,
-  user: state.Auth.user,
+  profile: state.App.profile,
   isLoading: state.App.isLoading,
   goalsError: state.App.errors.Goals,
 });

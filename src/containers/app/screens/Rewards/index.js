@@ -7,6 +7,7 @@ import {
 import Layout from '../../../../components/shared/Layout';
 import RewardCard from '../../../../components/shared/RewardCard';
 import AddButton from '../../../../components/common/AddButton';
+import Pricing from '../../../../components/shared/Pricing';
 import CongratsModal from '../../../../components/shared/CongratsModal';
 import {
   getRewards, updateReward, deleteReward, updateProfile,
@@ -16,10 +17,9 @@ import { colors } from '../../../../utils';
 import { styles } from './styles';
 
 const Rewards = (props) => {
-  const {
-    rewards, profile, isLoading, navigation,
-  } = props;
+  const { rewards, profile, isLoading } = props;
   const [sortedRewards, setSortedRewards] = useState([]);
+  const [isPricingVisible, togglePricingModal] = useState(false);
   const [modalVisible, toggleModal] = useState(false);
 
   const sortRewards = () => {
@@ -60,6 +60,14 @@ const Rewards = (props) => {
       id: profile.id,
       score: profile.score - reward.points,
     });
+  };
+
+  const handleAddReward = () => {
+    if (rewards.length >= 3 && !profile.is_upgraded) {
+      togglePricingModal(true);
+    } else {
+      props.navigation.push('AddReward');
+    }
   };
 
   const handleUsePress = () => {
@@ -114,12 +122,19 @@ const Rewards = (props) => {
         renderSectionFooter={renderNoContent}
         ListFooterComponent={<View style={styles.lastFooter} />}
         ListEmptyComponent={!isLoading
-              && <Text style={styles.emptyText}>No rewards found.</Text>}
+          && <Text style={styles.emptyText}>No rewards found.</Text>}
       />
 
-      <AddButton onPress={() => navigation.push('AddReward')} bottomSpace={155} />
+      <AddButton onPress={handleAddReward} bottomSpace={155} />
 
       <CongratsModal type="reward" visible={modalVisible} onClose={() => toggleModal(false)} />
+
+      <Pricing
+        label="rewards"
+        isVisible={isPricingVisible}
+        onClose={() => togglePricingModal(false)}
+        onOptionPress={() => { }}
+      />
     </Layout>
   );
 };

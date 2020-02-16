@@ -149,21 +149,7 @@ class AddGoal extends React.PureComponent {
           value={deadline}
         />
 
-
-        {/* <Text style={styles.sectionTitle}>TASKS</Text>
-
-        <Input
-          underlined
-          value={title}
-          onChangeText={(val) => this.handleInputChange('title', val)}
-          placeholder="Add a task"
-          placeholderTextColor={colors.grey}
-        />
-
-        <AddTask hasPadding={false} /> */}
-
         <ErrorBox errorText={this.props.addGoalError} />
-
       </Layout>
     );
   }
