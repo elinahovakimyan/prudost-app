@@ -16,6 +16,7 @@ class User(AbstractUser):
     about_me = models.TextField(blank=True, null=True)
     score = models.IntegerField(default=0)
     is_upgraded = models.BooleanField(default=False)
+    subscription_option = models.CharField(null=True, max_length=100)
 
     def get_absolute_url(self):
         return reverse("users:detail", kwargs={"username": self.username})

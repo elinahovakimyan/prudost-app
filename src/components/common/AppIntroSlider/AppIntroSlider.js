@@ -140,8 +140,8 @@ export default class AppIntroSlider extends React.Component {
   _renderPagination = () => {
     const { button1, button2 } = this.props;
     const pagStyle = {
-      marginTop: 20,
-      marginBottom: 80,
+      marginVertical: 30,
+      alignSelf: 'center',
     };
 
     return (
@@ -158,8 +158,8 @@ export default class AppIntroSlider extends React.Component {
         <View style={styles.bottomButtons}>
           <Button
             onPress={() => this._onButtonPress(button1.onPress)}
-            backgroundColor={colors.blue}
-            color={colors.lightYellow}
+            backgroundColor={colors.lightYellow}
+            color={colors.blue}
           >
             {button1.text}
           </Button>

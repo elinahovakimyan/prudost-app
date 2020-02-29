@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, Image, TouchableOpacity, Alert,
+  FlatList, View, Text, Image, TouchableOpacity, Alert, ActivityIndicator,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -120,61 +120,64 @@ const GoalDetails = (props) => {
     });
   };
 
-  return (
-    <Layout isLoading={!goal} style={styles.screen}>
-      <View style={styles.categoryContainer}>
-        <View style={styles.tagsRow}>
-          {goal?.completed
+  if (goal) {
+    return (
+      <Layout isLoading={!goal} style={styles.screen}>
+        <View style={styles.categoryContainer}>
+          <View style={styles.tagsRow}>
+            {goal?.completed
            && <Tag title="Completed" color={colors.green} style={styles.tag} />}
-          <Tag title={category?.title} color={category?.color} style={styles.tag} />
-          <Tag title={formatDate(goal?.deadline)} color="#B53737" style={styles.tag} />
+            <Tag title={category?.title} color={category?.color} style={styles.tag} />
+            <Tag title={formatDate(goal?.deadline)} color="#B53737" style={styles.tag} />
+          </View>
+
+          <View style={styles.iconContainer}>
+            <TouchableOpacity onPress={sendToEdit}>
+              <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleDelete}>
+              <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
+            </TouchableOpacity>
+          </View>
         </View>
 
-        <View style={styles.iconContainer}>
-          <TouchableOpacity onPress={sendToEdit}>
-            <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleDelete}>
-            <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
-          </TouchableOpacity>
-        </View>
-      </View>
+        <Text style={styles.title}>{goal.title}</Text>
+        <Text style={styles.description}>{goal.description}</Text>
 
-      <Text style={styles.title}>{goal.title}</Text>
-      <Text style={styles.description}>{goal.description}</Text>
+        <Text style={styles.sectionTitle}>TASKS</Text>
 
-      <Text style={styles.sectionTitle}>TASKS</Text>
+        <AddTask
+          isAdding={isAdding}
+          onAdd={handleAddTask}
+          onDone={() => toggleAddTask(false)}
+          onSubmit={handleSubmit}
+        />
 
-      <AddTask
-        isAdding={isAdding}
-        onAdd={handleAddTask}
-        onDone={() => toggleAddTask(false)}
-        onSubmit={handleSubmit}
-      />
+        <FlatList
+          data={goal.tasks || []}
+          style={styles.container}
+          renderItem={renderItem}
+          keyExtractor={(item) => String(item.id)}
+          ListEmptyComponent={!isLoading && <EmptyCard />}
+          ListFooterComponent={<View style={styles.footer} />}
+        />
 
-      <FlatList
-        data={goal.tasks || []}
-        style={styles.container}
-        renderItem={renderItem}
-        keyExtractor={(item) => String(item.id)}
-        ListEmptyComponent={!isLoading && <EmptyCard />}
-        ListFooterComponent={<View style={styles.footer} />}
-      />
+        <CongratsModal
+          type={modalType}
+          visible={modalVisible}
+          onClose={handleModalClose}
+        />
 
-      <CongratsModal
-        type={modalType}
-        visible={modalVisible}
-        onClose={handleModalClose}
-      />
-
-      <Pricing
-        label="tasks"
-        isVisible={isPricingVisible}
-        onClose={() => togglePricingModal(false)}
-        onOptionPress={() => { }}
-      />
-    </Layout>
-  );
+        <Pricing
+          label="tasks"
+          isVisible={isPricingVisible}
+          onClose={() => togglePricingModal(false)}
+          onOptionPress={() => { }}
+        />
+      </Layout>
+    );
+  }
+  return <ActivityIndicator />;
 };
 
 GoalDetails.navigationOptions = ({ navigation }) => ({

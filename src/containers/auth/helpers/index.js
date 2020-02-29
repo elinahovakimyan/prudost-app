@@ -10,8 +10,6 @@ export const getFormattedDateFromString = (date) => {
 export const getFormattedDateFromDate = (date) => {
   // current format DD-MM-YYYY
   // final format YYYY-MM-DD
-  // const [DD, MM, YYYY] = date.split('-');
-  // const formattedDate = [YYYY, MM, DD].join('-');
   const formattedDate = date.format('YYYY-MM-DD');
 
   return formattedDate;

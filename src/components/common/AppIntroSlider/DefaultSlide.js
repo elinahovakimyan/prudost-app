@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  Text, ImageBackground, View, Dimensions,
+  Text, View, Dimensions, Image,
 } from 'react-native';
 
 import { styles } from './DefaultSlide.style';
+import { colors } from '../../../utils';
 
 const { height } = Dimensions.get('window');
 
@@ -14,12 +15,7 @@ export default class DefaultSlide extends React.PureComponent {
       width: dimensions.width + 10,
       flex: 1,
       height,
-    };
-    const overlayStyle = {
-      flex: 1,
-      resizeMode: 'cover',
-      width: dimensions.width,
-      paddingBottom: bottomButtons ? 120 : 64,
+      backgroundColor: colors.blue,
     };
     const style = {
       flex: 1,
@@ -28,17 +24,13 @@ export default class DefaultSlide extends React.PureComponent {
     };
 
     return (
-      <ImageBackground source={item.backgroundImage} style={bgStyle}>
-        <ImageBackground
-          source={require('../../../assets/images/overlay.png')}
-          style={overlayStyle}
-        >
-          <View style={[styles.mainContent, style]}>
-            <Text style={[styles.title, item.titleStyle]}>{item.title}</Text>
-            <Text style={[styles.text, item.textStyle]}>{item.text}</Text>
-          </View>
-        </ImageBackground>
-      </ImageBackground>
+      <View style={bgStyle}>
+        <View style={[styles.mainContent, style]}>
+          <Image style={styles.image} source={item.image} />
+          <Text style={[styles.title, item.titleStyle]}>{item.title}</Text>
+          <Text style={[styles.text, item.textStyle]}>{item.text}</Text>
+        </View>
+      </View>
     );
   }
 }

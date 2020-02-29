@@ -12,6 +12,10 @@ export const quotes = [
     author: 'Tim Ferriss',
   },
   {
+    quote: '“Hardships often prepare ordinary people for an extraordinary destiny.”',
+    author: 'Unknown',
+  },
+  {
     quote: '“We have a strategic plan. It’s called doing things.”',
     author: 'Herb Kelleher',
   },

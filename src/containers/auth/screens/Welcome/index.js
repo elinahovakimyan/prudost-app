@@ -9,25 +9,25 @@ const slides = [
     key: 's1',
     title: 'Move with purpose',
     text: 'Take control of your life and follow your mission.',
-    backgroundImage: require('../../../../assets/images/domore.jpeg'),
+    image: require('../../../../assets/images/goals_illustration.png'),
   },
   {
     key: 's2',
     title: 'Achieve your goals',
     text: 'Set the right goals and achieve them with step by step process.',
-    backgroundImage: require('../../../../assets/images/achieve_goals.jpeg'),
+    image: require('../../../../assets/images/achieve__illustration.png'),
   },
   {
     key: 's3',
-    title: 'Develop life habits',
+    title: 'Get there step-by-step',
     text: 'Habits define you. Start developing the right habits today.',
-    backgroundImage: require('../../../../assets/images/life_habits.jpeg'),
+    image: require('../../../../assets/images/tasks_illustration.png'),
   },
   {
     key: 's4',
     title: 'Reward yourself',
     text: 'Appreciate your work and life. Notice every single step you do towards your dream life.',
-    backgroundImage: require('../../../../assets/images/reward_yourself.jpeg'),
+    image: require('../../../../assets/images/reward_illustration.png'),
   },
 ];
 

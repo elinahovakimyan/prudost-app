@@ -82,8 +82,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     color: colors.darkGrey,
   },
-  doneButton: {
-    marginVertical: 24,
+  upgradeButton: {
+    marginTop: 24,
+  },
+  cancelButton: {
+    marginTop: 12,
+    marginBottom: 24,
   },
   line: {
     height: 1,
