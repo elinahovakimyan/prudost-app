@@ -6,6 +6,8 @@ export const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
+  },
+  mainContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -25,7 +27,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   list: {
-    marginTop: -48,
+    marginTop: -60,
   },
   footer: {
     flexDirection: 'row',

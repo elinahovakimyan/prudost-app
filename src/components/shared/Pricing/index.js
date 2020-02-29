@@ -32,7 +32,7 @@ const Pricing = (props) => {
       id: props.profile.id, is_upgraded: true, subscription_option: option.subscription,
     });
 
-    Alert.alert('Successfully upgraded your account! Keep achieving many more goals!');
+    Alert.alert('Successfully upgraded!');
 
     onClose();
   };
@@ -51,8 +51,13 @@ const Pricing = (props) => {
       <TouchableOpacity style={styles.modalContainer} onPress={onClose}>
         <TouchableOpacity activeOpacity={1} onPress={() => null} style={styles.optionsContainer}>
           <View style={styles.fullWidth}>
-            <Text style={styles.headerText}>{`You have hit your limit of 3 ${label}`}</Text>
-            <View style={styles.line} />
+
+            {label && (
+              <>
+                <Text style={styles.headerText}>{`You have hit your limit of 3 ${label}`}</Text>
+                <View style={styles.line} />
+              </>
+            )}
             <Text style={styles.headerText}>UPGRADE YOUR ACCOUNT</Text>
             <Text style={styles.title}>Invest in your goals</Text>
             <Text style={styles.subtitle}>Unlimited goals, tasks and rewards</Text>

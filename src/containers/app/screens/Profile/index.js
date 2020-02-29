@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
@@ -12,6 +12,7 @@ import { logout, getAllTasks } from '../../redux/actions';
 import { colors } from '../../../../utils';
 
 import { styles } from './styles';
+import Pricing from '../../../../components/shared/Pricing';
 
 const termsUrl = 'https://prudost.com/terms-and-conditions';
 const privacyUrl = 'https://prudost.com/privacy-policy-2';
@@ -32,6 +33,7 @@ class Profile extends React.PureComponent {
   state = {
     showWebview: false,
     currentWebviewUrl: '',
+    isPricingVisible: false,
   }
 
   componentDidMount() {
@@ -50,12 +52,23 @@ class Profile extends React.PureComponent {
     });
   }
 
+  togglePricingModal = (isVisible) => {
+    this.setState({
+      isPricingVisible: isVisible,
+    });
+  }
+
   render() {
-    const { showWebview, currentWebviewUrl } = this.state;
+    const { showWebview, currentWebviewUrl, isPricingVisible } = this.state;
     const {
       isLoading, profile, completedGoals, usedRewards, completedTasks,
     } = this.props;
     const links = [
+      {
+        text: 'Upgrade membership',
+        icon: require('../../../../assets/icons/upgrade.png'),
+        onPress: () => this.togglePricingModal(true),
+      },
       {
         text: `${completedGoals?.length} completed goals`,
         icon: require('../../../../assets/icons/goal.png'),
@@ -72,35 +85,43 @@ class Profile extends React.PureComponent {
 
     return (
       <Layout isLoading={isLoading} style={styles.screen}>
-        <View>
-          <View style={styles.content}>
-            <Score score={profile.score} />
+        <ScrollView contentContainerStyle={styles.mainContainer}>
+          <View>
+            <View style={styles.content}>
+              <Score title={`${profile.name}, your current score is:`} score={profile.score} />
+            </View>
+
+            <View style={styles.listContainer}>
+              <List style={styles.list} list={links} />
+            </View>
           </View>
 
-          <View style={styles.listContainer}>
-            <List style={styles.list} list={links} />
-          </View>
-        </View>
+          <View style={styles.buttonContainer}>
+            <Button onPress={this.handleLogout} theme="dark">Log out</Button>
 
-        <View style={styles.buttonContainer}>
-          <Button onPress={this.handleLogout} theme="dark">Log out</Button>
-
-          <View style={styles.footer}>
-            <Text
-              style={[styles.link, styles.rightAlign]}
-              onPress={() => this.showWebview(privacyUrl)}
-            >
+            <View style={styles.footer}>
+              <Text
+                style={[styles.link, styles.rightAlign]}
+                onPress={() => this.showWebview(privacyUrl)}
+              >
               Privacy Policy
-            </Text>
-            <View style={styles.circle} />
-            <Text
-              style={styles.link}
-              onPress={() => this.showWebview(termsUrl)}
-            >
+              </Text>
+              <View style={styles.circle} />
+              <Text
+                style={styles.link}
+                onPress={() => this.showWebview(termsUrl)}
+              >
               Terms & Conditions
-            </Text>
+              </Text>
+            </View>
           </View>
-        </View>
+
+
+          <Pricing
+            isVisible={isPricingVisible}
+            onClose={() => this.togglePricingModal(false)}
+          />
+        </ScrollView>
 
         {showWebview && currentWebviewUrl && (
           <WebviewComponent key={currentWebviewUrl} uri={currentWebviewUrl} />

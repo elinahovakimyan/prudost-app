@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
   },
   scoreContainer: {
     borderColor: colors.yellow,
-    height: 160,
-    width: 160,
+    height: 150,
+    width: 150,
     borderRadius: 80,
-    borderWidth: 16,
+    borderWidth: 12,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
