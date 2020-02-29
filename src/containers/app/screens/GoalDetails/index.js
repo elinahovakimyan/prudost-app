@@ -89,7 +89,10 @@ const GoalDetails = (props) => {
 
   const handleModalClose = () => {
     toggleModal(false);
-    props.navigation.navigate('MainGoals');
+
+    if (modalType === 'goal') {
+      props.navigation.navigate('MainGoals');
+    }
   };
 
   const handleDelete = () => {

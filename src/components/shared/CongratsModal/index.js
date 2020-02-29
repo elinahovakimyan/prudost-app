@@ -12,15 +12,15 @@ const getContentByType = (type) => {
   switch (type) {
     case 'reward':
       return {
-        text: 'The world is ready to celebrate with you your achievements so far!',
-        image: require('../../../assets/images/reward.png'),
+        text: 'The world is ready to celebrate your achievements with you!',
+        image: require('../../../assets/images/reward_used.png'),
         points: null,
         buttonText: "Let's celebrate!",
       };
     case 'task':
       return {
         text: "Yaaay! You're on step closer to achieving your goal!",
-        image: require('../../../assets/images/task.png'),
+        image: require('../../../assets/images/task_completed.png'),
         points: 2,
         buttonText: 'Keep working hard',
       };
@@ -28,7 +28,7 @@ const getContentByType = (type) => {
       return {
         text: 'Yohooo, you did it! You achieved one more goal. So proud of you!',
         points: 10,
-        image: require('../../../assets/images/goal.png'),
+        image: require('../../../assets/images/goal_completed.png'),
         buttonText: 'Keep up the great job!',
       };
     case 'habit':

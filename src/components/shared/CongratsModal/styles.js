@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
   text: {
     color: colors.darkGrey,
     fontSize: 24,
+    marginBottom: 30,
     lineHeight: 30,
     fontWeight: '500',
+    paddingHorizontal: 10,
     textAlign: 'center',
   },
   points: {
@@ -41,10 +43,14 @@ const styles = StyleSheet.create({
   },
   image: {
     resizeMode: 'contain',
-    height: 200,
+    height: 180,
+    maxWidth: 300,
+    marginTop: 10,
+    marginBottom: 30,
     margin: 24,
   },
   button: {
+    marginTop: 10,
   },
 });
 

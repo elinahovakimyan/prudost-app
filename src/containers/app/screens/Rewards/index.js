@@ -56,6 +56,7 @@ const Rewards = (props) => {
 
   const handleRewardUse = (reward) => {
     toggleModal(true);
+    props.updateReward({ id: reward.id, used: true });
     props.updateProfile({
       id: profile.id,
       score: profile.score - reward.points,
@@ -70,13 +71,13 @@ const Rewards = (props) => {
     }
   };
 
-  const handleUsePress = () => {
+  const handleUsePress = (reward) => {
     Alert.alert(
       'You deserve it!',
       'Are you sure you want to use this reward now?',
       [
         { text: 'Cancel', style: 'cancel' },
-        { text: 'Yes', onPress: handleRewardUse },
+        { text: 'Yes', onPress: () => handleRewardUse(reward) },
       ],
     );
   };

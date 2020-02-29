@@ -33,7 +33,6 @@ function RewardCard({
 
   const handleUse = () => {
     onUse(item);
-    onUpdate({ id: item.id, used: true });
   };
 
   return (
