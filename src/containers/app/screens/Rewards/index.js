@@ -82,7 +82,7 @@ const Rewards = (props) => {
     );
   };
 
-  const renderItem = (item) => (
+  const renderItem = ({ item }) => (
     <RewardCard
       item={item}
       isUnlocked={profile.score >= item.points}
@@ -118,7 +118,7 @@ const Rewards = (props) => {
         style={styles.listContainer}
         stickySectionHeadersEnabled={false}
         keyExtractor={(item) => String(item.id)}
-        renderItem={({ item }) => renderItem(item)}
+        renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         renderSectionFooter={renderNoContent}
         ListFooterComponent={<View style={styles.lastFooter} />}

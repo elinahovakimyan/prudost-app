@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 import { colors } from '../../../../utils';
 
@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 0,
   },
   mainContainer: {
+    height: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -15,8 +16,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   content: {
+    paddingTop: Platform.OS === 'ios' ? 40 : 0,
     backgroundColor: colors.blue,
-    paddingBottom: 96,
+    paddingBottom: 80,
     shadowColor: '#727982',
     shadowOpacity: 0.5,
     shadowRadius: 6,
@@ -58,6 +60,6 @@ export const styles = StyleSheet.create({
   },
   buttonContainer: {
     padding: 16,
-    paddingBottom: 180,
+    paddingBottom: 40,
   },
 });

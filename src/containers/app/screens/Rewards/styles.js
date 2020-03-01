@@ -57,6 +57,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   listContainer: {
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
 });

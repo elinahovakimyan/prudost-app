@@ -30,12 +30,12 @@ class Splash extends React.PureComponent {
           .then(() => {
             this.timer = setTimeout(() => {
               this.props.navigation.navigate('App');
-            }, 500);
+            }, 2500);
           });
       } else {
         this.timer = setTimeout(() => {
           this.props.navigation.navigate('Auth');
-        }, 500);
+        }, 2500);
       }
     }
   }

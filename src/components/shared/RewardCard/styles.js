@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingVertical: 16,
     paddingHorizontal: 16,
+    marginHorizontal: 16,
     marginVertical: 8,
     backgroundColor: colors.white,
     shadowColor: '#727982',

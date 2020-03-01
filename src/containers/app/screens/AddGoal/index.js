@@ -29,6 +29,7 @@ class AddGoal extends React.PureComponent {
     const isEditing = navigation.state.params?.goal;
     return ({
       headerTitle: isEditing ? 'Edit Goal' : 'New Goal',
+      headerTitleAlign: 'center',
       headerTintColor: '#fff',
       headerStyle: styles.headerStyle,
       headerLeft: () => (

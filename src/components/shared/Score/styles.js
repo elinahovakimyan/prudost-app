@@ -20,17 +20,17 @@ const styles = StyleSheet.create({
   },
   scoreContainer: {
     borderColor: colors.yellow,
-    height: 150,
-    width: 150,
+    height: 140,
+    width: 140,
     borderRadius: 80,
-    borderWidth: 12,
+    borderWidth: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   score: {
     color: colors.white,
-    fontSize: 45,
+    fontSize: 42,
   },
 });
 

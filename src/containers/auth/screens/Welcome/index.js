@@ -14,19 +14,19 @@ const slides = [
   {
     key: 's2',
     title: 'Achieve your goals',
-    text: 'Set the right goals and achieve them with step by step process.',
+    text: 'Set S.M.A.R.T. goals and track your progress.',
     image: require('../../../../assets/images/achieve__illustration.png'),
   },
   {
     key: 's3',
     title: 'Get there step-by-step',
-    text: 'Habits define you. Start developing the right habits today.',
+    text: 'Split each goal into achievable tasks and get closer every day.',
     image: require('../../../../assets/images/tasks_illustration.png'),
   },
   {
     key: 's4',
     title: 'Reward yourself',
-    text: 'Appreciate your work and life. Notice every single step you do towards your dream life.',
+    text: 'Appreciate your work and life. Notice every single step you do towards your goals.',
     image: require('../../../../assets/images/reward_illustration.png'),
   },
 ];

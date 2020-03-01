@@ -1,33 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, View, ScrollView } from 'react-native';
+import {
+  Text, View, ScrollView, ActivityIndicator,
+} from 'react-native';
 
-import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
 import Score from '../../../../components/shared/Score';
 import List from '../../../../components/shared/List';
 import WebviewComponent from '../../../../components/shared/WebviewComponent';
 import { clearAccessToken } from '../../../auth/redux/actions';
 import { logout, getAllTasks } from '../../redux/actions';
-import { colors } from '../../../../utils';
+import Pricing from '../../../../components/shared/Pricing';
 
 import { styles } from './styles';
-import Pricing from '../../../../components/shared/Pricing';
 
 const termsUrl = 'https://prudost.com/terms-and-conditions';
 const privacyUrl = 'https://prudost.com/privacy-policy-2';
 
 class Profile extends React.PureComponent {
   static navigationOptions = () => ({
-    headerTitle: '',
-    headerTintColor: colors.white,
-    headerTitleStyle: styles.headerTitle,
-    headerStyle: {
-      backgroundColor: colors.blue,
-      shadowRadius: 0,
-      shadowOffset: { height: 0 },
-      height: 60,
-    },
+    headerShown: false,
   });
 
   state = {
@@ -83,12 +75,16 @@ class Profile extends React.PureComponent {
       },
     ];
 
+    if (isLoading) {
+      return <ActivityIndicator />;
+    }
+
     return (
-      <Layout isLoading={isLoading} style={styles.screen}>
+      <View style={styles.screen}>
         <ScrollView contentContainerStyle={styles.mainContainer}>
           <View>
             <View style={styles.content}>
-              <Score title={`${profile.name}, your current score is:`} score={profile.score} />
+              <Score title={`${profile.name || 'Unknown'}, your current score is:`} score={profile.score} />
             </View>
 
             <View style={styles.listContainer}>
@@ -126,7 +122,7 @@ class Profile extends React.PureComponent {
         {showWebview && currentWebviewUrl && (
           <WebviewComponent key={currentWebviewUrl} uri={currentWebviewUrl} />
         )}
-      </Layout>
+      </View>
     );
   }
 }

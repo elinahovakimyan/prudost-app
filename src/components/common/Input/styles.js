@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     position: 'absolute',
-    top: 20,
+    top: 22,
     right: 17,
     width: 24,
     height: 24,

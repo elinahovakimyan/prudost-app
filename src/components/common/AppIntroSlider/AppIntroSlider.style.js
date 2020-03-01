@@ -1,10 +1,5 @@
-import {
-  StyleSheet, Dimensions, Platform, I18nManager,
-} from 'react-native';
-
-const { width, height } = Dimensions.get('window');
-
-const isIphoneX = Platform.OS === 'ios' && !Platform.isPad && !Platform.isTVOS && (height === 812 || width === 812);
+import { StyleSheet, Platform, I18nManager } from 'react-native';
+import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === 'android';
 
@@ -18,7 +13,7 @@ export const styles = StyleSheet.create({
   },
   paginationContainer: {
     position: 'absolute',
-    bottom: 16 + (isIphoneX ? 34 : 0),
+    bottom: 16 + (ifIphoneX(34, 0)),
     left: 16,
     right: 16,
   },
@@ -39,7 +34,7 @@ export const styles = StyleSheet.create({
   bottomButtons: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 45,
+    marginBottom: ifIphoneX(40, 25),
   },
   buttonText: {
     backgroundColor: 'transparent',

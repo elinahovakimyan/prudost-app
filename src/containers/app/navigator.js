@@ -32,7 +32,7 @@ const GoalsStack = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      headerLayoutPreset: 'center',
+      headerTitleAlign: 'center',
       headerBackTitleVisible: false,
     },
   },
@@ -45,7 +45,7 @@ const GoalsStack = createStackNavigator(
 //   },
 //   {
 //     defaultNavigationOptions: {
-//       headerLayoutPreset: 'center',
+//       headerTitleAlign: 'center',
 //     },
 //   },
 // );
@@ -57,7 +57,7 @@ const RewardsStack = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      headerLayoutPreset: 'center',
+      headerTitleAlign: 'center',
       headerBackTitleVisible: false,
     },
   },
@@ -69,7 +69,7 @@ const ProfileStack = createStackNavigator(
   },
   {
     defaultNavigationOptions: {
-      headerLayoutPreset: 'center',
+      headerTitleAlign: 'center',
       headerBackTitleVisible: false,
     },
   },

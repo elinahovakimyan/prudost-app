@@ -13,7 +13,7 @@ export const request = axios;
 // });
 
 export function setupHttpConfig() {
-  request.defaults.baseURL = appConfig.AuthAPIEndPoint;
+  request.defaults.baseURL = appConfig.API_ENDPOINT;
   request.defaults.timeout = appConfig.defaultTimeout;
   axios.defaults.headers['Content-Type'] = 'application/json';
   // todo add auth token from store

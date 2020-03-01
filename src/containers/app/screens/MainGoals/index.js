@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  FlatList, View, Text, ScrollView,
-} from 'react-native';
+import { FlatList, View, Text } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
@@ -64,7 +62,7 @@ const MainGoals = (props) => {
     }
   };
 
-  const renderItem = (item) => {
+  const renderItem = ({ item }) => {
     const currentCategory = categories.find((c) => c.id === item.category);
 
     return (
@@ -79,28 +77,32 @@ const MainGoals = (props) => {
     );
   };
 
+  const renderCategoryItem = ({ item, index }) => {
+    const categoryGoals = goals.filter((g) => g.category === item.id);
+
+    return (
+      <CategoryCard
+        key={item.id}
+        category={item}
+        style={index === 0 ? { marginLeft: 12 } : {}}
+        goalsNumber={categoryGoals?.length}
+        onPress={() => navigation.push('Goals', { category: item, goals: categoryGoals })}
+      />
+    );
+  };
+
   return (
     <Layout isLoading={isLoading} style={styles.screen}>
       <View>
         <View>
-          <ScrollView
+          <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
+            data={categories}
             style={styles.categoryContainer}
-          >
-            {categories.map((category) => {
-              const categoryGoals = goals.filter((g) => g.category === category.id);
-
-              return (
-                <CategoryCard
-                  key={category.id}
-                  category={category}
-                  goalsNumber={categoryGoals?.length}
-                  onPress={() => navigation.push('Goals', { category, goals: categoryGoals })}
-                />
-              );
-            })}
-          </ScrollView>
+            renderItem={renderCategoryItem}
+            keyExtractor={(item) => String(item.id)}
+          />
         </View>
 
         <View style={styles.row}>
@@ -115,7 +117,7 @@ const MainGoals = (props) => {
         <FlatList
           data={filteredGoals}
           style={styles.container}
-          renderItem={({ item }) => renderItem(item)}
+          renderItem={renderItem}
           keyExtractor={(item) => String(item.id)}
           ListEmptyComponent={<EmptyCard buttonTitle="Add Goal" onButtonPress={handleAddGoal} />}
           ListFooterComponent={<View style={styles.footer} />}
