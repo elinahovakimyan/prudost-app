@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
@@ -107,40 +107,41 @@ class SignIn extends React.PureComponent {
 
     return (
       <Layout style={styles.screen}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Welcome Back!</Text>
+        <ScrollView keyboardShouldPersistTaps="never">
+          <View style={styles.header}>
+            <Text style={styles.title}>Welcome Back!</Text>
 
-          <Button
-            block={false}
-            buttonStyle={styles.signUpButon}
-            onPress={this.goToSignUp}
-          >
+            <Button
+              block={false}
+              buttonStyle={styles.signUpButon}
+              onPress={this.goToSignUp}
+            >
             Create account
-          </Button>
-        </View>
-        <Input
-          value={email}
-          onChangeText={this.handleEmailChange}
-          placeholder="Email"
-          keyboardType="email-address"
-        />
-        <Input
-          isPassword
-          value={password}
-          onChangeText={this.handlePasswordChange}
-          placeholder="Password"
-        />
+            </Button>
+          </View>
+          <Input
+            value={email}
+            onChangeText={this.handleEmailChange}
+            placeholder="Email"
+            keyboardType="email-address"
+          />
+          <Input
+            isPassword
+            value={password}
+            onChangeText={this.handlePasswordChange}
+            placeholder="Password"
+          />
 
-        {this.renderErrors()}
+          {this.renderErrors()}
 
-        <Button buttonStyle={styles.actionButon} onPress={this.submitLogin}>
+          <Button buttonStyle={styles.actionButon} onPress={this.submitLogin}>
             Sign In
-        </Button>
+          </Button>
 
-        <Text style={styles.forgotPasswordText} onPress={this.goToPasswordRecover}>
+          <Text style={styles.forgotPasswordText} onPress={this.goToPasswordRecover}>
             Forgot password?
-        </Text>
-
+          </Text>
+        </ScrollView>
       </Layout>
     );
   }

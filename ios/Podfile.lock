@@ -208,6 +208,8 @@ PODS:
     - React-Core/RCTTextHeaders (= 0.61.5)
   - React-RCTVibration (0.61.5):
     - React-Core/RCTVibrationHeaders (= 0.61.5)
+  - React-TestFairy (2.24.0):
+    - React
   - ReactCommon/jscallinvoker (0.61.5):
     - DoubleConversion
     - Folly (= 2018.10.22.00)
@@ -261,6 +263,7 @@ DEPENDENCIES:
   - React-RCTSettings (from `../node_modules/react-native/Libraries/Settings`)
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
+  - React-TestFairy (from `../node_modules/react-native-testfairy`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
@@ -325,6 +328,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Text"
   React-RCTVibration:
     :path: "../node_modules/react-native/Libraries/Vibration"
+  React-TestFairy:
+    :path: "../node_modules/react-native-testfairy"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
@@ -367,6 +372,7 @@ SPEC CHECKSUMS:
   React-RCTSettings: 8db258ea2a5efee381fcf7a6d5044e2f8b68b640
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
+  React-TestFairy: ed1c87caf1f55c9aee6d33b43f069500922cb8ce
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNCAsyncStorage: 44395cb9c7c1523104c2b499eb426ef7aff82bca
   RNCMaskedView: a88953beefbd347a29072d9eba90e42945fe291e
@@ -377,4 +383,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9b0d8baf6f2abbcd9620d8cb4a53656205753782
 
-COCOAPODS: 1.8.0.beta.2
+COCOAPODS: 1.8.4

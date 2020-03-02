@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
@@ -140,43 +140,45 @@ class SignUp extends React.PureComponent {
 
     return (
       <Layout style={styles.screen}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Achieve Your Goals, Live the Dream!</Text>
-        </View>
-        <Input
-          value={name}
-          onChangeText={this.handleNameChange}
-          placeholder="How should I call you?"
-          maxLength={10}
-        />
-        <Input
-          value={email}
-          onChangeText={this.handleEmailChange}
-          placeholder="Your email address"
-          keyboardType="email-address"
-        />
-        <Input
-          isPassword
-          value={password}
-          onChangeText={this.handlePasswordChange}
-          placeholder="Your password"
-        />
-        <Input
-          isPassword
-          value={confirmPassword}
-          onChangeText={this.handleConfirmPasswordChange}
-          placeholder="Confirm your password"
-        />
+        <ScrollView keyboardShouldPersistTaps="never">
+          <View style={styles.header}>
+            <Text style={styles.title}>Achieve Your Goals, Live the Dream!</Text>
+          </View>
+          <Input
+            value={name}
+            onChangeText={this.handleNameChange}
+            placeholder="How should I call you?"
+            maxLength={10}
+          />
+          <Input
+            value={email}
+            onChangeText={this.handleEmailChange}
+            placeholder="Your email address"
+            keyboardType="email-address"
+          />
+          <Input
+            isPassword
+            value={password}
+            onChangeText={this.handlePasswordChange}
+            placeholder="Your password"
+          />
+          <Input
+            isPassword
+            value={confirmPassword}
+            onChangeText={this.handleConfirmPasswordChange}
+            placeholder="Confirm your password"
+          />
 
-        {this.renderErrors()}
+          {this.renderErrors()}
 
-        <Button buttonStyle={styles.actionButon} onPress={this.submitSignUp}>
+          <Button buttonStyle={styles.actionButon} onPress={this.submitSignUp}>
           Create account
-        </Button>
+          </Button>
 
-        <Text style={styles.signInText} onPress={this.goToSignIn}>
+          <Text style={styles.signInText} onPress={this.goToSignIn}>
           Already have account?
-        </Text>
+          </Text>
+        </ScrollView>
       </Layout>
     );
   }
