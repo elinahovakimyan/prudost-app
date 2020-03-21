@@ -4,7 +4,6 @@ import { SafeAreaView, View, ActivityIndicator } from 'react-native';
 import { styles } from './styles';
 
 function Layout({ isLoading, style, children }) {
-  console.log('isLoading :', isLoading);
   if (isLoading) {
     return (
       <View style={styles.loaderContainer}>

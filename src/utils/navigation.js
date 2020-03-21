@@ -11,7 +11,7 @@ export const getTabIcon = (navigation, focused) => {
     tabIconSrc = focused ? require('../assets/icons/goals_yellow.png') : require('../assets/icons/goals_blue.png');
   } else if (routeName === 'Rewards') {
     tabIconSrc = focused ? require('../assets/icons/rewards_yellow.png') : require('../assets/icons/rewards_blue.png');
-  } else if (routeName === 'Habits') {
+  } else if (routeName === 'Tasks') {
     tabIconSrc = focused ? require('../assets/icons/habits_yellow.png') : require('../assets/icons/habits_blue.png');
   } else {
     tabIconSrc = focused ? require('../assets/icons/profile_yellow.png') : require('../assets/icons/profile_blue.png');

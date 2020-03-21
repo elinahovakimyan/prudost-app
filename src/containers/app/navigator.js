@@ -3,6 +3,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import Quiz from './screens/Quiz';
 
+/* Tasks */
+import ActiveTasks from './screens/ActiveTasks';
+
 /* Goals */
 import Goals from './screens/Goals';
 import MainGoals from './screens/MainGoals';
@@ -77,8 +80,8 @@ const ProfileStack = createStackNavigator(
 
 const TabNavigator = createBottomTabNavigator(
   {
+    Tasks: { screen: ActiveTasks },
     Goals: GoalsStack,
-    // Habits: HabitsStack,
     Rewards: RewardsStack,
     Profile: ProfileStack,
   },

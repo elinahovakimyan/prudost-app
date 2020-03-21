@@ -9,7 +9,7 @@ import Score from '../../../../components/shared/Score';
 import List from '../../../../components/shared/List';
 import WebviewComponent from '../../../../components/shared/WebviewComponent';
 import { clearAccessToken } from '../../../auth/redux/actions';
-import { logout, getAllTasks } from '../../redux/actions';
+import { logout } from '../../redux/actions';
 import Pricing from '../../../../components/shared/Pricing';
 import { addTokenToHttp } from '../../../../utils';
 
@@ -27,10 +27,6 @@ class Profile extends React.PureComponent {
     showWebview: false,
     currentWebviewUrl: '',
     isPricingVisible: false,
-  }
-
-  componentDidMount() {
-    this.props.getAllTasks();
   }
 
   handleLogout = () => {
@@ -140,7 +136,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   logout,
   clearAccessToken,
-  getAllTasks,
 };
 
 export default connect(

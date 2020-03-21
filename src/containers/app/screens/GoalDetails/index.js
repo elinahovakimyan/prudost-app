@@ -157,7 +157,9 @@ const GoalDetails = (props) => {
         />
 
         <FlatList
-          data={goal.tasks || []}
+          data={goal.tasks.sort((a, b) => (
+            (a.completed === b.completed) ? 0 : a.completed ? 1 : -1
+          )) || []}
           style={styles.container}
           renderItem={renderItem}
           keyExtractor={(item) => String(item.id)}

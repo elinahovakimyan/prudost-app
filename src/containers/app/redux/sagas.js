@@ -335,6 +335,7 @@ function* handleUpdateTask({ task }) {
     if (status >= 200 && status < 300) {
       yield put({ type: APP_UPDATE_TASK_SUCCESS });
       yield put({ type: APP_GET_GOALS_REQUEST });
+      yield put({ type: APP_GET_ALL_TASKS_REQUEST });
     } else {
       yield put({ type: APP_UPDATE_TASK_ERROR, error: 'Unknown Error' });
     }
@@ -354,6 +355,7 @@ function* handleDeleteTask({ taskId }) {
     if (status >= 200 && status < 300) {
       yield put({ type: APP_DELETE_TASK_SUCCESS });
       yield put({ type: APP_GET_GOALS_REQUEST });
+      yield put({ type: APP_GET_ALL_TASKS_REQUEST });
     } else {
       yield put({ type: APP_DELETE_TASK_ERROR, error: 'Unknown Error' });
     }

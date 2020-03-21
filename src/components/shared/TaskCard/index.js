@@ -45,6 +45,14 @@ function TaskCard({
     );
   };
 
+  const handleSetTodayTask = () => {
+    onUpdate({ set_for_date: new Date(), set_for_type: 'day', id: task.id });
+  };
+
+  const handleSetWeekTask = () => {
+    onUpdate({ set_for_date: new Date(), set_for_type: 'week', id: task.id });
+  };
+
   const handleShowOptions = () => {
     ActionSheet.showActionSheetWithOptions({
       options: (Platform.OS === 'ios') ? BUTTONSiOS : BUTTONSandroid,
@@ -55,10 +63,10 @@ function TaskCard({
     (buttonIndex) => {
       if (buttonIndex === 0) {
         // set as today's task
-
+        handleSetTodayTask();
       } else if (buttonIndex === 1) {
         // set as week's task
-
+        handleSetWeekTask();
       } else if (buttonIndex === 2) {
         // edit
         toggleEdit(true);
