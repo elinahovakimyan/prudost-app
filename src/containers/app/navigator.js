@@ -86,6 +86,7 @@ const TabNavigator = createBottomTabNavigator(
     Profile: ProfileStack,
   },
   {
+    initialRouteName: 'Goals',
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused }) => getTabIcon(navigation, focused),
     }),

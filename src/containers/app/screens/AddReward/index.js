@@ -6,7 +6,8 @@ import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
 import { addReward } from '../../redux/actions';
-import { colors } from '../../../../utils';
+import { colors, getRandomInt } from '../../../../utils';
+import { rewardSuggestions } from '../../data';
 
 import { styles } from './styles';
 
@@ -47,15 +48,21 @@ class AddReward extends React.PureComponent {
     ),
   });
 
+  rewardTitle = 'Reward Title'
+
   state = {
     title: '',
     timePoints: null,
     moneyPoints: null,
-    // notes: '',
   }
 
   componentDidMount() {
     this.props.navigation.setParams({ submit: this.handleSubmit });
+
+    const rewardTitleNumber = getRandomInt(rewardSuggestions.length - 1);
+    const currentGoalTitle = rewardSuggestions[rewardTitleNumber];
+
+    this.rewardTitle = currentGoalTitle;
   }
 
   handleSubmit = () => {
@@ -87,7 +94,7 @@ class AddReward extends React.PureComponent {
           underlined
           value={title}
           onChangeText={(val) => this.handleInputChange('title', val)}
-          placeholder="Reward title"
+          placeholder={`Title (e.g. ${this.rewardTitle})`}
           placeholderTextColor={colors.grey}
         />
 
@@ -107,17 +114,7 @@ class AddReward extends React.PureComponent {
           options={moneyOptions}
         />
 
-        {/* <Input
-          underlined
-          multiline
-          value={notes}
-          onChangeText={(val) => this.handleInputChange('notes', val)}
-          placeholder="Notes"
-          placeholderTextColor={colors.grey}
-        /> */}
-
         <Text style={styles.overallPoints}>{`Overall points required: ${timePoints + moneyPoints}`}</Text>
-
       </Layout>
     );
   }

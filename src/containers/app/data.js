@@ -45,3 +45,22 @@ export const habits = [
     title: 'Drink a water in the morning',
   },
 ];
+
+export const rewardSuggestions = [
+  'Movie Night',
+  'Take a day off',
+  'Order a pizza',
+  'Go to my favorite cafe',
+  'Go camping',
+  'Buy a new book',
+];
+
+export const goalSuggestions = [
+  'Save $5000',
+  'Read 10 books',
+  'Publish an ebook',
+  'Have a 5-day family trip',
+  'Get promotion at work',
+  'Practice meditation for 30 days',
+  'Achieve B1 level in Spanish',
+];

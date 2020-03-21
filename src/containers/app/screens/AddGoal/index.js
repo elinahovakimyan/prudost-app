@@ -7,10 +7,11 @@ import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
 import DateInput from '../../../../components/common/DateInput';
 import ErrorBox from '../../../../components/common/ErrorBox';
-import { colors } from '../../../../utils';
+import { colors, getRandomInt } from '../../../../utils';
 import { addGoal, updateGoal } from '../../redux/actions';
 
 import { styles } from './styles';
+import { goalSuggestions } from '../../data';
 
 
 class AddGoal extends React.PureComponent {
@@ -37,6 +38,8 @@ class AddGoal extends React.PureComponent {
     });
   }
 
+  goalTitle = 'Goal Title'
+
   state = {
     title: this.props.navigation.state.params?.goal?.title,
     description: this.props.navigation.state.params?.goal?.description,
@@ -50,6 +53,11 @@ class AddGoal extends React.PureComponent {
     this.props.navigation.setParams({
       submitGoal: isEditing ? this.handleSave : this.handleAdd,
     });
+
+    const goalTitleNumber = getRandomInt(goalSuggestions.length - 1);
+    const currentGoalTitle = goalSuggestions[goalTitleNumber];
+
+    this.goalTitle = currentGoalTitle;
   }
 
   handleSave = () => {
@@ -102,7 +110,7 @@ class AddGoal extends React.PureComponent {
           underlined
           value={title}
           onChangeText={(val) => this.handleInputChange('title', val)}
-          placeholder="Goal title"
+          placeholder={`Title (e.g. ${this.goalTitle})`}
           placeholderTextColor={colors.grey}
         />
 
