@@ -8,28 +8,31 @@ import RadioButton from '../../common/RadioButton';
 
 import styles from './styles';
 
-const BUTTONSiOS = [
-  "Add to Today's tasks",
-  "Add to This Week's tasks",
-  'Edit',
-  'Delete',
-  'Cancel',
-];
-
-const BUTTONSandroid = [
-  "Set as Today's task",
-  "Set as Week's task",
-  'Edit',
-  'Delete',
-];
-
-const DESTRUCTIVE_INDEX = 3;
-const CANCEL_INDEX = 4;
-
 
 function TaskCard({
-  task, onUpdate, onDelete, onComplete, onUncomplete,
+  task, onUpdate, onDelete, onComplete, onUncomplete, showViewGoalOption, onViewGoal,
 }) {
+  const BUTTONS = showViewGoalOption
+    ? [
+      "Add to Today's tasks",
+      "Add to This Week's tasks",
+      'View Goal',
+      'Edit',
+      'Delete',
+    ] : [
+      "Add to Today's tasks",
+      "Add to This Week's tasks",
+      'Edit',
+      'Delete',
+    ];
+
+  const BUTTONSiOS = [...BUTTONS, 'Cancel'];
+  const BUTTONSandroid = BUTTONS;
+  const VIEW_INDEX = showViewGoalOption ? 2 : null;
+  const EDIT_INDEX = showViewGoalOption ? 3 : 2;
+  const DESTRUCTIVE_INDEX = showViewGoalOption ? 4 : 3;
+  const CANCEL_INDEX = BUTTONSiOS.length - 1;
+
   const [isEditing, toggleEdit] = useState(false);
   const [value, onChange] = useState(task.text);
 
@@ -67,10 +70,13 @@ function TaskCard({
       } else if (buttonIndex === 1) {
         // set as week's task
         handleSetWeekTask();
-      } else if (buttonIndex === 2) {
+      } else if (buttonIndex === VIEW_INDEX && onViewGoal) {
+        // view goal
+        onViewGoal();
+      } else if (buttonIndex === EDIT_INDEX) {
         // edit
         toggleEdit(true);
-      } else if (buttonIndex === 3) {
+      } else if (buttonIndex === DESTRUCTIVE_INDEX) {
         // delete
         handleDelete();
       }

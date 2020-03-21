@@ -18,4 +18,7 @@ export const styles = StyleSheet.create({
     marginTop: 32,
     fontSize: 15,
   },
+  footer: {
+    height: 300,
+  },
 });

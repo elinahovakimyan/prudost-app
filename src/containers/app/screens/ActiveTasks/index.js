@@ -46,11 +46,13 @@ const ActiveTasks = (props) => {
 
   const renderItem = ({ item }) => (
     <TaskCard
+      showViewGoalOption
       task={item}
       onComplete={handleTaskComplete}
       onUncomplete={handleTaskUncomplete}
       onUpdate={props.updateTask}
       onDelete={props.deleteTask}
+      onViewGoal={() => props.navigation.push('GoalDetails', { goalId: item.goal })}
     />
   );
 
@@ -91,7 +93,7 @@ const ActiveTasks = (props) => {
         renderItem={renderItem}
         renderSectionHeader={renderSectionHeader}
         renderSectionFooter={renderNoContent}
-        ListFooterComponent={<View style={styles.lastFooter} />}
+        ListFooterComponent={<View style={styles.footer} />}
         ListEmptyComponent={!isLoading && <EmptyCard />}
       />
 
