@@ -27,6 +27,9 @@ export function addTokenToHttp(token) {
     if (token) {
       request.defaults.headers.Authorization = `Token ${token}`;
       resolve();
+    } else {
+      request.defaults.headers.Authorization = null;
+      resolve();
     }
   });
 }

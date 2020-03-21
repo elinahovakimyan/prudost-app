@@ -11,6 +11,7 @@ import WebviewComponent from '../../../../components/shared/WebviewComponent';
 import { clearAccessToken } from '../../../auth/redux/actions';
 import { logout, getAllTasks } from '../../redux/actions';
 import Pricing from '../../../../components/shared/Pricing';
+import { addTokenToHttp } from '../../../../utils';
 
 import { styles } from './styles';
 
@@ -34,6 +35,7 @@ class Profile extends React.PureComponent {
 
   handleLogout = () => {
     this.props.clearAccessToken();
+    addTokenToHttp();
     this.props.logout();
   }
 

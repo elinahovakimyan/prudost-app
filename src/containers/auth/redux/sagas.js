@@ -4,7 +4,7 @@ import {
 
 import * as NavigationService from '../../../navigator/NavigationService';
 import { request, addTokenToHttp } from '../../../utils';
-import StorageUtils from '../helpers/storage';
+import StorageUtils from '../../../utils/storage';
 import {
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_ERROR,

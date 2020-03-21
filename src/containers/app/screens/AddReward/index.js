@@ -64,7 +64,7 @@ class AddReward extends React.PureComponent {
 
     this.props.addReward({
       title,
-      createdAt: new Date(),
+      created_at: new Date(),
       points: timePoints + moneyPoints,
       user: profile.id,
     });

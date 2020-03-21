@@ -119,7 +119,7 @@ const GoalDetails = (props) => {
 
   const handleSubmit = (text) => {
     props.addTask({
-      text, goal: goal.id, createdAt: new Date(), user: profile.id,
+      text, goal: goal.id, created_at: new Date(), user: profile.id,
     });
   };
 

@@ -73,7 +73,7 @@ const Pricing = (props) => {
             ))}
           </View>
 
-          <View style={styles.fullWidth}>
+          <View style={[styles.fullWidth, { marginTop: 24 }]}>
             <Button
               theme="dark"
               buttonStyle={styles.upgadeButton}

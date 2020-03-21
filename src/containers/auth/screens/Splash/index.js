@@ -3,7 +3,7 @@ import { Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import Layout from '../../../../components/shared/Layout';
-import StorageUtils from '../../helpers/storage';
+import StorageUtils from '../../../../utils/storage';
 import { addTokenToHttp, getRandomInt, colors } from '../../../../utils';
 import { setUser } from '../../redux/actions';
 

@@ -14,14 +14,14 @@ const styles = StyleSheet.create({
   },
   title: {
     marginVertical: 8,
-    fontSize: 32,
+    fontSize: 30,
     fontWeight: '600',
     textAlign: 'center',
     color: colors.blue,
   },
   subtitle: {
-    marginVertical: 8,
-    fontSize: 16,
+    marginVertical: 4,
+    fontSize: 14,
     fontWeight: '500',
     textAlign: 'center',
     color: colors.blue,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 48,
     paddingVertical: 24,
-    height: '80%',
+    // height: '90%',
     width: '100%',
     shadowColor: '#000',
     shadowOffset: {
@@ -66,24 +66,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 5,
     shadowOffset: { height: 1, width: 1 },
-    marginVertical: 12,
+    marginVertical: 8,
     borderRadius: 12,
     width: '100%',
   },
   optionText: {
     fontSize: 16,
-    paddingVertical: 8,
     paddingHorizontal: 12,
     color: colors.darkGrey,
   },
   optionTitle: {
     fontSize: 24,
-    paddingVertical: 4,
+    paddingBottom: 8,
     paddingHorizontal: 12,
     color: colors.darkGrey,
   },
   upgradeButton: {
-    marginTop: 24,
   },
   cancelButton: {
     marginTop: 12,

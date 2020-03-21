@@ -6,8 +6,8 @@ import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
 import Input from '../../../../components/common/Input';
 import ErrorBox from '../../../../components/common/ErrorBox';
+import { validateEmail } from '../../../../utils/validation';
 import { login } from '../../redux/actions';
-import { validateEmail } from '../../helpers/validation';
 
 import { styles } from './styles';
 

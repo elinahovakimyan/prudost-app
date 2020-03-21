@@ -30,10 +30,8 @@ const styles = StyleSheet.create({
     color: colors.grey,
     width: width - 128,
     paddingLeft: 8,
-  },
-  iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    paddingVertical: 0,
+    lineHeight: 16,
   },
   icon: {
     width: 18,

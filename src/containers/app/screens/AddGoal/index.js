@@ -5,23 +5,12 @@ import { Text, TouchableOpacity } from 'react-native';
 import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
 import OptionPicker from '../../../../components/common/OptionPicker';
-import DatePicker from '../../../../components/common/DatePicker';
+import DateInput from '../../../../components/common/DateInput';
 import ErrorBox from '../../../../components/common/ErrorBox';
 import { colors } from '../../../../utils';
 import { addGoal, updateGoal } from '../../redux/actions';
 
 import { styles } from './styles';
-
-const getDatePickerFormat = (date) => {
-  let formattedDate = null;
-
-  if (date) {
-    const [YYYY, MM, DD] = date.split('-');
-    formattedDate = [DD, MM, YYYY].join('/');
-  }
-
-  return formattedDate;
-};
 
 
 class AddGoal extends React.PureComponent {
@@ -52,7 +41,7 @@ class AddGoal extends React.PureComponent {
     title: this.props.navigation.state.params?.goal?.title,
     description: this.props.navigation.state.params?.goal?.description,
     category: this.props.navigation.state.params?.goal?.category,
-    deadline: getDatePickerFormat(this.props.navigation.state.params?.goal?.deadline),
+    deadline: this.props.navigation.state.params?.goal?.deadline,
   }
 
   componentDidMount() {
@@ -68,21 +57,13 @@ class AddGoal extends React.PureComponent {
     const {
       title, description, category, deadline,
     } = this.state;
-    let formattedDeadline;
-
-    if (goal && deadline === goal.deadline) {
-      formattedDeadline = goal.deadline;
-    } else {
-      const [DD, MM, YYYY] = deadline ? deadline.split('/') : [];
-      formattedDeadline = [YYYY, MM, DD].join('-');
-    }
 
     this.props.updateGoal({
       id: goal.id,
       title,
       description,
       category,
-      deadline: formattedDeadline,
+      deadline,
     });
   }
 
@@ -91,16 +72,14 @@ class AddGoal extends React.PureComponent {
     const {
       title, description, category, deadline,
     } = this.state;
-    const [DD, MM, YYYY] = deadline ? deadline.split('/') : [];
-    const formattedDeadline = [YYYY, MM, DD].join('-');
 
     this.props.addGoal({
       user: profile.id,
       title,
       description,
       category,
-      deadline: formattedDeadline,
-      createdAt: new Date(),
+      deadline,
+      created_at: new Date(),
       tasks: [],
     });
   }
@@ -113,8 +92,9 @@ class AddGoal extends React.PureComponent {
 
   render() {
     const {
-      title, description, category, deadline, isLoading,
+      title, description, category, deadline,
     } = this.state;
+    const { isLoading } = this.props;
 
     return (
       <Layout isLoading={isLoading} style={styles.screen}>
@@ -143,8 +123,7 @@ class AddGoal extends React.PureComponent {
           options={this.props.categories}
         />
 
-        <DatePicker
-          inputStyle={styles.input}
+        <DateInput
           placeholder="Deadline"
           onChange={(val) => this.handleInputChange('deadline', val)}
           value={deadline}
