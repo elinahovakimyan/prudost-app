@@ -10,7 +10,7 @@ import Pricing from '../../../../components/shared/Pricing';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import { colors } from '../../../../utils';
 import {
-  getGoals, getCategories, getProfile, getRewards,
+  getGoals, getCategories, getProfile, getRewards, getAllTasks,
 } from '../../redux/actions';
 import FilterSection from '../../../../components/shared/FilterSection';
 import { filterOptions } from '../../data';
@@ -27,9 +27,10 @@ const MainGoals = (props) => {
   const [filteredGoals, setFilteredGoals] = useState([]);
 
   const fetchData = () => {
-    props.getGoals();
     props.getCategories();
+    props.getGoals();
     props.getRewards();
+    props.getAllTasks();
     props.getProfile();
   };
 
@@ -128,7 +129,7 @@ const MainGoals = (props) => {
         label="goals"
         isVisible={isPricingVisible}
         onClose={() => toggleModal(false)}
-        onOptionPress={() => {}}
+        onOptionPress={() => { }}
       />
 
       <AddButton onPress={handleAddGoal} bottomSpace={155} />
@@ -159,6 +160,7 @@ const mapDispatchToProps = {
   getCategories,
   getRewards,
   getProfile,
+  getAllTasks,
 };
 
 export default connect(

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
-import TestFairy from 'react-native-testfairy';
 
 import SplashScreen from './src/containers/auth/screens/Splash';
 import { store } from './src/redux/store';
@@ -20,7 +19,6 @@ class App extends React.PureComponent {
      */
     await this.loadAssets();
     setupHttpConfig();
-    TestFairy.begin('SDK-t55x7EBH');
   }
 
   loadAssets = async () => {

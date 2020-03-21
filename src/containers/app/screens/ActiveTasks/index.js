@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, SectionList } from 'react-native';
 
@@ -8,7 +8,7 @@ import EmptyCard from '../../../../components/shared/EmptyCard';
 import TaskCard from '../../../../components/shared/TaskCard';
 import CongratsModal from '../../../../components/shared/CongratsModal';
 import {
-  getAllTasks, addTask, updateTask, deleteTask, updateProfile,
+  addTask, updateTask, deleteTask, updateProfile,
 } from '../../redux/actions';
 
 
@@ -20,10 +20,6 @@ const ActiveTasks = (props) => {
     isLoading, profile, todayTasks, weekTasks, pastTasks,
   } = props;
   const [modalVisible, toggleModal] = useState(false);
-
-  useEffect(() => {
-    props.getAllTasks();
-  }, []);
 
   const handleTaskComplete = () => {
     toggleModal(true);
@@ -119,7 +115,7 @@ const mapStateToProps = (state) => {
       weekTasks.push(item);
     } else if (
       ((moment(item.set_for_date).isBefore(new Date(), 'week') && item.set_for_type === 'week')
-      || (moment(item.set_for_date).isBefore(new Date(), 'day') && item.set_for_type === 'day'))
+        || (moment(item.set_for_date).isBefore(new Date(), 'day') && item.set_for_type === 'day'))
       && !item.completed) {
       pastTasks.push(item);
     }
@@ -141,7 +137,6 @@ const mapDispatchToProps = {
   addTask,
   updateTask,
   deleteTask,
-  getAllTasks,
   updateProfile,
 };
 
