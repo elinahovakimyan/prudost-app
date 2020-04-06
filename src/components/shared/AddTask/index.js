@@ -15,6 +15,7 @@ function AddTask({
     return (
       <View style={[styles.inputContainer, hasHorizaontalPadding ? styles.padding : {}]}>
         <TextInput
+          autoFocus
           multiline
           value={value}
           onChangeText={onChange}

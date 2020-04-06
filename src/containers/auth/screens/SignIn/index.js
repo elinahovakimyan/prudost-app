@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Text, ScrollView } from 'react-native';
+import {
+  View, Text, ScrollView, ActivityIndicator,
+} from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
@@ -103,6 +105,7 @@ class SignIn extends React.PureComponent {
   }
 
   render() {
+    const { isLoading } = this.props;
     const { email, password } = this.state;
 
     return (
@@ -116,7 +119,7 @@ class SignIn extends React.PureComponent {
               buttonStyle={styles.signUpButon}
               onPress={this.goToSignUp}
             >
-            Create account
+              Create account
             </Button>
           </View>
           <Input
@@ -132,15 +135,23 @@ class SignIn extends React.PureComponent {
             placeholder="Password"
           />
 
-          {this.renderErrors()}
+          {isLoading ? (
+            <View style={styles.loader}>
+              <ActivityIndicator />
+            </View>
+          ) : (
+            <>
+              {this.renderErrors()}
 
-          <Button buttonStyle={styles.actionButon} onPress={this.submitLogin}>
-            Sign In
-          </Button>
+              <Button buttonStyle={styles.actionButon} onPress={this.submitLogin}>
+                Sign In
+              </Button>
 
-          <Text style={styles.forgotPasswordText} onPress={this.goToPasswordRecover}>
-            Forgot password?
-          </Text>
+              <Text style={styles.forgotPasswordText} onPress={this.goToPasswordRecover}>
+                Forgot password?
+              </Text>
+            </>
+          )}
         </ScrollView>
       </Layout>
     );
@@ -149,6 +160,7 @@ class SignIn extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
   signInErrors: state.Auth.errors.SignIn,
+  isLoading: state.Auth.isLoading,
 });
 
 const mapDispatchToProps = {

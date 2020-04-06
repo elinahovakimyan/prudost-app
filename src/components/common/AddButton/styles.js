@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     elevation: 6,
     position: 'absolute',
     zIndex: 20,
-    right: 20,
+    right: 10,
+    bottom: 10,
   },
   plusIcon: {
     width: 28,

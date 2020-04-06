@@ -64,11 +64,11 @@ const Rewards = (props) => {
   };
 
   const handleAddReward = () => {
-    if (rewards.length >= 3 && !profile.is_upgraded) {
-      togglePricingModal(true);
-    } else {
-      props.navigation.push('AddReward');
-    }
+    // if (rewards.length >= 3 && !profile.is_upgraded) {
+    //   togglePricingModal(true);
+    // } else {
+    props.navigation.push('AddReward');
+    // }
   };
 
   const handleUsePress = (reward) => {
@@ -108,7 +108,7 @@ const Rewards = (props) => {
     <Layout style={styles.screen}>
 
       <View style={styles.scoreContainer}>
-        <Text style={styles.scoreLabel}>Current Score: </Text>
+        <Text style={styles.scoreLabel}>Score: </Text>
         <Text style={styles.scoreText}>{profile.score}</Text>
       </View>
 
@@ -126,7 +126,7 @@ const Rewards = (props) => {
           && <Text style={styles.emptyText}>No rewards found.</Text>}
       />
 
-      <AddButton onPress={handleAddReward} bottomSpace={155} />
+      <AddButton onPress={handleAddReward} />
 
       <CongratsModal type="reward" visible={modalVisible} onClose={() => toggleModal(false)} />
 

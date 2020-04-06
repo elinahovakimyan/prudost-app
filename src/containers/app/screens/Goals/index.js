@@ -16,7 +16,7 @@ import { styles } from './styles';
 
 
 const Goals = (props) => {
-  const { navigation, isLoading, profile } = props;
+  const { navigation, isLoading } = props;
   const { goals } = navigation.state.params;
   const [isPricingVisible, toggleModal] = useState(false);
   const [filters, setFilters] = useState(['not_started', 'in_progress']);
@@ -44,17 +44,18 @@ const Goals = (props) => {
   };
 
   const handleAddGoal = () => {
-    if (goals.length >= 3 && !profile.is_upgraded) {
-      toggleModal(true);
-    } else {
-      props.navigation.push('AddGoal');
-    }
+    // if (goals.length >= 3 && !profile.is_upgraded) {
+    //   toggleModal(true);
+    // } else {
+    props.navigation.push('AddGoal');
+    // }
   };
 
   const renderItem = (item) => (
     <GoalCard
       title={item.title}
       tasks={item.tasks}
+      deadline={item.deadline}
       completed={item.completed}
       description={item.description}
       onPress={() => navigation.push('GoalDetails', { goalId: item.id })}

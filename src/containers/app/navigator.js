@@ -93,12 +93,10 @@ const TabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       activeTintColor: colors.yellow,
       inactiveTintColor: colors.blue,
-      labelStyle: {
-        fontSize: 14,
-      },
+      showLabel: false,
       style: {
         height: 65,
-        borderTopColor: '#cccccc',
+        borderTopColor: '#ccc',
       },
     },
   },

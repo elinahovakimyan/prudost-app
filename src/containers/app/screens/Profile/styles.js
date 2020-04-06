@@ -4,11 +4,11 @@ import { colors } from '../../../../utils';
 
 export const styles = StyleSheet.create({
   screen: {
-    backgroundColor: colors.lightGrey,
-    paddingHorizontal: 0,
   },
   mainContainer: {
-    height: '100%',
+    backgroundColor: colors.lightGrey,
+    paddingHorizontal: 0,
+    // minHeight: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -61,5 +61,6 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     padding: 16,
     paddingBottom: 40,
+    paddingTop: 40,
   },
 });

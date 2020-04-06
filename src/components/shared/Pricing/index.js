@@ -32,13 +32,9 @@ const Pricing = (props) => {
       id: props.profile.id, is_upgraded: true, subscription_option: option.subscription,
     });
 
-    Alert.alert('Successfully upgraded!');
-
-    onClose();
-  };
-
-  const handleUpdate = () => {
-    Alert.alert('Please select the subscription option :)');
+    Alert.alert('Successfully upgraded!', '', [
+      { text: 'OK', onPress: () => onClose() },
+    ]);
   };
 
   return (
@@ -63,7 +59,7 @@ const Pricing = (props) => {
             <Text style={styles.subtitle}>Unlimited goals, tasks and rewards</Text>
           </View>
 
-          <View style={styles.fullWidth}>
+          <View style={[styles.fullWidth, { marginTop: 16 }]}>
             {priceOptions?.map((option) => (
               <PriceOption
                 key={option.id}
@@ -73,15 +69,7 @@ const Pricing = (props) => {
             ))}
           </View>
 
-          <View style={[styles.fullWidth, { marginTop: 24 }]}>
-            <Button
-              theme="dark"
-              buttonStyle={styles.upgadeButton}
-              onPress={handleUpdate}
-            >
-              Upgrade now
-            </Button>
-
+          <View style={[styles.fullWidth, { marginTop: 8 }]}>
             <Button
               theme="light"
               buttonStyle={styles.cancelButton}

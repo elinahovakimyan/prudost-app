@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, ScrollView } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
@@ -12,7 +12,8 @@ import { rewardSuggestions } from '../../data';
 import { styles } from './styles';
 
 const timeOptions = [
-  { value: 5, label: 'Less than 1 hour (5 points)' },
+  { value: 0, label: 'Less than 10 min (0 points)' },
+  { value: 5, label: '11 min - 1 hour (5 points)' },
   { value: 20, label: '1 - 5 hours (20 points)' },
   { value: 50, label: '1 full day (50 points)' },
   { value: 80, label: '2 - 7 days (80 points)' },
@@ -90,31 +91,33 @@ class AddReward extends React.PureComponent {
 
     return (
       <Layout style={styles.screen}>
-        <Input
-          underlined
-          value={title}
-          onChangeText={(val) => this.handleInputChange('title', val)}
-          placeholder={`Title (e.g. ${this.rewardTitle})`}
-          placeholderTextColor={colors.grey}
-        />
+        <ScrollView keyboardShouldPersistTaps="never">
+          <Input
+            underlined
+            value={title}
+            onChangeText={(val) => this.handleInputChange('title', val)}
+            placeholder={`Title (e.g. ${this.rewardTitle})`}
+            placeholderTextColor={colors.grey}
+          />
 
-        <OptionPicker
-          headerStyle={styles.input}
-          onChange={(val) => this.handleInputChange('timePoints', val)}
-          value={timePoints}
-          placeholder="How much time will it take?"
-          options={timeOptions}
-        />
+          <OptionPicker
+            headerStyle={styles.input}
+            onChange={(val) => this.handleInputChange('timePoints', val)}
+            value={timePoints}
+            placeholder="How much time will it take?"
+            options={timeOptions}
+          />
 
-        <OptionPicker
-          headerStyle={styles.input}
-          onChange={(val) => this.handleInputChange('moneyPoints', val)}
-          value={moneyPoints}
-          placeholder="How much money will it take?"
-          options={moneyOptions}
-        />
+          <OptionPicker
+            headerStyle={styles.input}
+            onChange={(val) => this.handleInputChange('moneyPoints', val)}
+            value={moneyPoints}
+            placeholder="How much money will it take?"
+            options={moneyOptions}
+          />
 
-        <Text style={styles.overallPoints}>{`Overall points required: ${timePoints + moneyPoints}`}</Text>
+          <Text style={styles.overallPoints}>{`Overall points required: ${timePoints + moneyPoints}`}</Text>
+        </ScrollView>
       </Layout>
     );
   }

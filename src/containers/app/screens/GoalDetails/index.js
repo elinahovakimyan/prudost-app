@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  FlatList, View, Text, Image, TouchableOpacity, Alert, ActivityIndicator,
+  FlatList, View, Text, Image, TouchableOpacity, Alert,
+  ActivityIndicator, ScrollView, RefreshControl,
 } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
@@ -9,7 +10,6 @@ import EmptyCard from '../../../../components/shared/EmptyCard';
 import TaskCard from '../../../../components/shared/TaskCard';
 import AddTask from '../../../../components/shared/AddTask';
 import CongratsModal from '../../../../components/shared/CongratsModal';
-import Pricing from '../../../../components/shared/Pricing';
 import Tag from '../../../../components/common/Tag';
 import { colors, formatDate } from '../../../../utils';
 import {
@@ -25,7 +25,6 @@ const GoalDetails = (props) => {
   } = props;
   const [modalVisible, toggleModal] = useState(false);
   const [modalType, changeModalType] = useState('task');
-  const [isPricingVisible, togglePricingModal] = useState(false);
   const [isAdding, toggleAddTask] = useState(false);
 
   const handleGoalComplete = () => {
@@ -41,11 +40,7 @@ const GoalDetails = (props) => {
   };
 
   const handleAddTask = () => {
-    if (goal.tasks.length >= 3 && !profile.is_upgraded) {
-      togglePricingModal(true);
-    } else {
-      toggleAddTask(true);
-    }
+    toggleAddTask(true);
   };
 
   const handleMarkComplete = () => {
@@ -77,10 +72,12 @@ const GoalDetails = (props) => {
   };
 
   const handleTaskUncomplete = () => {
-    props.updateProfile({
-      id: profile.id,
-      score: profile.score - 2,
-    });
+    if (profile.score - 2 >= 0) {
+      props.updateProfile({
+        id: profile.id,
+        score: profile.score - 2,
+      });
+    }
   };
 
   const sendToEdit = () => {
@@ -126,58 +123,55 @@ const GoalDetails = (props) => {
   if (goal) {
     return (
       <Layout isLoading={!goal} style={styles.screen}>
-        <View style={styles.categoryContainer}>
-          <View style={styles.tagsRow}>
-            {goal?.completed
-           && <Tag title="Completed" color={colors.green} style={styles.tag} />}
-            <Tag title={category?.title} color={category?.color} style={styles.tag} />
-            <Tag title={formatDate(goal?.deadline)} color="#B53737" style={styles.tag} />
+        <ScrollView keyboardShouldPersistTaps="never" style={styles.header}>
+          <View style={styles.categoryContainer}>
+            <View style={styles.tagsRow}>
+              {goal?.completed
+              && <Tag title="Completed" color={colors.green} style={styles.tag} />}
+              <Tag title={category?.title} color={category?.color} style={styles.tag} />
+              <Tag title={formatDate(goal?.deadline)} color="#B53737" style={styles.tag} />
+            </View>
+
+            <View style={styles.iconContainer}>
+              <TouchableOpacity onPress={sendToEdit}>
+                <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={handleDelete}>
+                <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
+              </TouchableOpacity>
+            </View>
           </View>
 
-          <View style={styles.iconContainer}>
-            <TouchableOpacity onPress={sendToEdit}>
-              <Image source={require('../../../../assets/icons/edit.png')} style={styles.icon} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleDelete}>
-              <Image source={require('../../../../assets/icons/delete.png')} style={styles.icon} />
-            </TouchableOpacity>
-          </View>
+          <Text style={styles.title}>{goal.title}</Text>
+          <Text style={styles.description}>{goal.description}</Text>
+        </ScrollView>
+
+        <View style={styles.tasks}>
+          <Text style={styles.sectionTitle}>TASKS</Text>
+
+          <AddTask
+            isAdding={isAdding}
+            onAdd={handleAddTask}
+            onDone={() => toggleAddTask(false)}
+            onSubmit={handleSubmit}
+          />
+
+          <FlatList
+            data={goal.tasks.sort((a, b) => (
+              (a.completed === b.completed) ? 0 : a.completed ? 1 : -1
+            )) || []}
+            style={styles.container}
+            renderItem={renderItem}
+            refreshControl={<RefreshControl refreshing={isLoading} />}
+            keyExtractor={(item) => String(item.id)}
+            ListEmptyComponent={!isLoading && <EmptyCard />}
+          />
         </View>
-
-        <Text style={styles.title}>{goal.title}</Text>
-        <Text style={styles.description}>{goal.description}</Text>
-
-        <Text style={styles.sectionTitle}>TASKS</Text>
-
-        <AddTask
-          isAdding={isAdding}
-          onAdd={handleAddTask}
-          onDone={() => toggleAddTask(false)}
-          onSubmit={handleSubmit}
-        />
-
-        <FlatList
-          data={goal.tasks.sort((a, b) => (
-            (a.completed === b.completed) ? 0 : a.completed ? 1 : -1
-          )) || []}
-          style={styles.container}
-          renderItem={renderItem}
-          keyExtractor={(item) => String(item.id)}
-          ListEmptyComponent={!isLoading && <EmptyCard />}
-          ListFooterComponent={<View style={styles.footer} />}
-        />
 
         <CongratsModal
           type={modalType}
           visible={modalVisible}
           onClose={handleModalClose}
-        />
-
-        <Pricing
-          label="tasks"
-          isVisible={isPricingVisible}
-          onClose={() => togglePricingModal(false)}
-          onOptionPress={() => { }}
         />
       </Layout>
     );

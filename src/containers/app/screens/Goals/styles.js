@@ -6,10 +6,11 @@ export const styles = StyleSheet.create({
   screen: {
     backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
+    height: '100%',
     position: 'relative',
   },
   container: {
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
   row: {
     width: '100%',

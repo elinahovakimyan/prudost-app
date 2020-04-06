@@ -9,7 +9,7 @@ function Score({
 }) {
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, titleStyle]}>{title || 'Current score'}</Text>
+      <Text style={[styles.title, titleStyle]}>{title || 'Score'}</Text>
       <View style={styles.scoreContainer}>
         <Text style={[styles.score, numberStyle]}>{score}</Text>
       </View>

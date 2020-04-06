@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, Text, ScrollView } from 'react-native';
+import {
+  View, Text, ScrollView, ActivityIndicator,
+} from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Button from '../../../../components/common/Button';
@@ -134,6 +136,7 @@ class SignUp extends React.PureComponent {
   }
 
   render() {
+    const { isLoading } = this.props;
     const {
       email, password, name, confirmPassword,
     } = this.state;
@@ -169,15 +172,24 @@ class SignUp extends React.PureComponent {
             placeholder="Confirm your password"
           />
 
-          {this.renderErrors()}
 
-          <Button buttonStyle={styles.actionButon} onPress={this.submitSignUp}>
-          Create account
-          </Button>
+          {isLoading ? (
+            <View style={styles.loader}>
+              <ActivityIndicator />
+            </View>
+          ) : (
+            <>
+              {this.renderErrors()}
 
-          <Text style={styles.signInText} onPress={this.goToSignIn}>
-          Already have account?
-          </Text>
+              <Button buttonStyle={styles.actionButon} onPress={this.submitSignUp}>
+                Create account
+              </Button>
+
+              <Text style={styles.signInText} onPress={this.goToSignIn}>
+                Already have account?
+              </Text>
+            </>
+          )}
         </ScrollView>
       </Layout>
     );
@@ -185,6 +197,7 @@ class SignUp extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
+  isLoading: state.Auth.isLoading,
   signUpErrors: state.Auth.errors.SignUp,
 });
 

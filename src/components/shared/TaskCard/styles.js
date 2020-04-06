@@ -6,9 +6,10 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 16,
+    borderRadius: 8,
     paddingVertical: 16,
     paddingHorizontal: 16,
+    marginHorizontal: 16,
     marginVertical: 8,
     backgroundColor: colors.white,
     shadowColor: '#727982',

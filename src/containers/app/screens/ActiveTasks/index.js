@@ -115,7 +115,7 @@ const mapStateToProps = (state) => {
       weekTasks.push(item);
     } else if (
       ((moment(item.set_for_date).isBefore(new Date(), 'week') && item.set_for_type === 'week')
-        || (moment(item.set_for_date).isBefore(new Date(), 'day') && item.set_for_type === 'day'))
+      || (moment(item.set_for_date).isBefore(new Date(), 'day') && item.set_for_type === 'day'))
       && !item.completed) {
       pastTasks.push(item);
     }

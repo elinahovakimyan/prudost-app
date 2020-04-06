@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, ScrollView } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
 import Input from '../../../../components/common/Input';
@@ -106,38 +106,40 @@ class AddGoal extends React.PureComponent {
 
     return (
       <Layout isLoading={isLoading} style={styles.screen}>
-        <Input
-          underlined
-          value={title}
-          onChangeText={(val) => this.handleInputChange('title', val)}
-          placeholder={`Title (e.g. ${this.goalTitle})`}
-          placeholderTextColor={colors.grey}
-        />
+        <ScrollView keyboardShouldPersistTaps="never">
+          <Input
+            underlined
+            value={title}
+            onChangeText={(val) => this.handleInputChange('title', val)}
+            placeholder={`Title (e.g. ${this.goalTitle})`}
+            placeholderTextColor={colors.grey}
+          />
 
-        <Input
-          multiline
-          underlined
-          value={description}
-          onChangeText={(val) => this.handleInputChange('description', val)}
-          placeholder="Why is this goal important?"
-          placeholderTextColor={colors.grey}
-        />
+          <Input
+            multiline
+            underlined
+            value={description}
+            onChangeText={(val) => this.handleInputChange('description', val)}
+            placeholder="Why is this goal important?"
+            placeholderTextColor={colors.grey}
+          />
 
-        <OptionPicker
-          headerStyle={styles.input}
-          placeholder="Goal category"
-          onChange={(val) => this.handleInputChange('category', val)}
-          value={category}
-          options={this.props.categories}
-        />
+          <OptionPicker
+            headerStyle={styles.input}
+            placeholder="Goal category"
+            onChange={(val) => this.handleInputChange('category', val)}
+            value={category}
+            options={this.props.categories}
+          />
 
-        <DateInput
-          placeholder="Deadline"
-          onChange={(val) => this.handleInputChange('deadline', val)}
-          value={deadline}
-        />
+          <DateInput
+            placeholder="Deadline"
+            onChange={(val) => this.handleInputChange('deadline', val)}
+            value={deadline}
+          />
 
-        <ErrorBox errorText={this.props.addGoalError} />
+          <ErrorBox errorText={this.props.addGoalError} />
+        </ScrollView>
       </Layout>
     );
   }

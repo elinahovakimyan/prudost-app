@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 5,
     shadowOffset: { height: 1, width: 1 },
+    marginHorizontal: 16,
     elevation: 5,
   },
   contentContainer: {

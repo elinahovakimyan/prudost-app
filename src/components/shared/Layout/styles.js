@@ -6,7 +6,6 @@ const { height } = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   container: {
-    height,
     paddingHorizontal: 15,
     backgroundColor: colors.blue,
   },

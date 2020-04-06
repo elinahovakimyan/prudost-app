@@ -45,4 +45,7 @@ export const styles = StyleSheet.create({
   imageContainer: {
     marginTop: 48,
   },
+  loader: {
+    marginVertical: 32,
+  },
 });

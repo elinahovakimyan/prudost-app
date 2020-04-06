@@ -30,3 +30,30 @@ export const formatDate = (date) => {
   }
   return null;
 };
+
+export const formatServerError = (error) => {
+  if (error) {
+    const fields = Object.keys(error);
+    const messages = [];
+
+    fields.forEach((fieldName) => {
+      const message = error[fieldName];
+
+      if (fieldName === 'non_field_errors') {
+        messages.push(`${message}`);
+      } else {
+        messages.push(`${message} (${fieldName})`);
+      }
+    });
+
+    return messages.join(' ~ ');
+  }
+  return null;
+};
+
+// export const getDeadlineColor = (date) => {
+//   const green = '#37b574';
+//   const red = '#B53737';
+
+//   if smaller
+// };

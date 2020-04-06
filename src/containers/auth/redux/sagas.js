@@ -3,7 +3,7 @@ import {
 } from 'redux-saga/effects';
 
 import * as NavigationService from '../../../navigator/NavigationService';
-import { request, addTokenToHttp } from '../../../utils';
+import { request, addTokenToHttp, formatServerError } from '../../../utils';
 import StorageUtils from '../../../utils/storage';
 import {
   AUTH_LOGIN_REQUEST,
@@ -16,6 +16,7 @@ import {
   AUTH_PASSWORD_RECOVER_SUCCESS,
   AUTH_PASSWORD_RECOVER_ERROR,
   AUTH_LOGOUT,
+  AUTH_CHANGE_LOADING_STATE,
 } from './constants';
 
 
@@ -47,6 +48,11 @@ function* handleLogin(action) {
   } = action;
 
   try {
+    yield put({
+      type: AUTH_CHANGE_LOADING_STATE,
+      isLoading: true,
+    });
+
     const { status, data } = yield call(sendLogin, { email, password });
 
     if (status === 200) {
@@ -60,17 +66,27 @@ function* handleLogin(action) {
       yield StorageUtils.setUser(data.user);
       addTokenToHttp(data.token);
 
-      NavigationService.navigate('App');
+      NavigationService.navigate('ProfileSplash');
     } else {
       yield put({
         type: AUTH_LOGIN_ERROR,
         error: 'Unknown Error',
       });
     }
+
+    yield put({
+      type: AUTH_CHANGE_LOADING_STATE,
+      isLoading: false,
+    });
   } catch (error) {
     yield put({
       type: AUTH_LOGIN_ERROR,
-      error: "Can't sign in with provided credentials",
+      error: formatServerError(error?.response?.data) || "Can't sign in with provided credentials",
+    });
+
+    yield put({
+      type: AUTH_CHANGE_LOADING_STATE,
+      isLoading: false,
     });
   }
 }
@@ -80,6 +96,11 @@ function* handleSignUp(action) {
     user,
   } = action;
   try {
+    yield put({
+      type: AUTH_CHANGE_LOADING_STATE,
+      isLoading: true,
+    });
+
     const { status } = yield call(sendSignUp, user);
 
     if (status === 201) {
@@ -101,7 +122,7 @@ function* handleSignUp(action) {
         addTokenToHttp(loginInfo.data.token);
 
         // you can change the navigate for navigateAndResetStack to go to a protected route
-        NavigationService.navigate('App');
+        NavigationService.navigate('ProfileSplash');
       }
     } else {
       yield put({
@@ -109,11 +130,21 @@ function* handleSignUp(action) {
         error: 'Unknown Error',
       });
     }
+
+    yield put({
+      type: AUTH_CHANGE_LOADING_STATE,
+      isLoading: false,
+    });
   } catch (error) {
     // todo add errors with similar structure in backend
     yield put({
       type: AUTH_SIGNUP_ERROR,
-      error: "Can't sign up with provided credentials",
+      error: formatServerError(error?.response?.data) || "Can't sign up with provided credentials",
+    });
+
+    yield put({
+      type: AUTH_CHANGE_LOADING_STATE,
+      isLoading: false,
     });
   }
 }

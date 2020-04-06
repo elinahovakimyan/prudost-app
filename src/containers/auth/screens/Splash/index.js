@@ -1,11 +1,15 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
+import {
+  SafeAreaView, Image, View, Text,
+} from 'react-native';
 import { connect } from 'react-redux';
 
-import Layout from '../../../../components/shared/Layout';
 import StorageUtils from '../../../../utils/storage';
 import { addTokenToHttp, getRandomInt, colors } from '../../../../utils';
 import { setUser } from '../../redux/actions';
+import {
+  getGoals, getCategories, getProfile, getRewards, getAllTasks,
+} from '../../../app/redux/actions';
 
 import { styles } from './styles';
 import { quotes } from './quotes';
@@ -28,6 +32,8 @@ class Splash extends React.PureComponent {
         this.props.setUser(user, token);
         addTokenToHttp(token)
           .then(() => {
+            this.fetchData();
+
             this.timer = setTimeout(() => {
               this.props.navigation.navigate('App');
             }, 2500);
@@ -44,15 +50,22 @@ class Splash extends React.PureComponent {
     clearTimeout(this.timer);
   }
 
+  fetchData = () => {
+    this.props.getCategories();
+    this.props.getGoals();
+    this.props.getRewards();
+    this.props.getAllTasks();
+    this.props.getProfile();
+  };
+
   render() {
     const quoteNumber = getRandomInt(quotes.length - 1);
     const currentQuote = quotes[quoteNumber];
 
     return (
-      <Layout>
+      <SafeAreaView style={styles.screen}>
         <View style={styles.container}>
           <Image style={styles.image} source={require('../../../../assets/images/logo.png')} />
-
 
           {currentQuote ? (
             <>
@@ -61,14 +74,18 @@ class Splash extends React.PureComponent {
             </>
           ) : null}
         </View>
-      </Layout>
+      </SafeAreaView>
     );
   }
 }
 
-
 const mapDispatchToProps = {
   setUser,
+  getGoals,
+  getCategories,
+  getRewards,
+  getProfile,
+  getAllTasks,
 };
 
 export default connect(

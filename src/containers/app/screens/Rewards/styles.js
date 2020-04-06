@@ -4,6 +4,7 @@ import { colors } from '../../../../utils';
 
 export const styles = StyleSheet.create({
   screen: {
+    height: '100%',
     backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
   },
@@ -44,7 +45,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
+    marginTop: 32,
+    marginBottom: 16,
   },
   scoreLabel: {
     fontWeight: '600',

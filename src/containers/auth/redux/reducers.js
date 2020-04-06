@@ -3,6 +3,7 @@ import * as actions from './constants';
 const initialState = {
   user: null,
   accessToken: null,
+  isLoading: false,
   errors: {
     SignIn: null, SignUp: null, ResetPassword: null, User: null,
   },
@@ -22,6 +23,8 @@ export const AuthReducer = (state = initialState, action) => {
       return { ...state, errors: { SignUp: action.error } };
     case actions.AUTH_USER:
       return { ...state, user: action.user, accessToken: action.token };
+    case actions.AUTH_CHANGE_LOADING_STATE:
+      return { ...state, isLoading: action.isLoading };
     case actions.AUTH_LOGOUT:
       return initialState;
     default:

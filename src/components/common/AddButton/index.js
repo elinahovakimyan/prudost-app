@@ -1,22 +1,15 @@
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import { ifIphoneX } from 'react-native-iphone-x-helper';
 
 import styles from './styles';
 
 function AddButton(props) {
-  const { onPress, bottomSpace } = props;
-
-  const finalBottomSpace = ifIphoneX({
-    bottom: bottomSpace || 200,
-  }, {
-    bottom: bottomSpace - 50 || 160,
-  });
+  const { onPress } = props;
 
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.plusContainer, finalBottomSpace]}
+      style={[styles.plusContainer]}
     >
       <Image
         style={styles.plusIcon}

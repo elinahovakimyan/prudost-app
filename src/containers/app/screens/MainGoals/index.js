@@ -6,12 +6,8 @@ import Layout from '../../../../components/shared/Layout';
 import GoalCard from '../../../../components/shared/GoalCard';
 import CategoryCard from '../../../../components/shared/CategoryCard';
 import AddButton from '../../../../components/common/AddButton';
-import Pricing from '../../../../components/shared/Pricing';
 import EmptyCard from '../../../../components/shared/EmptyCard';
 import { colors } from '../../../../utils';
-import {
-  getGoals, getCategories, getProfile, getRewards, getAllTasks,
-} from '../../redux/actions';
 import FilterSection from '../../../../components/shared/FilterSection';
 import { filterOptions } from '../../data';
 
@@ -20,23 +16,10 @@ import { styles } from './styles';
 
 const MainGoals = (props) => {
   const {
-    navigation, goals, categories, isLoading, profile,
+    navigation, goals, categories, isLoading,
   } = props;
-  const [isPricingVisible, toggleModal] = useState(false);
   const [filters, setFilters] = useState(['not_started', 'in_progress']);
   const [filteredGoals, setFilteredGoals] = useState([]);
-
-  const fetchData = () => {
-    props.getCategories();
-    props.getGoals();
-    props.getRewards();
-    props.getAllTasks();
-    props.getProfile();
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const updatedGoals = [];
@@ -56,11 +39,7 @@ const MainGoals = (props) => {
   }, [filters, goals]);
 
   const handleAddGoal = () => {
-    if (goals.length >= 3 && !profile.is_upgraded) {
-      toggleModal(true);
-    } else {
-      props.navigation.push('AddGoal');
-    }
+    props.navigation.push('AddGoal');
   };
 
   const renderItem = ({ item }) => {
@@ -70,6 +49,7 @@ const MainGoals = (props) => {
       <GoalCard
         title={item.title}
         tasks={item.tasks}
+        deadline={item.deadline}
         completed={item.completed}
         description={item.description}
         category={currentCategory}
@@ -124,15 +104,7 @@ const MainGoals = (props) => {
           ListFooterComponent={<View style={styles.footer} />}
         />
       </View>
-
-      <Pricing
-        label="goals"
-        isVisible={isPricingVisible}
-        onClose={() => toggleModal(false)}
-        onOptionPress={() => { }}
-      />
-
-      <AddButton onPress={handleAddGoal} bottomSpace={155} />
+      <AddButton onPress={handleAddGoal} />
     </Layout>
   );
 };
@@ -148,22 +120,12 @@ MainGoals.navigationOptions = () => ({
 });
 
 const mapStateToProps = (state) => ({
-  profile: state.App.profile,
   goals: state.App.goals,
   categories: state.App.categories,
   isLoading: state.App.isLoading,
   goalsError: state.App.errors.Goals,
 });
 
-const mapDispatchToProps = {
-  getGoals,
-  getCategories,
-  getRewards,
-  getProfile,
-  getAllTasks,
-};
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(MainGoals);

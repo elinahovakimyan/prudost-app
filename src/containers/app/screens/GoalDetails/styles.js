@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 0,
   },
   container: {
-    paddingHorizontal: 16,
+    // paddingHorizontal: 16,
   },
   headerTitle: {
     fontSize: 20,
@@ -53,9 +53,6 @@ export const styles = StyleSheet.create({
     height: 20,
     marginRight: 12,
   },
-  footer: {
-    height: 230,
-  },
   emptyText: {
     textAlign: 'center',
     padding: 30,
@@ -73,5 +70,11 @@ export const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: '500',
     marginHorizontal: 8,
+  },
+  header: {
+    height: '30%',
+  },
+  tasks: {
+    height: '70%',
   },
 });

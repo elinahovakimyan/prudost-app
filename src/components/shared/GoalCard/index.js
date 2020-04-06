@@ -4,13 +4,13 @@ import {
 } from 'react-native';
 
 import Tag from '../../common/Tag';
-import { colors } from '../../../utils';
+import { colors, formatDate } from '../../../utils';
 
 import styles from './styles';
 
 
 function GoalCard({
-  title, category, onPress, tasks, completed,
+  title, category, onPress, tasks, completed, deadline,
 }) {
   const completedTasks = tasks.filter((task) => task.completed);
   const completedPercentage = (completedTasks.length / tasks.length) * 100;
@@ -23,6 +23,9 @@ function GoalCard({
             {category && (
               <Tag title={category?.title} color={category?.color} style={styles.tag} />
             )}
+            {deadline && (
+              <Tag title={formatDate(deadline)} color="#B53737" style={styles.tag} />
+            )}
             {completed && (
               <Tag title="Completed" color={colors.green} style={styles.tag} />
             )}
@@ -33,7 +36,7 @@ function GoalCard({
       </View>
 
       <View style={styles.progressBarContainer}>
-        <View style={[styles.progressBar, { width: `${completedPercentage}%` }]} />
+        <View style={[styles.progressBar, { width: `${completedPercentage || 0}%` }]} />
       </View>
     </TouchableOpacity>
   );

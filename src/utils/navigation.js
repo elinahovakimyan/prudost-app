@@ -1,10 +1,15 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
+import { colors } from './styles';
 
 
 // This function returns the icon for the tab bar based on routename
 export const getTabIcon = (navigation, focused) => {
   const { routeName } = navigation.state;
+  const iconStyles = { width: 25, height: 25 };
+  const iconContainer = {
+    width: 45, height: 45, backgroundColor: colors.blue, borderRadius: 8, alignItems: 'center', justifyContent: 'center',
+  };
   let tabIconSrc;
 
   if (routeName === 'Goals') {
@@ -17,5 +22,13 @@ export const getTabIcon = (navigation, focused) => {
     tabIconSrc = focused ? require('../assets/icons/profile_yellow.png') : require('../assets/icons/profile_blue.png');
   }
 
-  return <Image resizeMode="contain" style={{ width: 25, height: 30 }} source={tabIconSrc} />;
+  if (focused) {
+    return (
+      <View style={iconContainer}>
+        <Image resizeMode="contain" style={iconStyles} source={tabIconSrc} />
+      </View>
+    );
+  }
+
+  return <Image resizeMode="contain" style={iconStyles} source={tabIconSrc} />;
 };
