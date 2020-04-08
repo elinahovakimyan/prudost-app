@@ -7,7 +7,7 @@ export const colors = {
   orange: '#FFBE69',
   green: '#37B68E',
   darkBlue: '#1B446A',
-  blue: '#33638e',
+  blue: '#2f4f6b',
   white: '#fff',
   black: '#000',
 };

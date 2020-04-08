@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   image: {
-    width: 245,
-    height: 245,
+    width: 160,
+    height: 160,
     resizeMode: 'contain',
   },
   quoteText: {

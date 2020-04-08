@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   innerCircle: {
-    height: 18,
-    width: 18,
-    borderRadius: 4,
+    height: 12,
+    width: 12,
+    resizeMode: 'contain',
   },
 });
 

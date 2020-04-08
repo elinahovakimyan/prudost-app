@@ -54,7 +54,8 @@ const ActiveTasks = (props) => {
 
   const renderNoContent = ({ section }) => {
     if (section?.data?.length === 0) {
-      return <EmptyCard />;
+      // eslint-disable-next-line
+      return <Text style={styles.emptyText}>No tasks found. 👀</Text>;
     }
     return null;
   };

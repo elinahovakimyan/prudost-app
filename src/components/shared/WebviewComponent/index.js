@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Platform, ActivityIndicator, SafeAreaView, Modal, TouchableOpacity, Text,
+  Platform, ActivityIndicator, Modal, TouchableOpacity, Text,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 

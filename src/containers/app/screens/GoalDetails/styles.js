@@ -77,4 +77,7 @@ export const styles = StyleSheet.create({
   tasks: {
     height: '70%',
   },
+  footer: {
+    height: 20,
+  },
 });

@@ -11,7 +11,7 @@ import WebviewComponent from '../../../../components/shared/WebviewComponent';
 import { clearAccessToken } from '../../../auth/redux/actions';
 import { logout } from '../../redux/actions';
 import Pricing from '../../../../components/shared/Pricing';
-import { addTokenToHttp } from '../../../../utils';
+import { addTokenToHttp, colors } from '../../../../utils';
 
 import { styles } from './styles';
 
@@ -74,11 +74,10 @@ class Profile extends React.PureComponent {
     ];
 
     if (isLoading) {
-      return <ActivityIndicator />;
+      return <ActivityIndicator color={colors.blue} />;
     }
 
     return (
-    // <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.mainContainer}>
         <View>
           <View style={styles.content}>
@@ -121,7 +120,6 @@ class Profile extends React.PureComponent {
           <WebviewComponent key={currentWebviewUrl} uri={currentWebviewUrl} />
         )}
       </ScrollView>
-    // </View>
     );
   }
 }

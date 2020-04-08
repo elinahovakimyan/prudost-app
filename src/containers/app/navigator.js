@@ -12,10 +12,6 @@ import MainGoals from './screens/MainGoals';
 import GoalDetails from './screens/GoalDetails';
 import AddGoal from './screens/AddGoal';
 
-/* Habits */
-// import Habits from './screens/Habits';
-// import AddHabit from './screens/AddHabit';
-
 /* Rewards */
 import Rewards from './screens/Rewards';
 import AddReward from './screens/AddReward';
@@ -40,18 +36,6 @@ const GoalsStack = createStackNavigator(
     },
   },
 );
-
-// const HabitsStack = createStackNavigator(
-//   {
-//     Habits: { screen: Habits },
-//     AddHabit: { screen: AddHabit },
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerTitleAlign: 'center',
-//     },
-//   },
-// );
 
 const RewardsStack = createStackNavigator(
   {

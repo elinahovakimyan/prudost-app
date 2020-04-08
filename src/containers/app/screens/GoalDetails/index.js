@@ -165,6 +165,7 @@ const GoalDetails = (props) => {
             refreshControl={<RefreshControl refreshing={isLoading} />}
             keyExtractor={(item) => String(item.id)}
             ListEmptyComponent={!isLoading && <EmptyCard />}
+            ListFooterComponent={<View style={styles.footer} />}
           />
         </View>
 
@@ -176,7 +177,7 @@ const GoalDetails = (props) => {
       </Layout>
     );
   }
-  return <ActivityIndicator />;
+  return <ActivityIndicator color={colors.blue} />;
 };
 
 GoalDetails.navigationOptions = ({ navigation }) => ({

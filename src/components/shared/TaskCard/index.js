@@ -117,9 +117,11 @@ function TaskCard({
             />
           )
           : (
-            <Text style={styles.text}>
-              {task.text}
-            </Text>
+            <TouchableOpacity onPress={handleCompleteTogggle}>
+              <Text style={styles.text}>
+                {task.text}
+              </Text>
+            </TouchableOpacity>
           )}
       </View>
 

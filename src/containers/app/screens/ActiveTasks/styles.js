@@ -21,4 +21,9 @@ export const styles = StyleSheet.create({
   footer: {
     height: 300,
   },
+  emptyText: {
+    paddingVertical: 16,
+    color: colors.grey,
+    fontSize: 12,
+  },
 });

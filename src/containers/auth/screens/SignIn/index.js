@@ -10,6 +10,7 @@ import Input from '../../../../components/common/Input';
 import ErrorBox from '../../../../components/common/ErrorBox';
 import { validateEmail } from '../../../../utils/validation';
 import { login } from '../../redux/actions';
+import { colors } from '../../../../utils';
 
 import { styles } from './styles';
 
@@ -137,7 +138,7 @@ class SignIn extends React.PureComponent {
 
           {isLoading ? (
             <View style={styles.loader}>
-              <ActivityIndicator />
+              <ActivityIndicator color={colors.yellow} />
             </View>
           ) : (
             <>
