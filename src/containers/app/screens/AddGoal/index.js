@@ -40,12 +40,18 @@ class AddGoal extends React.PureComponent {
 
   goalTitle = 'Goal Title'
 
-  state = {
-    title: this.props.navigation.state.params?.goal?.title,
-    description: this.props.navigation.state.params?.goal?.description,
-    category: this.props.navigation.state.params?.goal?.category,
-    deadline: this.props.navigation.state.params?.goal?.deadline,
+  constructor(props) {
+    super(props);
+    const goal = this.props.navigation.state.params?.goal;
+
+    this.state = {
+      title: goal?.title,
+      description: goal?.description,
+      category: goal?.category,
+      deadline: goal?.deadline ? Date.parse(goal?.deadline) : new Date(),
+    };
   }
+
 
   componentDidMount() {
     const isEditing = this.props.navigation.state.params?.goal;
@@ -103,6 +109,7 @@ class AddGoal extends React.PureComponent {
       title, description, category, deadline,
     } = this.state;
     const { isLoading } = this.props;
+    console.log('deadline :', deadline);
 
     return (
       <Layout isLoading={isLoading} style={styles.screen}>

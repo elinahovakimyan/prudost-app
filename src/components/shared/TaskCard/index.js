@@ -101,7 +101,11 @@ function TaskCard({
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <TouchableOpacity onPress={handleCompleteTogggle}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          style={styles.checkbox}
+          onPress={handleCompleteTogggle}
+        >
           <RadioButton isChecked={task.completed} />
         </TouchableOpacity>
 
@@ -117,7 +121,7 @@ function TaskCard({
             />
           )
           : (
-            <TouchableOpacity onPress={handleCompleteTogggle}>
+            <TouchableOpacity activeOpacity={0.8} onPress={handleShowOptions}>
               <Text style={styles.text}>
                 {task.text}
               </Text>
@@ -127,11 +131,11 @@ function TaskCard({
 
       {isEditing
         ? (
-          <TouchableOpacity onPress={handleTextChange}>
+          <TouchableOpacity activeOpacity={0.8} style={styles.rightIcon} onPress={handleTextChange}>
             <Image source={require('../../../assets/icons/done.png')} style={styles.icon} />
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity onPress={handleShowOptions}>
+          <TouchableOpacity style={styles.rightIcon} onPress={handleShowOptions}>
             <Image source={require('../../../assets/icons/more.png')} style={styles.icon} />
           </TouchableOpacity>
         )}

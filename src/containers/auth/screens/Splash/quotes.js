@@ -8,6 +8,10 @@ export const quotes = [
     author: 'Peter Drucker',
   },
   {
+    quote: '"Victory is in having done your best. If you’ve done your best, you’ve won."',
+    author: 'Billy Bowerman',
+  },
+  {
     quote: '“Focus on being productive instead of busy.”',
     author: 'Tim Ferriss',
   },

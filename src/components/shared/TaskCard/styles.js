@@ -7,19 +7,25 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     borderRadius: 8,
-    paddingVertical: 16,
-    paddingHorizontal: 16,
     marginHorizontal: 16,
     marginVertical: 8,
     backgroundColor: colors.white,
     shadowColor: '#727982',
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
     shadowOffset: { height: 1, width: 1 },
-    elevation: 6,
+    elevation: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  checkbox: {
+    paddingRight: 8,
+    paddingVertical: 16,
+    paddingLeft: 16,
+  },
+  rightIcon: {
+    paddingRight: 16,
   },
   content: {
     flexDirection: 'row',
@@ -28,10 +34,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     fontWeight: '500',
+    paddingVertical: 16,
     color: colors.grey,
     width: width - 128,
-    paddingLeft: 8,
-    paddingVertical: 0,
     lineHeight: 16,
   },
   icon: {

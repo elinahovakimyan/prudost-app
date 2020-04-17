@@ -4,11 +4,11 @@ import { colors } from '../../../utils';
 
 const styles = StyleSheet.create({
   radioButton: {
-    height: 18,
-    width: 18,
-    borderWidth: 2,
+    height: 20,
+    width: 20,
+    borderWidth: 1,
     borderColor: colors.blue,
-    borderRadius: 9,
+    borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',

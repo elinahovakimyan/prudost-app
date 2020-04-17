@@ -91,8 +91,8 @@ class ResetPassword extends React.PureComponent {
           <Text style={styles.title}>Forgot password</Text>
         </View>
         <Text style={styles.text1}>
-            Enter the email address associated with your account.
-            We will email you a link to reset your password
+          Enter the email address associated with your account.
+          We will email you a link to reset your password
         </Text>
         <Input
           value={email}
@@ -104,7 +104,7 @@ class ResetPassword extends React.PureComponent {
         {this.renderErrors()}
 
         <Button buttonStyle={styles.actionButon} onPress={this.submitReset}>
-            Send
+          Send
         </Button>
 
         <Text style={styles.rememberPasswordText} onPress={this.goToSignIn}>
