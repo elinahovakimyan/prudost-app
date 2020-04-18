@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
   mainContainer: {
     backgroundColor: colors.lightGrey,
     paddingHorizontal: 0,
-    // minHeight: '100%',
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
@@ -37,6 +36,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
   },
+  ownershipText: {
+    color: colors.darkGrey,
+  },
+  deegeehubLogo: {
+    width: 20,
+    height: 20,
+    marginHorizontal: 10,
+    resizeMode: 'contain',
+  },
   circle: {
     backgroundColor: colors.darkGrey,
     width: 4,
@@ -61,6 +69,6 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     padding: 16,
     paddingBottom: 40,
-    paddingTop: 40,
+    paddingTop: 60,
   },
 });

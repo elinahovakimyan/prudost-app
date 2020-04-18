@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-  Text, View, ScrollView, ActivityIndicator,
+  Text, View, ScrollView, ActivityIndicator, Image, Linking,
 } from 'react-native';
 
 import Button from '../../../../components/common/Button';
@@ -40,6 +40,10 @@ class Profile extends React.PureComponent {
       currentWebviewUrl: url,
       showWebview: true,
     });
+  }
+
+  goToDeegeehub = () => {
+    Linking.openURL('https://deegeehub.com');
   }
 
   togglePricingModal = (isVisible) => {
@@ -104,8 +108,17 @@ class Profile extends React.PureComponent {
               style={styles.link}
               onPress={() => this.showWebview(termsUrl)}
             >
-
               Terms & Conditions
+            </Text>
+          </View>
+
+          <View style={styles.footer}>
+            <Image style={styles.deegeehubLogo} source={require('../../../../assets/images/deeegeehub_logo.png')} />
+            <Text
+              style={styles.ownershipText}
+              onPress={() => this.goToDeegeehub()}
+            >
+              Developed by DeegeeHub
             </Text>
           </View>
         </View>
