@@ -114,11 +114,12 @@ class Profile extends React.PureComponent {
 
           <View style={styles.footer}>
             <Image style={styles.deegeehubLogo} source={require('../../../../assets/images/deeegeehub_logo.png')} />
+            {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
             <Text
               style={styles.ownershipText}
               onPress={() => this.goToDeegeehub()}
             >
-              Developed by DeegeeHub
+              Developed with ❤️ by DeegeeHub
             </Text>
           </View>
         </View>

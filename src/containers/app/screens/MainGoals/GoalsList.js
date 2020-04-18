@@ -41,10 +41,7 @@ const GoalsList = (props) => {
         data={goals}
         style={styles.container}
         renderItem={renderItem}
-        onDragEnd={({ data }) => {
-          console.log('data :', data);
-          updateGoalsList(data);
-        }}
+        onDragEnd={({ data }) => updateGoalsList(data)}
         keyExtractor={(item) => String(item.id)}
         ListEmptyComponent={<EmptyCard buttonTitle="Add Goal" onButtonPress={handleAddGoal} />}
         ListFooterComponent={<View style={styles.footer} />}
