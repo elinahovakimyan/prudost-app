@@ -9,12 +9,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginVertical: 8,
     backgroundColor: colors.white,
+    marginHorizontal: 16,
     shadowColor: '#727982',
     shadowOpacity: 0.4,
     shadowRadius: 5,
     shadowOffset: { height: 1, width: 1 },
-    marginHorizontal: 16,
     elevation: 5,
+  },
+  activeCard: {
+    shadowOpacity: 0.6,
+    shadowOffset: { height: 2, width: 2 },
+    elevation: 7,
   },
   contentContainer: {
     paddingVertical: 16,

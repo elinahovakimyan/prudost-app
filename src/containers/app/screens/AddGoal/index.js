@@ -109,7 +109,6 @@ class AddGoal extends React.PureComponent {
       title, description, category, deadline,
     } = this.state;
     const { isLoading } = this.props;
-    console.log('deadline :', deadline);
 
     return (
       <Layout isLoading={isLoading} style={styles.screen}>

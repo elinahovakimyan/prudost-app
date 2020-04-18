@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { FlatList, View, Text } from 'react-native';
 
 import Layout from '../../../../components/shared/Layout';
-import GoalCard from '../../../../components/shared/GoalCard';
 import CategoryCard from '../../../../components/shared/CategoryCard';
 import AddButton from '../../../../components/common/AddButton';
-import EmptyCard from '../../../../components/shared/EmptyCard';
-import { colors } from '../../../../utils';
 import FilterSection from '../../../../components/shared/FilterSection';
+import { updateGoal } from '../../redux/actions';
+import { colors } from '../../../../utils';
 import { filterOptions } from '../../data';
+import GoalsList from './GoalsList';
 
 import { styles } from './styles';
 
@@ -42,22 +42,6 @@ const MainGoals = (props) => {
     props.navigation.push('AddGoal');
   };
 
-  const renderItem = ({ item }) => {
-    const currentCategory = categories.find((c) => c.id === item.category);
-
-    return (
-      <GoalCard
-        title={item.title}
-        tasks={item.tasks}
-        deadline={item.deadline}
-        completed={item.completed}
-        description={item.description}
-        category={currentCategory}
-        onPress={() => navigation.push('GoalDetails', { goalId: item.id })}
-      />
-    );
-  };
-
   const renderCategoryItem = ({ item, index }) => {
     const categoryGoals = goals.filter((g) => g.category === item.id);
 
@@ -72,9 +56,20 @@ const MainGoals = (props) => {
     );
   };
 
+  const updateGoalsList = (data) => {
+    setFilteredGoals(data);
+
+    data.forEach((goal, index) => {
+      props.updateGoal({
+        id: goal.id,
+        order: index,
+      }, true);
+    });
+  };
+
   return (
     <Layout isLoading={isLoading} style={styles.screen}>
-      <View>
+      <View style={{ flex: 1 }}>
         <View>
           <FlatList
             horizontal
@@ -95,15 +90,14 @@ const MainGoals = (props) => {
           />
         </View>
 
-        <FlatList
-          data={filteredGoals}
-          style={styles.container}
-          renderItem={renderItem}
-          keyExtractor={(item) => String(item.id)}
-          ListEmptyComponent={<EmptyCard buttonTitle="Add Goal" onButtonPress={handleAddGoal} />}
-          ListFooterComponent={<View style={styles.footer} />}
+        <GoalsList
+          updateGoalsList={updateGoalsList}
+          navigation={navigation}
+          goals={filteredGoals}
+          categories={categories}
         />
       </View>
+
       <AddButton onPress={handleAddGoal} />
     </Layout>
   );
@@ -126,6 +120,11 @@ const mapStateToProps = (state) => ({
   goalsError: state.App.errors.Goals,
 });
 
+const mapDispatchToProps = {
+  updateGoal,
+};
+
 export default connect(
   mapStateToProps,
+  mapDispatchToProps,
 )(MainGoals);

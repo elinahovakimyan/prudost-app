@@ -23,9 +23,10 @@ export const addGoal = (goal) => ({
   goal,
 });
 
-export const updateGoal = (goal) => ({
+export const updateGoal = (goal, silent) => ({
   type: actions.APP_UPDATE_GOAL_REQUEST,
   goal,
+  silent,
 });
 
 export const deleteGoal = (goalId) => ({

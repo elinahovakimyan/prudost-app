@@ -226,9 +226,11 @@ function* handleAddGoal({ goal }) {
   }
 }
 
-function* handleUpdateGoal({ goal }) {
+function* handleUpdateGoal({ goal, silent }) {
   try {
-    yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
+    if (!silent) {
+      yield put({ type: APP_CHANGE_LOADING_STATE, isLoading: true });
+    }
 
     const { status } = yield call(updateGoal, { goal });
 
@@ -236,7 +238,9 @@ function* handleUpdateGoal({ goal }) {
       yield put({ type: APP_UPDATE_GOAL_SUCCESS });
       yield put({ type: APP_GET_GOALS_REQUEST });
 
-      NavigationService.navigate('GoalDetails', { goalId: goal.id });
+      if (!silent) {
+        NavigationService.navigate('GoalDetails', { goalId: goal.id });
+      }
     } else {
       yield put({ type: APP_UPDATE_GOAL_ERROR, error: 'Unknown Error' });
     }

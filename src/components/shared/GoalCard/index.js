@@ -10,13 +10,17 @@ import styles from './styles';
 
 
 function GoalCard({
-  title, category, onPress, tasks, completed, deadline,
+  title, category, onPress, tasks, completed, deadline, isActive, onLongPress,
 }) {
   const completedTasks = tasks.filter((task) => task.completed);
   const completedPercentage = (completedTasks.length / tasks.length) * 100;
 
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.container, isActive ? styles.activeCard : {}]}
+      onLongPress={() => onLongPress && onLongPress()}
+    >
       <View style={styles.contentContainer}>
         <View style={styles.content}>
           <View style={styles.tagsContainer}>

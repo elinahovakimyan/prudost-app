@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
     height: 16,
   },
   footer: {
-    height: 400,
+    height: 100,
   },
   emptyText: {
     textAlign: 'center',
